@@ -1,4 +1,5 @@
 import { Hand, Target, BookOpenCheck, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -41,12 +42,12 @@ export function Pillars() {
               </p>
             </div>
 
-            <a
-              href="#fundamentos"
+            <Link
+              href="/fundamentals"
               className={buttonVariants({ variant: "outline", size: "md", className: "self-start md:self-auto shrink-0" })}
             >
               Acessar módulo completo <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </div>
         </Reveal>
 
