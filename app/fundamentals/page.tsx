@@ -5,6 +5,7 @@ import { HeroFundamentals } from "@/components/fundamentals/hero-fundamentals";
 import { WhyDesignSystems } from "@/components/fundamentals/why-design-systems";
 import { AtomicArchitecture } from "@/components/fundamentals/atomic-architecture";
 import { ErgonomicPillars } from "@/components/fundamentals/ergonomic-pillars";
+import { RulesCheatSheet } from "@/components/fundamentals/rules-cheat-sheet";
 
 export const metadata: Metadata = {
   title: "Fundamentos | Hapto Design System",
@@ -21,6 +22,7 @@ export default function FundamentalsPage() {
         <WhyDesignSystems />
         <AtomicArchitecture />
         <ErgonomicPillars />
+        <RulesCheatSheet />
       </main>
       <Footer />
     </>
