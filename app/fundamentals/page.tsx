@@ -4,6 +4,7 @@ import { Footer } from "@/components/landing/footer";
 import { HeroFundamentals } from "@/components/fundamentals/hero-fundamentals";
 import { WhyDesignSystems } from "@/components/fundamentals/why-design-systems";
 import { AtomicArchitecture } from "@/components/fundamentals/atomic-architecture";
+import { ErgonomicPillars } from "@/components/fundamentals/ergonomic-pillars";
 
 export const metadata: Metadata = {
   title: "Fundamentos | Hapto Design System",
@@ -19,6 +20,7 @@ export default function FundamentalsPage() {
         <HeroFundamentals />
         <WhyDesignSystems />
         <AtomicArchitecture />
+        <ErgonomicPillars />
       </main>
       <Footer />
     </>
