@@ -1,1 +1,65 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f6faf8;
+  --surface: #ffffff;
+  --ink: #172e2b;
+  --muted: #5b7571;
+  --line: #d6e5e0;
+  --primary: #176b5b;
+  --on-primary: #ffffff;
+  --accent: #b8f2dc;
+}
+
+.dark {
+  --bg: #07100f;
+  --surface: #0e1f1c;
+  --ink: #e6f4f0;
+  --muted: #8ca9a3;
+  --line: #1c3631;
+  --primary: #2fd4ae;
+  --on-primary: #07100f;
+  --accent: #c8f560;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+}
+
+@theme {
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-ripple: ripple 2.4s ease-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes ripple {
+    0% { transform: scale(0.6); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-bg font-sans text-ink antialiased; }
+}
+
+.bg-dots {
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; }
+}
