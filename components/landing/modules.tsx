@@ -9,7 +9,7 @@ const modules = [
 
 export function Modules() {
   return (
-    <section id="modulos" className="scroll-mt-20 bg-secondary-surface">
+    <section id="modulos" className="scroll-mt-20 bg-primary/5">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <Reveal>
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Uma jornada em 3 módulos</h2>
