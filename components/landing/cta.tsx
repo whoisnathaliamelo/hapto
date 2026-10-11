@@ -1,21 +1,31 @@
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 export function Cta() {
   return (
-    <section className="mx-auto max-w-6xl px-5 pb-24">
+    <section className="mx-auto max-w-6xl px-6 py-20">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2rem] bg-primary px-8 py-16 text-center text-on-primary">
-          <div className="absolute -top-20 -right-20 size-72 rounded-full bg-accent/30 blur-3xl" />
-          <h2 className="relative text-3xl font-semibold tracking-tight sm:text-4xl">
-            Pronta para desenhar para o toque?
+        <div className="relative overflow-hidden rounded-3xl border border-line bg-surface p-10 text-center shadow-sm sm:p-16">
+          <div className="absolute inset-0 -z-10 bg-radial from-primary/10 via-transparent to-transparent opacity-70" />
+          
+          <h2 className="mx-auto max-w-2xl text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+            Pronto para aplicar ergonomia mobile de verdade?
           </h2>
-          <p className="relative mx-auto mt-3 max-w-md opacity-80">
-            Comece pelos fundamentos e avance no seu ritmo.
+          
+          <p className="mx-auto mt-4 max-w-xl text-base text-muted sm:text-lg">
+            Acesse os tokens, explore o playground interativo e entenda como pequenas alterações
+            em targets e zonas de toque transformam a usabilidade mobile.
           </p>
-          <a href="#modulos" className={buttonVariants({ variant: "outline", className: "relative mt-8 text-ink" })}>
-            Começar agora
-          </a>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="#fundamentos" className={buttonVariants({ variant: "primary", size: "lg" })}>
+              Começar pelos fundamentos <ArrowRight className="size-4" />
+            </a>
+            <a href="#playground" className={buttonVariants({ variant: "secondary", size: "lg" })}>
+              Acessar o playground
+            </a>
+          </div>
         </div>
       </Reveal>
     </section>
