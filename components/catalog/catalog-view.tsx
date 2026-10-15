@@ -5,6 +5,7 @@ import {
   Bell,
   Blocks,
   IdCard,
+  LayoutGrid,
   MousePointerClick,
   PanelBottom,
   PanelTop,
@@ -72,15 +73,135 @@ const CATEGORY_LABELS: Record<SectionMeta["category"], string> = {
   organisms: "Organismo",
 };
 
-const LEVELS: { id: AtomicCategory; label: string }[] = [
-  { id: "all", label: "Todos os Níveis" },
+const GROUPS: { id: Exclude<AtomicCategory, "all">; label: string }[] = [
   { id: "atoms", label: "Átomos" },
   { id: "molecules", label: "Moléculas" },
   { id: "organisms", label: "Organismos" },
 ];
 
-const chipBase =
-  "inline-flex min-h-11 items-center justify-center rounded-xl px-4 text-sm font-medium transition-all duration-200 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+// Nome curto para a navegação (remove o trecho entre parênteses do label completo)
+const shortLabel = (label: string) => label.replace(/\s*\(.*\)/, "");
+
+function FilterSidebar({
+  activeCategory,
+  activeSection,
+  onSelect,
+}: {
+  activeCategory: AtomicCategory;
+  activeSection: ComponentSection;
+  onSelect: (category: AtomicCategory, section: ComponentSection) => void;
+}) {
+  const isAllActive = activeCategory === "all" && activeSection === "all";
+
+  return (
+    <aside className="lg:sticky lg:top-24">
+      {/* Desktop: lista vertical agrupada por nível */}
+      <nav
+        aria-label="Filtro de componentes"
+        className="hidden max-h-[calc(100svh-8rem)] overflow-y-auto pr-1 lg:block"
+      >
+        <button
+          type="button"
+          aria-pressed={isAllActive}
+          onClick={() => onSelect("all", "all")}
+          className={cn(
+            "flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-sm transition-all duration-200 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+            isAllActive
+              ? "bg-primary text-on-primary font-semibold shadow-sm"
+              : "border border-line bg-surface font-medium text-ink hover:border-primary/50 hover:text-primary"
+          )}
+        >
+          <LayoutGrid className="size-4 shrink-0" />
+          <span className="flex-1 text-left">Todos os componentes</span>
+          <span
+            className={cn(
+              "rounded-full px-2 py-0.5 text-[10px] font-bold",
+              isAllActive ? "bg-on-primary/20 text-on-primary" : "bg-surface-raised text-muted"
+            )}
+          >
+            {SECTIONS.length}
+          </span>
+        </button>
+
+        {GROUPS.map((group) => {
+          const items = SECTIONS.filter((item) => item.category === group.id);
+          const isGroupActive = activeCategory === group.id && activeSection === "all";
+
+          return (
+            <div key={group.id} className="mt-7">
+              <button
+                type="button"
+                aria-pressed={isGroupActive}
+                onClick={() => onSelect(group.id, "all")}
+                className={cn(
+                  "flex w-full items-center justify-between rounded-lg px-3 py-1 text-[11px] font-bold uppercase tracking-widest transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                  isGroupActive ? "text-primary" : "text-muted hover:text-primary"
+                )}
+              >
+                <span>{group.label}</span>
+                <span className="rounded-full border border-line/60 bg-surface-raised px-2 py-0.5 text-[10px] tracking-normal">
+                  {items.length}
+                </span>
+              </button>
+
+              <ul className="mt-2 ml-3 border-l border-line">
+                {items.map((item) => {
+                  const Icon = SECTION_ICONS[item.id as Exclude<ComponentSection, "all">];
+                  const isActive = activeSection === item.id;
+                  return (
+                    <li key={item.id}>
+                      <button
+                        type="button"
+                        aria-pressed={isActive}
+                        title={item.label}
+                        onClick={() => onSelect(item.category, item.id)}
+                        className={cn(
+                          "relative flex min-h-11 w-full items-center gap-3 rounded-r-xl pr-3 pl-4 text-left text-sm leading-snug transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                          isActive
+                            ? "bg-primary-light font-semibold text-primary before:absolute before:inset-y-1 before:-left-px before:w-0.5 before:rounded-full before:bg-primary"
+                            : "text-muted hover:bg-surface-raised hover:text-ink"
+                        )}
+                      >
+                        <Icon className="size-4 shrink-0" />
+                        <span>{shortLabel(item.label)}</span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
+      </nav>
+
+      {/* Mobile: chips em linha com rolagem horizontal */}
+      <nav aria-label="Filtro de componentes (mobile)" className="-mx-6 overflow-x-auto px-6 lg:hidden">
+        <ul className="flex gap-2 pb-2">
+          {[{ id: "all" as const, label: "Todos", category: "all" as const }, ...SECTIONS].map((item) => {
+            const isActive = item.id === "all" ? isAllActive : activeSection === item.id;
+            return (
+              <li key={item.id} className="shrink-0">
+                <button
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => onSelect(item.category, item.id)}
+                  className={cn(
+                    "inline-flex min-h-11 items-center rounded-xl border px-4 text-sm font-medium whitespace-nowrap transition-all duration-200 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                    isActive
+                      ? "border-primary bg-primary-light text-primary"
+                      : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
+                  )}
+                >
+                  {item.id === "all" ? item.label : shortLabel(item.label)}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </aside>
+  );
+}
 
 function ShowcaseCard({
   id,
@@ -154,10 +275,10 @@ export function CatalogView() {
   const [activeCategory, setActiveCategory] = useState<AtomicCategory>("all");
   const [activeSection, setActiveSection] = useState<ComponentSection>("all");
 
-  const availableSections =
-    activeCategory === "all"
-      ? SECTIONS
-      : SECTIONS.filter((item) => item.category === activeCategory);
+  const handleSelect = (category: AtomicCategory, section: ComponentSection) => {
+    setActiveCategory(category);
+    setActiveSection(section);
+  };
 
   const shouldRender = (sectionId: ComponentSection, category: AtomicCategory) => {
     const matchesCategory = activeCategory === "all" || activeCategory === category;
@@ -170,7 +291,7 @@ export function CatalogView() {
   const showOrganisms = activeCategory === "all" || activeCategory === "organisms";
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-line/40">
+    <section className="relative isolate overflow-clip border-b border-line/40">
       {/* Background decorativo com grid dots e iluminação sutil */}
       <div className="bg-dots absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-72 w-full max-w-4xl -translate-x-1/2 bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl" />
@@ -193,92 +314,18 @@ export function CatalogView() {
           </Reveal>
         </header>
 
-        {/* Barra de Filtros */}
-        <Reveal delay={0.1}>
-          <div className="mt-12 space-y-5 rounded-2xl border border-line bg-surface/80 p-5 shadow-xs backdrop-blur-sm">
-            {/* Navegação de Nível 1: Atomic Design */}
-            <nav aria-label="Níveis do Atomic Design">
-              <ul className="flex flex-wrap gap-1.5 rounded-2xl border border-line bg-surface-raised p-1.5 sm:inline-flex">
-                {LEVELS.map(({ id, label }) => {
-                  const isActive = activeCategory === id;
-                  return (
-                    <li key={id} className="flex-1 sm:flex-none">
-                      <button
-                        type="button"
-                        aria-pressed={isActive}
-                        onClick={() => {
-                          setActiveCategory(id);
-                          setActiveSection("all");
-                        }}
-                        className={cn(
-                          chipBase,
-                          "w-full font-semibold",
-                          isActive
-                            ? "bg-primary text-on-primary shadow-sm"
-                            : "text-muted hover:bg-surface hover:text-ink"
-                        )}
-                      >
-                        {label}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+        {/* Layout em duas colunas: filtros (sidebar) + conteúdo */}
+        <div className="mt-14 grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start lg:gap-12">
+          <Reveal delay={0.1} className="lg:self-stretch">
+            <FilterSidebar
+              activeCategory={activeCategory}
+              activeSection={activeSection}
+              onSelect={handleSelect}
+            />
+          </Reveal>
 
-            {/* Navegação de Nível 2: Seletor Direto de Componente */}
-            <nav
-              aria-label="Seleção rápida de componente"
-              className="flex flex-col gap-3 border-t border-line/50 pt-5 lg:flex-row lg:items-start"
-            >
-              <span className="shrink-0 pt-3 text-xs font-bold uppercase tracking-widest text-primary">
-                Filtrar componente:
-              </span>
-              <ul className="flex flex-wrap gap-2">
-                <li>
-                  <button
-                    type="button"
-                    aria-pressed={activeSection === "all"}
-                    onClick={() => setActiveSection("all")}
-                    className={cn(
-                      chipBase,
-                      "border",
-                      activeSection === "all"
-                        ? "border-primary bg-primary-light text-primary"
-                        : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
-                    )}
-                  >
-                    Exibir Todos
-                  </button>
-                </li>
-                {availableSections.map((item) => {
-                  const isActive = activeSection === item.id;
-                  return (
-                    <li key={item.id}>
-                      <button
-                        type="button"
-                        aria-pressed={isActive}
-                        onClick={() => setActiveSection(item.id)}
-                        className={cn(
-                          chipBase,
-                          "border",
-                          isActive
-                            ? "border-primary bg-primary-light text-primary"
-                            : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
-                        )}
-                      >
-                        {item.label}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-          </div>
-        </Reveal>
-
-        {/* Conteúdo Renderizado por Sessão */}
-        <div className="mt-14 space-y-16">
+          {/* Conteúdo Renderizado por Sessão */}
+          <div className="min-w-0 space-y-16">
           {/* GRUPO: ÁTOMOS */}
           {showAtoms && (
             <section id="atoms-group" className="scroll-mt-24">
@@ -404,6 +451,7 @@ export function CatalogView() {
               </div>
             </section>
           )}
+          </div>
         </div>
       </div>
     </section>
