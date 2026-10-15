@@ -59,7 +59,6 @@ export function CatalogView() {
       {/* Cabeçalho da Página */}
       <header>
         <div>
-          <span>Módulo 03</span>
           <h1>Catálogo de Componentes</h1>
           <p>
             Biblioteca modular guiada por Atomic Design e calibrada para ergonomia móvel.
