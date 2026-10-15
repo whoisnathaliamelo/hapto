@@ -278,7 +278,7 @@ export function CatalogView() {
         </Reveal>
 
         {/* Conteúdo Renderizado por Sessão */}
-        <main className="mt-14 space-y-16">
+        <div className="mt-14 space-y-16">
           {/* GRUPO: ÁTOMOS */}
           {showAtoms && (
             <section id="atoms-group" className="scroll-mt-24">
@@ -404,7 +404,7 @@ export function CatalogView() {
               </div>
             </section>
           )}
-        </main>
+        </div>
       </div>
     </section>
   );
