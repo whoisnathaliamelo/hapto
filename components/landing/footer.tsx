@@ -1,4 +1,11 @@
+import { cacheLife } from "next/cache";
 import { Logo } from "@/components/logo";
+
+async function CurrentYear() {
+  "use cache";
+  cacheLife("days");
+  return <>{new Date().getFullYear()}</>;
+}
 
 export function Footer() {
   return (
@@ -17,7 +24,7 @@ export function Footer() {
         </div>
 
         <span className="text-[11px] opacity-75">
-          © {new Date().getFullYear()} Hapto
+          © <CurrentYear /> Hapto
         </span>
       </div>
     </footer>
