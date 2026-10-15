@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { MousePointerClick, TextCursorInput, Type, MoveVertical, ArrowRight, Layers } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -58,12 +59,12 @@ export function TokensPreview() {
               </p>
             </div>
 
-            <a
-              href="#tokens"
+            <Link
+              href="/components"
               className={buttonVariants({ variant: "outline", size: "md", className: "self-start md:self-auto shrink-0" })}
             >
               Explorar módulos de tokens <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </div>
         </Reveal>
 
