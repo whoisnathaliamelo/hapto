@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 export default function ComponentsPage() {
   return (
     <>
-      <Navbar />
+      <Navbar fluid />
       <main className="w-full">
         <CatalogView />
       </main>
-      <Footer />
+      <Footer fluid />
     </>
   );
 }

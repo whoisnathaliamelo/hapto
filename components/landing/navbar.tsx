@@ -3,6 +3,7 @@
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BookOpen, Palette, Terminal } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const modules = [
   { href: "#fundamentos", label: "Início & Fundamento", icon: BookOpen },
@@ -10,7 +11,7 @@ const modules = [
   { href: "#playground", label: "Playground", icon: Terminal },
 ];
 
-export function Navbar() {
+export function Navbar({ fluid = false }: { fluid?: boolean } = {}) {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
@@ -24,7 +25,12 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-line/60 bg-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div
+        className={cn(
+          "mx-auto flex h-16 items-center justify-between px-6 transition-all",
+          fluid ? "w-full max-w-[1600px] lg:px-8 xl:px-12" : "max-w-6xl"
+        )}
+      >
         {/* Brand */}
         <a href="#" className="transition hover:opacity-80 shrink-0" aria-label="Hapto início">
           <Logo />

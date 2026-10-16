@@ -94,12 +94,18 @@ function FilterSidebar({
   const isAllActive = activeCategory === "all" && activeSection === "all";
 
   return (
-    <aside className="lg:sticky lg:top-24">
+    <aside className="hidden lg:block lg:sticky lg:top-24 lg:self-start w-64 xl:w-72 shrink-0">
       {/* Desktop: lista vertical agrupada por nível */}
       <nav
         aria-label="Filtro de componentes"
-        className="hidden max-h-[calc(100svh-8rem)] overflow-y-auto pr-1 lg:block"
+        className="max-h-[calc(100svh-7.5rem)] overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:var(--line)_transparent]"
       >
+        <div className="mb-3 px-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
+            Explorar Catálogo
+          </span>
+        </div>
+
         <button
           type="button"
           aria-pressed={isAllActive}
@@ -128,7 +134,7 @@ function FilterSidebar({
           const isGroupActive = activeCategory === group.id && activeSection === "all";
 
           return (
-            <div key={group.id} className="mt-7">
+            <div key={group.id} className="mt-6">
               <button
                 type="button"
                 aria-pressed={isGroupActive}
@@ -173,33 +179,46 @@ function FilterSidebar({
           );
         })}
       </nav>
-
-      {/* Mobile: chips em linha com rolagem horizontal */}
-      <nav aria-label="Filtro de componentes (mobile)" className="-mx-6 overflow-x-auto px-6 lg:hidden">
-        <ul className="flex gap-2 pb-2">
-          {[{ id: "all" as const, label: "Todos", category: "all" as const }, ...SECTIONS].map((item) => {
-            const isActive = item.id === "all" ? isAllActive : activeSection === item.id;
-            return (
-              <li key={item.id} className="shrink-0">
-                <button
-                  type="button"
-                  aria-pressed={isActive}
-                  onClick={() => onSelect(item.category, item.id)}
-                  className={cn(
-                    "inline-flex min-h-11 items-center rounded-xl border px-4 text-sm font-medium whitespace-nowrap transition-all duration-200 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
-                    isActive
-                      ? "border-primary bg-primary-light text-primary"
-                      : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
-                  )}
-                >
-                  {item.id === "all" ? item.label : shortLabel(item.label)}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
     </aside>
+  );
+}
+
+function MobileFilterChips({
+  activeCategory,
+  activeSection,
+  onSelect,
+}: {
+  activeCategory: AtomicCategory;
+  activeSection: ComponentSection;
+  onSelect: (category: AtomicCategory, section: ComponentSection) => void;
+}) {
+  const isAllActive = activeCategory === "all" && activeSection === "all";
+
+  return (
+    <nav aria-label="Filtro de componentes (mobile)" className="-mx-6 overflow-x-auto px-6">
+      <ul className="flex gap-2 pb-2">
+        {[{ id: "all" as const, label: "Todos", category: "all" as const }, ...SECTIONS].map((item) => {
+          const isActive = item.id === "all" ? isAllActive : activeSection === item.id;
+          return (
+            <li key={item.id} className="shrink-0">
+              <button
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => onSelect(item.category, item.id)}
+                className={cn(
+                  "inline-flex min-h-11 items-center rounded-xl border px-4 text-sm font-medium whitespace-nowrap transition-all duration-200 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+                  isActive
+                    ? "border-primary bg-primary-light text-primary"
+                    : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
+                )}
+              >
+                {item.id === "all" ? item.label : shortLabel(item.label)}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }
 
@@ -259,8 +278,8 @@ function GroupHeading({
   count: number;
 }) {
   return (
-    <div className="flex items-center gap-3 border-b border-line/40 pb-4">
-      <div className="flex size-9 items-center justify-center rounded-xl bg-primary-light text-primary">
+    <div className="flex items-center justify-center gap-3 border-b border-line/40 pb-4 text-center">
+      <div className="flex size-9 items-center justify-center rounded-xl bg-primary-light text-primary shadow-2xs">
         <Icon className="size-4.5" />
       </div>
       <h2 className="text-2xl font-extrabold tracking-tight text-ink">{title}</h2>
@@ -296,36 +315,49 @@ export function CatalogView() {
       <div className="bg-dots absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-72 w-full max-w-4xl -translate-x-1/2 bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl" />
 
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
-        {/* Cabeçalho da Página */}
-        <header>
-          <Reveal>
-            <div className="max-w-3xl">
-              <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-5xl lg:text-6xl lg:leading-[1.12]">
-                Catálogo de{" "}
-                <span className="text-primary underline decoration-primary/30 underline-offset-8">
-                  Componentes
-                </span>
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-                Biblioteca modular guiada por Atomic Design e calibrada para ergonomia móvel.
-              </p>
-            </div>
-          </Reveal>
-        </header>
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-8 pb-20 lg:pt-10 lg:pb-24">
+        {/* Layout no desktop: Sidebar à esquerda + Área Principal com conteúdo centralizado */}
+        <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-10 xl:gap-14">
+          {/* Sidebar lateral no Desktop (iniciando no topo da página à esquerda) */}
+          <FilterSidebar
+            activeCategory={activeCategory}
+            activeSection={activeSection}
+            onSelect={handleSelect}
+          />
 
-        {/* Layout em duas colunas: filtros (sidebar) + conteúdo */}
-        <div className="mt-14 grid gap-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start lg:gap-12">
-          <Reveal delay={0.1} className="lg:self-stretch">
-            <FilterSidebar
-              activeCategory={activeCategory}
-              activeSection={activeSection}
-              onSelect={handleSelect}
-            />
-          </Reveal>
+          {/* Área / Coluna Principal centralizada */}
+          <div className="min-w-0 flex-1 flex flex-col items-center">
+            <div className="w-full max-w-4xl xl:max-w-5xl space-y-12 lg:space-y-16">
+              {/* Cabeçalho da Página Centralizado */}
+              <header className="mx-auto max-w-2xl text-center">
+                <Reveal>
+                  <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
+                    <span className="size-2 rounded-full bg-primary animate-pulse" />
+                    <span>Design System Mobile-First</span>
+                  </div>
+                  <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl lg:leading-[1.15]">
+                    Catálogo de{" "}
+                    <span className="text-primary underline decoration-primary/30 underline-offset-8">
+                      Componentes
+                    </span>
+                  </h1>
+                  <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+                    Biblioteca modular guiada por Atomic Design e calibrada para ergonomia móvel.
+                  </p>
+                </Reveal>
+              </header>
 
-          {/* Conteúdo Renderizado por Sessão */}
-          <div className="min-w-0 space-y-16">
+              {/* Mobile: chips em linha logo após o cabeçalho */}
+              <Reveal delay={0.1} className="lg:hidden w-full">
+                <MobileFilterChips
+                  activeCategory={activeCategory}
+                  activeSection={activeSection}
+                  onSelect={handleSelect}
+                />
+              </Reveal>
+
+              {/* Conteúdo Renderizado por Sessão */}
+              <div className="space-y-14 lg:space-y-16">
           {/* GRUPO: ÁTOMOS */}
           {showAtoms && (
             <section id="atoms-group" className="scroll-mt-24">
@@ -451,6 +483,8 @@ export function CatalogView() {
               </div>
             </section>
           )}
+            </div>
+            </div>
           </div>
         </div>
       </div>

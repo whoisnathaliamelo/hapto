@@ -1,5 +1,6 @@
 import { cacheLife } from "next/cache";
 import { Logo } from "@/components/logo";
+import { cn } from "@/lib/utils";
 
 async function CurrentYear() {
   "use cache";
@@ -7,10 +8,15 @@ async function CurrentYear() {
   return <>{new Date().getFullYear()}</>;
 }
 
-export function Footer() {
+export function Footer({ fluid = false }: { fluid?: boolean } = {}) {
   return (
     <footer className="border-t border-line/60 bg-surface/40 py-4">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-xs text-muted sm:flex-row">
+      <div
+        className={cn(
+          "mx-auto flex flex-col items-center justify-between gap-3 px-6 text-xs text-muted sm:flex-row transition-all",
+          fluid ? "w-full max-w-[1600px] lg:px-8 xl:px-12" : "max-w-6xl"
+        )}
+      >
         <div className="flex items-center gap-3">
           <Logo />
           <span className="hidden text-line sm:inline">•</span>
