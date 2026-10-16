@@ -227,6 +227,7 @@ function ShowcaseCard({
   section,
   title,
   description,
+  children,
   placeholder,
   delay,
 }: {
@@ -234,7 +235,8 @@ function ShowcaseCard({
   section: Exclude<ComponentSection, "all">;
   title: string;
   description: string;
-  placeholder: string;
+  children?: React.ReactNode;
+  placeholder?: string;
   delay: number;
 }) {
   const Icon = SECTION_ICONS[section];
@@ -260,8 +262,12 @@ function ShowcaseCard({
         </h3>
         <p className="mt-2 text-xs leading-relaxed text-muted">{description}</p>
 
-        <div className="mt-6 flex min-h-40 flex-1 items-center justify-center rounded-xl border border-dashed border-line bg-surface-raised/50 px-4 text-center text-xs font-medium text-muted">
-          {placeholder}
+        <div className="mt-6 flex min-h-40 flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
+          {children ?? (
+            <span className="text-xs font-medium text-muted">
+              {placeholder ?? "Em breve..."}
+            </span>
+          )}
         </div>
       </article>
     </Reveal>
