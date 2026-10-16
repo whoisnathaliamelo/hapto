@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
+import { ButtonsShowcase } from "./showcases/buttons-showcase";
 
 type AtomicCategory = "all" | "atoms" | "molecules" | "organisms";
 
@@ -376,10 +377,12 @@ export function CatalogView() {
                     section="buttons"
                     title="Botões (Normal, Secundário, FAB)"
                     description="Alvos táteis calibrados entre 40px e 56px para polegar."
-                    placeholder="[Espaço reservado: ButtonsShowcase]"
                     delay={0}
-                  />
+                    >
+                    <ButtonsShowcase />
+                  </ShowcaseCard>
                 )}
+
 
                 {shouldRender("inputs", "atoms") && (
                   <ShowcaseCard
