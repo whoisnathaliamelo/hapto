@@ -12,6 +12,8 @@ import {
   INPUTS_CODE,
   SwitchesShowcase,
   SWITCHES_CODE,
+  IconsShowcase,
+  ICONS_CODE,
 } from "../showcases";
 
 interface AtomsGroupProps {
@@ -76,9 +78,11 @@ export function AtomsGroup({ activeSection }: AtomsGroupProps) {
             section="icons"
             title="Ícones Ergonômicos"
             description="Metáforas visuais com grid de toque acessível."
-            placeholder="[Espaço reservado: IconsShowcase]"
+            code={ICONS_CODE}
             delay={0.24}
-          />
+          >
+            <IconsShowcase />
+          </ShowcaseCard>
         )}
       </div>
     </section>
