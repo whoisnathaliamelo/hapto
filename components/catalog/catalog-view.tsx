@@ -340,7 +340,7 @@ function ShowcaseCard({
         {/* Área de Apresentação */}
         <div className="mt-4 flex min-h-48 flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
           {activeTab === "code" && code ? (
-            <pre className="max-h-80 w-full overflow-x-auto rounded-lg bg-ink p-4 text-xs font-mono leading-relaxed text-paper/90 selection:bg-primary/30 [scrollbar-width:thin]">
+            <pre className="max-h-80 w-full overflow-x-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">
               <code>{code}</code>
             </pre>
           ) : (
@@ -459,8 +459,9 @@ export function CatalogView() {
                     section="buttons"
                     title="Botões (Normal, Secundário, FAB)"
                     description="Alvos táteis calibrados entre 40px e 56px para polegar."
+                    code={BUTTONS_CODE}
                     delay={0}
-                    >
+                  >
                     <ButtonsShowcase />
                   </ShowcaseCard>
                 )}
