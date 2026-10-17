@@ -24,6 +24,7 @@ import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 import { ButtonsShowcase, BUTTONS_CODE } from "./showcases/buttons-showcase";
 import { InputsShowcase, INPUTS_CODE } from "./showcases/inputs-showcase";
+import { SwitchesShowcase, SWITCHES_CODE } from "./showcases/switches-showcase";
 
 
 type AtomicCategory = "all" | "atoms" | "molecules" | "organisms";
@@ -514,9 +515,11 @@ export function CatalogView() {
                     section="switches"
                     title="Switches e Checkboxes"
                     description="Controles binários com estados visuais claros e feedback tátil."
-                    placeholder="[Espaço reservado: SwitchesShowcase]"
+                    code={SWITCHES_CODE}
                     delay={0.16}
-                  />
+                  >
+                    <SwitchesShowcase />
+                  </ShowcaseCard>
                 )}
 
                 {shouldRender("icons", "atoms") && (
