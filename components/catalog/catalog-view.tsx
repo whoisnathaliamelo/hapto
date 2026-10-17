@@ -23,6 +23,7 @@ import {
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 import { ButtonsShowcase, BUTTONS_CODE } from "./showcases/buttons-showcase";
+import { InputsShowcase, INPUTS_CODE } from "./showcases/inputs-showcase";
 
 
 type AtomicCategory = "all" | "atoms" | "molecules" | "organisms";
@@ -282,7 +283,7 @@ function ShowcaseCard({
         <h3 className="mt-5 text-base font-bold text-ink transition-colors group-hover:text-primary">
           {title}
         </h3>
-        <p className="mt-2 text-xs leading-relaxed text-muted">{description}</p>
+        <p className="mt-2 text-xs leading-relaxed text-muted min-h-[34px]">{description}</p>
 
         {/* Barra de Abas (Visualizar / Código) e Ação de Copiar */}
         {code && (
@@ -338,18 +339,20 @@ function ShowcaseCard({
           </div>
         )}
 
-        {/* Área de Apresentação */}
-        <div className="mt-4 flex min-h-48 flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
+        {/* Área de Apresentação com Altura Uniforme Calibrada */}
+        <div className="mt-4 flex min-h-[380px] flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
           {activeTab === "code" && code ? (
-            <pre className="max-h-80 w-full overflow-x-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">
+            <pre className="h-[380px] max-h-[380px] w-full overflow-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">
               <code>{code}</code>
             </pre>
           ) : (
-            children ?? (
-              <span className="text-xs font-medium text-muted">
-                {placeholder ?? "Em breve..."}
-              </span>
-            )
+            <div className="flex h-full w-full items-center justify-center">
+              {children ?? (
+                <span className="text-xs font-medium text-muted">
+                  {placeholder ?? "Em breve..."}
+                </span>
+              )}
+            </div>
           )}
         </div>
       </article>
@@ -498,9 +501,11 @@ export function CatalogView() {
                     section="inputs"
                     title="Inputs de Texto"
                     description="Campos com altura de 48dp e tipografia mínima que evita zoom involuntário."
-                    placeholder="[Espaço reservado: InputsShowcase]"
+                    code={INPUTS_CODE}
                     delay={0.08}
-                  />
+                  >
+                    <InputsShowcase />
+                  </ShowcaseCard>
                 )}
 
                 {shouldRender("switches", "atoms") && (
