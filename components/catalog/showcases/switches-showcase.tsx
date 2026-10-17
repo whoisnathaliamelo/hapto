@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Check, Info, Shield, Sliders } from "lucide-react";
+import { Check, Info, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type ControlType = "switch" | "checkbox" | "row";

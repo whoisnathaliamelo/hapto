@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
-import { CatalogView } from "@/components/catalog/catalog-view";
+import { CatalogView } from "@/components/catalog";
 
 export const metadata: Metadata = {
     title: "Catálogo de Componentes | Hapto Design System",

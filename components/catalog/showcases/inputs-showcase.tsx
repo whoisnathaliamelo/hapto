@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, Check, Info, Mail, Search, X } from "lucide-react";
+import { AlertCircle, Check, Info, Mail, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type InputState = "normal" | "icon" | "error";
