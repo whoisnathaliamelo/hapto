@@ -34,28 +34,38 @@ const SIZES_INFO: Record<
   },
 };
 
-export const BUTTONS_CODE = `import { Button } from "@/components/ui/button";
+// Código puro com Tailwind CSS (Caminho 1: Zero Dependências)
+// Qualquer desenvolvedor pode copiar e colar diretamente no projeto sem precisar instalar componentes extras
+export const BUTTONS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
+// Dica: Instale 'lucide-react' para os ícones ou use seus próprios SVGs
+
 import { Plus, Sparkles } from "lucide-react";
 
-export function ExemploBotoes() {
+export function BotoesErgonomicos() {
   return (
     <div className="flex flex-wrap items-center gap-3">
-      {/* Botão Primário (48px - Padrão Ouro para Polegar) */}
-      <Button variant="primary" size="lg">
+      {/* 1. Botão Primário — 48px de altura (Regra dos 48dp para o polegar) */}
+      <button
+        type="button"
+        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 text-base font-semibold text-on-primary shadow-sm transition-all duration-200 hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
         <Sparkles className="size-4" />
         <span>Principal</span>
-      </Button>
+      </button>
 
-      {/* Botão Secundário (44px ou 48px) */}
-      <Button variant="secondary" size="md">
+      {/* 2. Botão Secundário — 44px de altura (Padrão Apple HIG) */}
+      <button
+        type="button"
+        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-surface-raised px-5 text-sm font-medium text-ink transition-all duration-200 hover:border-primary/50 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
         <span>Secundário</span>
-      </Button>
+      </button>
 
-      {/* FAB Flutuante (56px - Alcance Imediato do Polegar) */}
+      {/* 3. FAB Flutuante — 56px de diâmetro (Alcance imediato do polegar) */}
       <button
         type="button"
         aria-label="Ação rápida flutuante"
-        className="flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-md active:scale-95"
+        className="flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-md shadow-primary/25 transition-all duration-200 hover:scale-105 hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <Plus className="size-6 stroke-[2.5]" />
       </button>
