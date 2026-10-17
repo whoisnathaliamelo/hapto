@@ -3,5 +3,7 @@ export * from "./inputs-showcase";
 export * from "./switches-showcase";
 export * from "./icons-showcase";
 export * from "./search-showcase";
+export * from "./cards-showcase";
+
 
 

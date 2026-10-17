@@ -5,7 +5,12 @@ import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
 import type { ComponentSection } from "../types";
-import { SearchShowcase, SEARCH_CODE } from "../showcases";
+import {
+  SearchShowcase,
+  SEARCH_CODE,
+  CardsShowcase,
+  CARDS_CODE,
+} from "../showcases";
 
 interface MoleculesGroupProps {
   activeSection: ComponentSection;
@@ -43,9 +48,11 @@ export function MoleculesGroup({ activeSection }: MoleculesGroupProps) {
             section="cards"
             title="Cards Informativos"
             description="Superfícies táteis com hierarquia e feedback em toda a área."
-            placeholder="[Espaço reservado: CardsShowcase]"
+            code={CARDS_CODE}
             delay={0.08}
-          />
+          >
+            <CardsShowcase />
+          </ShowcaseCard>
         )}
       </div>
     </section>
