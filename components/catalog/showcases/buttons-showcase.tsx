@@ -1,43 +1,135 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Send, Sparkles, Check } from "lucide-react";
+import { Plus, Sparkles, Check, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+type ButtonSize = "sm" | "md" | "lg";
+
+const SIZES_INFO: Record<
+  ButtonSize,
+  { label: string; height: string; tag: string; ergonomicNote: string; badgeColor: string }
+> = {
+  sm: {
+    label: "P",
+    height: "40px",
+    tag: "Secundário / Inline",
+    ergonomicNote: "Exige respiro lateral. Abaixo dos 48dp, use apenas para ações de apoio.",
+    badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/30",
+  },
+  md: {
+    label: "M",
+    height: "44px",
+    tag: "Padrão Apple (iOS HIG)",
+    ergonomicNote: "Alvo mínimo de 44pt da Apple. Excelente densidade para listas e cards.",
+    badgeColor: "bg-blue-500/10 text-blue-600 border-blue-500/30",
+  },
+  lg: {
+    label: "G",
+    height: "48px",
+    tag: "Padrão Ouro (Regra dos 48dp)",
+    ergonomicNote: "Ideal para o polegar e conformidade total com a Regra dos 48dp e WCAG AAA.",
+    badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/30",
+  },
+};
+
+export const BUTTONS_CODE = `import { Button } from "@/components/ui/button";
+import { Plus, Sparkles } from "lucide-react";
+
+export function ExemploBotoes() {
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      {/* Botão Primário (48px - Padrão Ouro para Polegar) */}
+      <Button variant="primary" size="lg">
+        <Sparkles className="size-4" />
+        <span>Principal</span>
+      </Button>
+
+      {/* Botão Secundário (44px ou 48px) */}
+      <Button variant="secondary" size="md">
+        <span>Secundário</span>
+      </Button>
+
+      {/* FAB Flutuante (56px - Alcance Imediato do Polegar) */}
+      <button
+        type="button"
+        aria-label="Ação rápida flutuante"
+        className="flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-md active:scale-95"
+      >
+        <Plus className="size-6 stroke-[2.5]" />
+      </button>
+    </div>
+  );
+}`;
 
 export function ButtonsShowcase() {
+  const [size, setSize] = useState<ButtonSize>("lg");
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const handleClick = (name: string) => {
-    setFeedback(`Toque detectado: ${name}`);
+    setFeedback(`Toque: ${name}`);
     const timer = setTimeout(() => setFeedback(null), 1800);
     return () => clearTimeout(timer);
   };
 
+  const currentSizeInfo = SIZES_INFO[size];
+
   return (
-    <div className="flex w-full flex-col items-center gap-6 py-2">
-      {/* Grade de demonstração dos botões */}
-      <div className="flex w-full flex-wrap items-center justify-center gap-3">
-        {/* 1. Botão Primário (48px - Padrão Ergonômico de Toque) */}
+    <div className="flex w-full flex-col items-center gap-5 py-1">
+      {/* 1. Seletor Ergonômico de Tamanhos (P, M, G) */}
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
+          Calibrar Tamanho do Alvo Tátil
+        </span>
+        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
+          {(["sm", "md", "lg"] as ButtonSize[]).map((s) => {
+            const isSelected = size === s;
+            const item = SIZES_INFO[s];
+            return (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setSize(s)}
+                aria-pressed={isSelected}
+                className={cn(
+                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
+                  isSelected
+                    ? "bg-primary text-on-primary shadow-xs"
+                    : "text-muted hover:bg-surface-raised hover:text-ink"
+                )}
+              >
+                <span>{item.label}</span>
+                <span className="text-[10px] opacity-80">({item.height})</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 2. Área de Demonstração Interativa */}
+      <div className="flex w-full flex-wrap items-center justify-center gap-3 py-2">
+        {/* Botão Primário */}
         <Button
           variant="primary"
-          size="lg"
-          onClick={() => handleClick("Primário (48px)")}
+          size={size}
+          onClick={() => handleClick(`Principal (${currentSizeInfo.height})`)}
           className="shadow-sm hover:shadow-primary/20 hover:shadow-lg"
         >
           <Sparkles className="size-4" />
           <span>Principal</span>
         </Button>
 
-        {/* 2. Botão Secundário */}
+        {/* Botão Secundário */}
         <Button
           variant="secondary"
-          size="md"
-          onClick={() => handleClick("Secundário (44px)")}
+          size={size}
+          onClick={() => handleClick(`Secundário (${currentSizeInfo.height})`)}
         >
           <span>Secundário</span>
         </Button>
 
-        {/* 3. FAB (Floating Action Button - 56px para fácil alcance do polegar) */}
+        {/* FAB Flutuante (56px) */}
         <button
           type="button"
           onClick={() => handleClick("FAB Flutuante (56px)")}
@@ -49,21 +141,38 @@ export function ButtonsShowcase() {
         </button>
       </div>
 
-      {/* Régua de Especificações & Feedback Interativo */}
-      <div className="flex w-full items-center justify-between border-t border-line/60 pt-3 text-[11px] text-muted">
-        <span className="flex items-center gap-1.5 font-mono">
-          <span className="size-1.5 rounded-full bg-emerald-500" />
-          Alvo mínimo: 48×48dp
-        </span>
+      {/* 3. Diagnóstico Ergonômico do Tamanho Selecionado */}
+      <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
+        <div className="flex items-center justify-between gap-2">
+          <span className="flex items-center gap-1.5 font-bold text-ink">
+            <Info className="size-3.5 text-primary" />
+            <span>Tamanho {currentSizeInfo.label} ({currentSizeInfo.height})</span>
+          </span>
+          <span
+            className={cn(
+              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+              currentSizeInfo.badgeColor
+            )}
+          >
+            {currentSizeInfo.tag}
+          </span>
+        </div>
+        <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
+          {currentSizeInfo.ergonomicNote}
+        </p>
+      </div>
 
-        <span className="font-medium text-ink transition-all">
+      {/* 4. Feedback de Toque */}
+      <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
+        <span className="font-mono text-[10px]">Alvo ativo: {currentSizeInfo.height}</span>
+        <span className="font-medium text-ink">
           {feedback ? (
             <span className="inline-flex items-center gap-1 text-primary animate-in fade-in">
               <Check className="size-3" />
               {feedback}
             </span>
           ) : (
-            <span className="text-muted/70">Toque em qualquer botão</span>
+            <span className="text-muted/60">Experimente tocar nos botões</span>
           )}
         </span>
       </div>

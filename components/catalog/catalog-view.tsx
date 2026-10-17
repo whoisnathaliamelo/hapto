@@ -4,6 +4,10 @@ import { useState } from "react";
 import {
   Bell,
   Blocks,
+  Check,
+  Code2,
+  Copy,
+  Eye,
   IdCard,
   LayoutGrid,
   MousePointerClick,
@@ -17,7 +21,8 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { cn } from "@/lib/utils";
-import { ButtonsShowcase } from "./showcases/buttons-showcase";
+import { ButtonsShowcase, BUTTONS_CODE } from "./showcases/buttons-showcase";
+
 
 type AtomicCategory = "all" | "atoms" | "molecules" | "organisms";
 
@@ -231,6 +236,7 @@ function ShowcaseCard({
   children,
   placeholder,
   delay,
+  code,
 }: {
   id: string;
   section: Exclude<ComponentSection, "all">;
@@ -239,9 +245,23 @@ function ShowcaseCard({
   children?: React.ReactNode;
   placeholder?: string;
   delay: number;
+  code?: string;
 }) {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [copied, setCopied] = useState(false);
   const Icon = SECTION_ICONS[section];
   const meta = SECTIONS.find((item) => item.id === section)!;
+
+  const handleCopy = async () => {
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Falha ao copiar:", err);
+    }
+  };
 
   return (
     <Reveal delay={delay} className="h-full">
@@ -263,17 +283,79 @@ function ShowcaseCard({
         </h3>
         <p className="mt-2 text-xs leading-relaxed text-muted">{description}</p>
 
-        <div className="mt-6 flex min-h-40 flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
-          {children ?? (
-            <span className="text-xs font-medium text-muted">
-              {placeholder ?? "Em breve..."}
-            </span>
+        {/* Barra de Abas (Visualizar / Código) e Ação de Copiar */}
+        {code && (
+          <div className="mt-4 flex items-center justify-between border-b border-line/60 pb-2">
+            <div className="flex items-center gap-1 rounded-lg bg-surface-raised p-1">
+              <button
+                type="button"
+                onClick={() => setActiveTab("preview")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all",
+                  activeTab === "preview"
+                    ? "bg-surface text-ink shadow-xs"
+                    : "text-muted hover:text-ink"
+                )}
+              >
+                <Eye className="size-3.5" />
+                <span>Visualizar</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("code")}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all",
+                  activeTab === "code"
+                    ? "bg-surface text-ink shadow-xs"
+                    : "text-muted hover:text-ink"
+                )}
+              >
+                <Code2 className="size-3.5" />
+                <span>Código</span>
+              </button>
+            </div>
+
+            {activeTab === "code" && (
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="flex items-center gap-1.5 rounded-md border border-line bg-surface px-2.5 py-1 text-xs font-medium text-muted transition-all hover:border-primary hover:text-primary active:scale-95"
+              >
+                {copied ? (
+                  <>
+                    <Check className="size-3.5 text-emerald-600" />
+                    <span className="text-emerald-600 font-semibold">Copiado!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="size-3.5" />
+                    <span>Copiar código</span>
+                  </>
+                )}
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Área de Apresentação */}
+        <div className="mt-4 flex min-h-48 flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
+          {activeTab === "code" && code ? (
+            <pre className="max-h-80 w-full overflow-x-auto rounded-lg bg-ink p-4 text-xs font-mono leading-relaxed text-paper/90 selection:bg-primary/30 [scrollbar-width:thin]">
+              <code>{code}</code>
+            </pre>
+          ) : (
+            children ?? (
+              <span className="text-xs font-medium text-muted">
+                {placeholder ?? "Em breve..."}
+              </span>
+            )
           )}
         </div>
       </article>
     </Reveal>
   );
 }
+
 
 function GroupHeading({
   icon: Icon,
