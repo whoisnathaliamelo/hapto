@@ -5,6 +5,7 @@ import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
 import type { ComponentSection } from "../types";
+import { SearchShowcase, SEARCH_CODE } from "../showcases";
 
 interface MoleculesGroupProps {
   activeSection: ComponentSection;
@@ -29,9 +30,11 @@ export function MoleculesGroup({ activeSection }: MoleculesGroupProps) {
             section="search"
             title="Barra de Busca"
             description="Campo com botão de limpar e atalho tátil de fácil alcance."
-            placeholder="[Espaço reservado: SearchShowcase]"
+            code={SEARCH_CODE}
             delay={0}
-          />
+          >
+            <SearchShowcase />
+          </ShowcaseCard>
         )}
 
         {shouldRender("cards") && (
