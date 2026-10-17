@@ -1,25 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Blocks, Shapes, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { FilterSidebar } from "./filter-sidebar";
 import { MobileFilterChips } from "./mobile-filter-chips";
-import { ShowcaseCard } from "./showcase-card";
-import { GroupHeading } from "./group-heading";
 import { UsageGuide } from "./usage-guide";
+import { AtomsGroup, MoleculesGroup, OrganismsGroup } from "./groups";
 import { SECTIONS } from "./constants";
 import type { AtomicCategory, ComponentSection } from "./types";
-
-// Showcases individuais
-import {
-  ButtonsShowcase,
-  BUTTONS_CODE,
-  InputsShowcase,
-  INPUTS_CODE,
-  SwitchesShowcase,
-  SWITCHES_CODE,
-} from "./showcases";
 
 export function CatalogView() {
   const [activeCategory, setActiveCategory] = useState<AtomicCategory>("all");
@@ -30,15 +18,13 @@ export function CatalogView() {
     setActiveSection(section);
   };
 
-  const shouldRender = (sectionId: ComponentSection, category: AtomicCategory) => {
+  const showGroup = (category: Exclude<AtomicCategory, "all">) => {
     const matchesCategory = activeCategory === "all" || activeCategory === category;
-    const matchesSection = activeSection === "all" || activeSection === sectionId;
+    const matchesSection =
+      activeSection === "all" ||
+      SECTIONS.some((s) => s.category === category && s.id === activeSection);
     return matchesCategory && matchesSection;
   };
-
-  const showAtoms = activeCategory === "all" || activeCategory === "atoms";
-  const showMolecules = activeCategory === "all" || activeCategory === "molecules";
-  const showOrganisms = activeCategory === "all" || activeCategory === "organisms";
 
   return (
     <section className="relative isolate overflow-clip border-b border-line/40">
@@ -92,149 +78,9 @@ export function CatalogView() {
 
               {/* Conteúdo Renderizado por Seção */}
               <div className="space-y-14 lg:space-y-16">
-                {/* GRUPO: ÁTOMOS */}
-                {showAtoms && (
-                  <section id="atoms-group" className="scroll-mt-24">
-                    <GroupHeading
-                      icon={Blocks}
-                      title="Átomos"
-                      count={SECTIONS.filter((s) => s.category === "atoms" && shouldRender(s.id, "atoms")).length}
-                    />
-
-                    <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                      {shouldRender("buttons", "atoms") && (
-                        <ShowcaseCard
-                          id="section-buttons"
-                          section="buttons"
-                          title="Botões (Normal, Secundário, FAB)"
-                          description="Alvos táteis calibrados entre 40px e 56px para polegar."
-                          code={BUTTONS_CODE}
-                          delay={0}
-                        >
-                          <ButtonsShowcase />
-                        </ShowcaseCard>
-                      )}
-
-                      {shouldRender("inputs", "atoms") && (
-                        <ShowcaseCard
-                          id="section-inputs"
-                          section="inputs"
-                          title="Inputs de Texto"
-                          description="Campos com altura de 48dp e tipografia mínima que evita zoom involuntário."
-                          code={INPUTS_CODE}
-                          delay={0.08}
-                        >
-                          <InputsShowcase />
-                        </ShowcaseCard>
-                      )}
-
-                      {shouldRender("switches", "atoms") && (
-                        <ShowcaseCard
-                          id="section-switches"
-                          section="switches"
-                          title="Switches e Checkboxes"
-                          description="Controles binários com estados visuais claros e feedback tátil."
-                          code={SWITCHES_CODE}
-                          delay={0.16}
-                        >
-                          <SwitchesShowcase />
-                        </ShowcaseCard>
-                      )}
-
-                      {shouldRender("icons", "atoms") && (
-                        <ShowcaseCard
-                          id="section-icons"
-                          section="icons"
-                          title="Ícones Ergonômicos"
-                          description="Metáforas visuais com grid de toque acessível."
-                          placeholder="[Espaço reservado: IconsShowcase]"
-                          delay={0.24}
-                        />
-                      )}
-                    </div>
-                  </section>
-                )}
-
-                {/* GRUPO: MOLÉCULAS */}
-                {showMolecules && (
-                  <section id="molecules-group" className="scroll-mt-24">
-                    <GroupHeading
-                      icon={Sparkles}
-                      title="Moléculas"
-                      count={SECTIONS.filter((s) => s.category === "molecules" && shouldRender(s.id, "molecules")).length}
-                    />
-
-                    <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                      {shouldRender("search", "molecules") && (
-                        <ShowcaseCard
-                          id="section-search"
-                          section="search"
-                          title="Barra de Busca"
-                          description="Campo com botão de limpar e atalho tátil de fácil alcance."
-                          placeholder="[Espaço reservado: SearchShowcase]"
-                          delay={0}
-                        />
-                      )}
-
-                      {shouldRender("cards", "molecules") && (
-                        <ShowcaseCard
-                          id="section-cards"
-                          section="cards"
-                          title="Cards Informativos"
-                          description="Superfícies táteis com hierarquia e feedback em toda a área."
-                          placeholder="[Espaço reservado: CardsShowcase]"
-                          delay={0.08}
-                        />
-                      )}
-                    </div>
-                  </section>
-                )}
-
-                {/* GRUPO: ORGANISMOS */}
-                {showOrganisms && (
-                  <section id="organisms-group" className="scroll-mt-24">
-                    <GroupHeading
-                      icon={Shapes}
-                      title="Organismos"
-                      count={SECTIONS.filter((s) => s.category === "organisms" && shouldRender(s.id, "organisms")).length}
-                    />
-
-                    <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                      {shouldRender("bottom-nav", "organisms") && (
-                        <ShowcaseCard
-                          id="section-bottom-nav"
-                          section="bottom-nav"
-                          title="Bottom Navigation"
-                          description="Barra inferior ergonômica com zona de alcance natural do polegar."
-                          placeholder="[Espaço reservado: BottomNavShowcase]"
-                          delay={0}
-                        />
-                      )}
-
-                      {shouldRender("top-bar", "organisms") && (
-                        <ShowcaseCard
-                          id="section-top-bar"
-                          section="top-bar"
-                          title="Top App Bar"
-                          description="Cabeçalho mobile com navegação e ações secundárias."
-                          placeholder="[Espaço reservado: TopBarShowcase]"
-                          delay={0.08}
-                        />
-                      )}
-
-                      {shouldRender("feedback", "organisms") && (
-                        <ShowcaseCard
-                          id="section-feedback"
-                          section="feedback"
-                          title="Alertas e Snackbars"
-                          description="Notificações efêmeras e contextuais posicionadas próximas ao polegar."
-                          placeholder="[Espaço reservado: FeedbackShowcase]"
-                          delay={0.16}
-                        />
-                      )}
-                    </div>
-                  </section>
-                )}
+                {showGroup("atoms") && <AtomsGroup activeSection={activeSection} />}
+                {showGroup("molecules") && <MoleculesGroup activeSection={activeSection} />}
+                {showGroup("organisms") && <OrganismsGroup activeSection={activeSection} />}
               </div>
             </div>
           </div>

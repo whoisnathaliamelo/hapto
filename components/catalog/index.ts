@@ -6,3 +6,5 @@ export * from "./mobile-filter-chips";
 export * from "./showcase-card";
 export * from "./types";
 export * from "./usage-guide";
+export * from "./groups";
+
