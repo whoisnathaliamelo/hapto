@@ -121,9 +121,9 @@ export function ShowcaseCard({
         )}
 
         {/* Área de Apresentação com Altura Uniforme Calibrada */}
-        <div className="mt-4 flex min-h-[380px] flex-1 items-center justify-center rounded-xl border border-line/60 bg-surface-raised/40 p-4">
+        <div className="mt-4 flex h-[380px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line/60 bg-surface-raised/40 p-4">
           {activeTab === "code" && code ? (
-            <pre className="h-[380px] max-h-[380px] w-full overflow-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">
+            <pre className="h-full w-full overflow-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">
               <code>{code}</code>
             </pre>
           ) : (
