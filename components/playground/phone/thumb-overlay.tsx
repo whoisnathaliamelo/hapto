@@ -1,5 +1,4 @@
 import type { HandGrip } from "../types";
-import { AlertTriangle, CheckCircle, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ThumbOverlayProps {
@@ -12,65 +11,52 @@ export function ThumbOverlay({ handGrip }: ThumbOverlayProps) {
       id="thumb-overlay"
       aria-hidden="true"
       data-hand={handGrip}
-      className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between select-none overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between select-none overflow-hidden transition-all duration-300"
     >
-      {/* 1. Zona Difícil (Hard to reach - Topo da tela) */}
-      <div className="relative h-[28%] border-b border-rose-500/25 bg-rose-500/[0.07] p-2.5 backdrop-blur-[0.5px] transition-all">
-        <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1 rounded bg-rose-500/20 px-1.5 py-0.5 text-[9px] font-bold text-rose-700 dark:text-rose-300">
-            <AlertTriangle className="size-2.5" />
-            Zona Difícil (Hard)
-          </span>
-          <span className="text-[8px] font-semibold text-rose-600/80 dark:text-rose-400">
-            Leitura passiva
+      {/* 1. Zona Difícil (Topo da tela) - Sombra suave e linha tracejada rosa */}
+      <div className="relative h-[26%] border-b border-dashed border-rose-500/40 bg-rose-500/[0.04] transition-all">
+        {/* Marcador lateral discreto (sem poluir o centro da tela) */}
+        <div className="absolute right-2 top-2">
+          <span className="rounded-full bg-rose-500/15 border border-rose-500/30 px-2 py-0.5 text-[9px] font-bold text-rose-600 dark:text-rose-400">
+            Difícil
           </span>
         </div>
       </div>
 
-      {/* 2. Zona Esticada (Stretch - Centro da tela) */}
-      <div className="relative flex-1 border-b border-amber-500/25 bg-amber-500/[0.05] p-2.5 transition-all flex flex-col justify-center">
-        <div className="flex items-center justify-between">
-          <span className="inline-flex items-center gap-1 rounded bg-amber-500/20 px-1.5 py-0.5 text-[9px] font-bold text-amber-700 dark:text-amber-300">
-            <Flame className="size-2.5" />
-            Zona Esticada (Stretch)
-          </span>
-          <span className="text-[8px] font-semibold text-amber-600/80 dark:text-amber-400">
-            Alcance médio
-          </span>
-        </div>
+      {/* 2. Zona Esticada (Centro da tela) - Linha tracejada âmbar */}
+      <div className="relative flex-1 border-b border-dashed border-amber-500/40 bg-amber-500/[0.03] transition-all flex items-center justify-end pr-2">
+        {/* Marcador lateral discreto */}
+        <span className="rounded-full bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 text-[9px] font-bold text-amber-600 dark:text-amber-400">
+          Esticada
+        </span>
       </div>
 
-      {/* 3. Zona Natural (Easy Reach - Base da tela onde o polegar atinge com facilidade) */}
+      {/* 3. Zona Natural (Base da tela) - Curvatura do arco do polegar e linha tracejada primária */}
       <div
         className={cn(
-          "relative h-[38%] border-t-2 border-primary/50 bg-primary/[0.08] p-2.5 transition-all flex flex-col justify-end",
-          // Curvatura visual adaptada à mão
-          handGrip === "right" && "rounded-tl-[3.5rem] bg-gradient-to-tl from-primary/15 to-transparent",
-          handGrip === "left" && "rounded-tr-[3.5rem] bg-gradient-to-tr from-primary/15 to-transparent",
-          handGrip === "both" && "rounded-t-[2.5rem] bg-gradient-to-t from-primary/15 to-transparent"
+          "relative h-[38%] border-t-2 border-dashed border-primary/60 bg-primary/[0.06] transition-all duration-300 flex flex-col justify-end p-2",
+          // Arco dinâmico conforme a mão
+          handGrip === "right" && "rounded-tl-[5rem] bg-gradient-to-tl from-primary/20 via-primary/8 to-transparent",
+          handGrip === "left" && "rounded-tr-[5rem] bg-gradient-to-tr from-primary/20 via-primary/8 to-transparent",
+          handGrip === "both" && "rounded-t-[3.5rem] bg-gradient-to-t from-primary/18 via-primary/8 to-transparent"
         )}
       >
+        {/* Marcador no canto respectivo da mão */}
         <div
           className={cn(
-            "flex items-center justify-between",
-            handGrip === "right" && "flex-row-reverse text-right",
-            handGrip === "left" && "flex-row text-left",
-            handGrip === "both" && "justify-between"
+            "flex items-center",
+            handGrip === "right" && "justify-end",
+            handGrip === "left" && "justify-start",
+            handGrip === "both" && "justify-center"
           )}
         >
-          <span className="inline-flex items-center gap-1 rounded bg-primary/20 px-2 py-0.5 text-[10px] font-bold text-primary">
-            <CheckCircle className="size-3" />
-            Zona Natural (Reach)
-          </span>
-          <span className="text-[9px] font-bold text-primary/90">
-            {handGrip === "right" ? "Polegar Direito ↘" : handGrip === "left" ? "↙ Polegar Esquerdo" : "2 Polegares ↔"}
+          <span className="rounded-full bg-primary/20 border border-primary/40 px-2 py-0.5 text-[9px] font-bold text-primary shadow-2xs">
+            {handGrip === "right" ? "Natural (Destro)" : handGrip === "left" ? "Natural (Canhoto)" : "Natural (2 Mãos)"}
           </span>
         </div>
-        <p className="mt-1 text-[9px] text-primary/80 font-medium">
-          Área ideal para CTAs primários, tabs e ações frequentes.
-        </p>
       </div>
     </div>
   );
 }
+
 
