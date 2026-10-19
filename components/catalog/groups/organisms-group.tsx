@@ -10,6 +10,8 @@ import {
   BOTTOM_NAV_CODE,
   TopBarShowcase,
   TOP_BAR_CODE,
+  FeedbackShowcase,
+  FEEDBACK_CODE,
 } from "../showcases";
 
 interface OrganismsGroupProps {
@@ -61,9 +63,11 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
             section="feedback"
             title="Alertas e Snackbars"
             description="Notificações efêmeras e contextuais posicionadas próximas ao polegar."
-            placeholder="[Espaço reservado: FeedbackShowcase]"
+            code={FEEDBACK_CODE}
             delay={0.16}
-          />
+          >
+            <FeedbackShowcase />
+          </ShowcaseCard>
         )}
       </div>
     </section>

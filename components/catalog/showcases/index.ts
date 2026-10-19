@@ -6,3 +6,4 @@ export * from "./search-showcase";
 export * from "./cards-showcase";
 export * from "./bottom-nav-showcase";
 export * from "./top-bar-showcase";
+export * from "./feedback-showcase";
