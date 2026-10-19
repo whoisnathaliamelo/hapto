@@ -66,12 +66,29 @@
     color: var(--ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.35s ease, color 0.35s ease;
   }
+}
 
-  header, footer, nav, section, div, article, button, input {
-    transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
-  }
+/* Durante a troca de tema, a View Transition faz o cross-fade; as transições por elemento são pausadas */
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: none !important;
+}
+
+/* Suporte à View Transitions API: o snapshot antigo fica parado e o novo surge por cima.
+   Evita o blend plus-lighter padrão, que exige uma passada extra de composição. */
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  animation: theme-fade-in 350ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  mix-blend-mode: normal;
+}
+
+@keyframes theme-fade-in {
+  from { opacity: 0; }
 }
 
 .bg-dots {
@@ -84,5 +101,9 @@
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
