@@ -153,124 +153,137 @@ export function FeedbackShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação de Tela Mobile */}
-      <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-end overflow-hidden rounded-2xl border border-line bg-surface p-2.5 shadow-xs">
-        {/* Mock de fundo da tela */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center">
-          <span className="text-[11px] font-medium text-ink">
-            Área de Visualização Mobile
-          </span>
-          <span className="mt-0.5 text-[10px] text-muted">
-            {activeNotification
-              ? "Interaja com os gatilhos táteis do alerta"
-              : "Notificação fechada"}
-          </span>
-          {!activeNotification && (
+      {/* 2. Área Central Interativa: Simulação de Tela Mobile (altura mantida em 142px) */}
+      <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-between overflow-hidden rounded-2xl border border-line bg-surface p-3 shadow-xs">
+        {/* Topo do Mock Mobile: Contexto da Tela */}
+        <div className="flex flex-col gap-1.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5 text-xs font-semibold text-ink">
+              <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Tela Mobile Ativa</span>
+            </div>
+            <span className="text-[10px] text-muted">Zona de Feedback</span>
+          </div>
+
+          {/* Linhas sutis simulando conteúdo da interface sem poluição visual */}
+          <div className="space-y-1 opacity-25">
+            <div className="h-1.5 w-3/5 rounded-full bg-ink" />
+            <div className="h-1.5 w-2/5 rounded-full bg-ink" />
+          </div>
+        </div>
+
+        {/* Notificação Ativa (posicionada em fluxo natural sem sobreposição de texto) */}
+        {activeNotification ? (
+          <div>
+            {/* --- Variação 1: Snackbar Inferior com Ação "Desfazer" --- */}
+            {variant === "snackbar" && (
+              <div
+                role="status"
+                className="flex w-full items-center justify-between gap-2 rounded-xl border border-line bg-surface-raised/95 p-2 shadow-sm backdrop-blur-sm transition-all"
+              >
+                <div className="flex min-w-0 items-center gap-2">
+                  <CheckCircle2 className="size-4 shrink-0 text-emerald-500" />
+                  <span className="truncate text-[11px] font-medium text-ink">
+                    Item salvo nos favoritos
+                  </span>
+                </div>
+
+                <div className="flex shrink-0 items-center gap-1">
+                  <button
+                    type="button"
+                    onClick={triggerUndo}
+                    className="flex h-7 items-center gap-1 rounded-lg px-2 text-[11px] font-bold text-primary transition-colors hover:bg-primary/10 active:scale-90"
+                  >
+                    <RotateCcw className="size-3" />
+                    <span>Desfazer</span>
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Dispensar"
+                    onClick={triggerDismiss}
+                    className="flex size-7 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-ink active:scale-90"
+                  >
+                    <X className="size-3.5" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* --- Variação 2: Banner de Aviso / Card Persistente --- */}
+            {variant === "banner" && (
+              <div
+                role="alert"
+                className="flex w-full flex-col gap-1 rounded-xl border border-amber-500/30 bg-amber-500/10 p-2 shadow-xs transition-all"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <AlertTriangle className="size-3.5 shrink-0 text-amber-600" />
+                    <span className="truncate text-[11px] font-bold text-ink">
+                      Modo offline ativado
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    aria-label="Fechar alerta"
+                    onClick={triggerDismiss}
+                    className="flex size-5 shrink-0 items-center justify-center rounded text-muted transition-colors hover:text-ink active:scale-90"
+                  >
+                    <X className="size-3" />
+                  </button>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-muted">
+                    Sincronização em pausa
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => triggerAction("Tentando reconexão...")}
+                    className="rounded bg-amber-600/20 px-2 py-0.5 text-[10px] font-bold text-amber-700 transition-colors hover:bg-amber-600/30 active:scale-90"
+                  >
+                    Reconectar
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* --- Variação 3: Floating Toast (Pill) --- */}
+            {variant === "floating" && (
+              <div className="flex w-full items-center justify-center">
+                <div
+                  role="status"
+                  className="flex items-center gap-2 rounded-full border border-line bg-surface/95 px-3 py-1.5 shadow-md backdrop-blur-sm transition-all"
+                >
+                  <Sparkles className="size-3.5 text-primary" />
+                  <span className="text-[11px] font-semibold text-ink">
+                    Preferências salvas
+                  </span>
+                  <button
+                    type="button"
+                    aria-label="Dispensar toast"
+                    onClick={triggerDismiss}
+                    className="ml-1 flex size-5 items-center justify-center rounded-full text-muted hover:bg-surface-raised hover:text-ink active:scale-80"
+                  >
+                    <X className="size-3" />
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          /* Estado quando a notificação é fechada */
+          <div className="flex w-full items-center justify-between rounded-xl border border-dashed border-line bg-surface-raised/40 px-3 py-2">
+            <span className="text-[11px] text-muted">Notificação fechada</span>
             <button
               type="button"
               onClick={() => {
                 setActiveNotification(true);
                 setLastAction("Notificação reaberta!");
               }}
-              className="mt-2 flex min-h-8 items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 text-[11px] font-semibold text-primary transition-all hover:border-primary active:scale-95"
+              className="flex min-h-7 items-center gap-1.5 rounded-lg border border-line bg-surface px-2.5 text-[11px] font-semibold text-primary transition-all hover:border-primary active:scale-95"
             >
               <RefreshCw className="size-3" />
               <span>Disparar novamente</span>
             </button>
-          )}
-        </div>
-
-        {/* --- Variação 1: Snackbar Inferior com Ação "Desfazer" --- */}
-        {variant === "snackbar" && activeNotification && (
-          <div
-            role="status"
-            className="relative z-10 flex w-full items-center justify-between gap-2 rounded-xl border border-line bg-surface-raised/95 p-2 shadow-md backdrop-blur-sm transition-all"
-          >
-            <div className="flex min-w-0 items-center gap-2">
-              <CheckCircle2 className="size-4 shrink-0 text-emerald-500" />
-              <span className="truncate text-[11px] font-medium text-ink">
-                Item salvo nos favoritos
-              </span>
-            </div>
-
-            <div className="flex shrink-0 items-center gap-1">
-              <button
-                type="button"
-                onClick={triggerUndo}
-                className="flex h-7 items-center gap-1 rounded-lg px-2 text-[11px] font-bold text-primary transition-colors hover:bg-primary/10 active:scale-90"
-              >
-                <RotateCcw className="size-3" />
-                <span>Desfazer</span>
-              </button>
-              <button
-                type="button"
-                aria-label="Dispensar"
-                onClick={triggerDismiss}
-                className="flex size-7 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-ink active:scale-90"
-              >
-                <X className="size-3.5" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* --- Variação 2: Banner de Aviso / Card Persistente --- */}
-        {variant === "banner" && activeNotification && (
-          <div
-            role="alert"
-            className="relative z-10 flex w-full flex-col gap-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 p-2.5 shadow-xs transition-all"
-          >
-            <div className="flex items-start justify-between gap-2">
-              <div className="flex min-w-0 items-center gap-2">
-                <AlertTriangle className="size-4 shrink-0 text-amber-600" />
-                <span className="truncate text-[11px] font-bold text-ink">
-                  Modo offline ativado
-                </span>
-              </div>
-              <button
-                type="button"
-                aria-label="Fechar alerta"
-                onClick={triggerDismiss}
-                className="flex size-6 shrink-0 items-center justify-center rounded-md text-muted transition-colors hover:text-ink active:scale-90"
-              >
-                <X className="size-3.5" />
-              </button>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] text-muted">
-                Alterações serão sincronizadas
-              </span>
-              <button
-                type="button"
-                onClick={() => triggerAction("Tentando reconexão...")}
-                className="rounded-md bg-amber-600/20 px-2 py-0.5 text-[10px] font-bold text-amber-700 transition-colors hover:bg-amber-600/30 active:scale-90"
-              >
-                Reconectar
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* --- Variação 3: Floating Toast (Pill) --- */}
-        {variant === "floating" && activeNotification && (
-          <div className="relative z-10 flex w-full items-center justify-center">
-            <div
-              role="status"
-              className="flex items-center gap-2 rounded-full border border-line bg-surface/95 px-3 py-1.5 shadow-md backdrop-blur-sm transition-all"
-            >
-              <Sparkles className="size-3.5 text-primary" />
-              <span className="text-[11px] font-semibold text-ink">
-                Preferências atualizadas
-              </span>
-              <button
-                type="button"
-                aria-label="Dispensar toast"
-                onClick={triggerDismiss}
-                className="ml-1 flex size-5 items-center justify-center rounded-full text-muted hover:bg-surface-raised hover:text-ink active:scale-80"
-              >
-                <X className="size-3" />
-              </button>
-            </div>
           </div>
         )}
       </div>
