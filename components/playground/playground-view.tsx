@@ -145,28 +145,8 @@ export function PlaygroundView() {
             </Reveal>
           </div>
 
-          {/* COLUNA 2: O Celular Simulado Centralizado */}
-          <div className="lg:col-span-4 xl:col-span-4 order-1 lg:order-2 flex flex-col items-center justify-center py-2 space-y-3">
-            {/* Mini Legenda de Zonas Externa (não polui a tela interna) */}
-            {settings.showOverlay && (
-              <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 text-[11px] font-semibold text-muted bg-surface/90 border border-line/80 rounded-full px-3.5 py-1 shadow-2xs backdrop-blur-xs">
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-primary ring-2 ring-primary/20" />
-                  <span>Natural</span>
-                </div>
-                <span className="text-line text-[9px]">•</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-amber-500 ring-2 ring-amber-500/20" />
-                  <span>Esticada</span>
-                </div>
-                <span className="text-line text-[9px]">•</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="size-2 rounded-full bg-rose-500 ring-2 ring-rose-500/20" />
-                  <span>Difícil</span>
-                </div>
-              </div>
-            )}
-
+          {/* COLUNA 2: O Celular Simulado Centralizado (Posição Estática Fixa) */}
+          <div className="lg:col-span-4 xl:col-span-4 order-1 lg:order-2 flex items-center justify-center">
             <Reveal delay={0.1}>
               <PhoneFrame>
                 <ScreenContent

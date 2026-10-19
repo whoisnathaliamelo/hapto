@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Layers } from "lucide-react";
+import { Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ZoneToggleProps {
@@ -8,7 +8,7 @@ interface ZoneToggleProps {
 
 export function ZoneToggle({ checked, onChange }: ZoneToggleProps) {
   return (
-    <div className="rounded-xl border border-line bg-surface p-3.5 shadow-2xs">
+    <div className="rounded-xl border border-line bg-surface p-3.5 shadow-2xs space-y-3">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <div className="flex size-8 items-center justify-center rounded-lg bg-primary-light text-primary">
@@ -17,7 +17,7 @@ export function ZoneToggle({ checked, onChange }: ZoneToggleProps) {
           <div>
             <p className="text-xs font-bold text-ink">Thumb Zone Overlay</p>
             <p className="text-[11px] text-muted">
-              Mapa de alcance visual do polegar
+              Mapa de alcance do polegar
             </p>
           </div>
         </div>
@@ -42,20 +42,46 @@ export function ZoneToggle({ checked, onChange }: ZoneToggleProps) {
         </button>
       </div>
 
-      <div className="mt-3 flex items-center gap-2 border-t border-line/50 pt-2 text-[10px] text-muted">
-        {checked ? (
-          <>
-            <Eye className="size-3 text-primary shrink-0" />
-            <span>Zonas visíveis sobrepostas na tela do celular</span>
-          </>
-        ) : (
-          <>
-            <EyeOff className="size-3 text-muted shrink-0" />
-            <span>Zonas ocultas (visão pura da aplicação)</span>
-          </>
-        )}
+      {/* Legenda de Cores Integrada (Altura Estável, sem empurrar o celular) */}
+      <div className="flex items-center justify-between border-t border-line/50 pt-2 text-[10px] font-semibold">
+        <div className="flex items-center gap-1.5">
+          <span
+            className={cn(
+              "size-2 rounded-full transition-colors",
+              checked ? "bg-primary ring-2 ring-primary/20" : "bg-muted/30"
+            )}
+          />
+          <span className={cn("transition-colors", checked ? "text-primary font-bold" : "text-muted/60")}>
+            Natural
+          </span>
+        </div>
+        <span className="text-line text-[9px]">•</span>
+        <div className="flex items-center gap-1.5">
+          <span
+            className={cn(
+              "size-2 rounded-full transition-colors",
+              checked ? "bg-amber-500 ring-2 ring-amber-500/20" : "bg-muted/30"
+            )}
+          />
+          <span className={cn("transition-colors", checked ? "text-amber-600 dark:text-amber-400 font-bold" : "text-muted/60")}>
+            Esticada
+          </span>
+        </div>
+        <span className="text-line text-[9px]">•</span>
+        <div className="flex items-center gap-1.5">
+          <span
+            className={cn(
+              "size-2 rounded-full transition-colors",
+              checked ? "bg-rose-500 ring-2 ring-rose-500/20" : "bg-muted/30"
+            )}
+          />
+          <span className={cn("transition-colors", checked ? "text-rose-600 dark:text-rose-400 font-bold" : "text-muted/60")}>
+            Difícil
+          </span>
+        </div>
       </div>
     </div>
   );
 }
+
 
