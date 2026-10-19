@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Smartphone, Layers, Code2 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
@@ -31,9 +32,9 @@ export function Hero() {
             <a href="#fundamentos" className={buttonVariants({ variant: "primary", size: "md" })}>
               Conhecer módulos <ArrowRight className="size-4" />
             </a>
-            <a href="#playground" className={buttonVariants({ variant: "outline", size: "md" })}>
+            <Link href="/playground" className={buttonVariants({ variant: "outline", size: "md" })}>
               Ver playground
-            </a>
+            </Link>
           </Reveal>
 
           <Reveal delay={0.3} className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-y-2 gap-x-5 text-xs text-muted">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { Sliders, BookOpen, Code2, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -47,19 +48,22 @@ export function PlaygroundPreview() {
               </p>
             </div>
 
-            <a
-              href="#playground"
+            <Link
+              href="/playground"
               className={buttonVariants({ variant: "outline", size: "md", className: "self-start md:self-auto shrink-0" })}
             >
-              Acessar playground <ArrowRight className="size-4" />
-            </a>
+              Acessar módulo completo <ArrowRight className="size-4" />
+            </Link>
           </div>
         </Reveal>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {playgroundCards.map(({ icon: Icon, badge, title, description }, i) => (
             <Reveal key={title} delay={i * 0.08}>
-              <div className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md">
+              <Link
+                href="/playground"
+                className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md"
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-primary-light text-primary">
@@ -82,7 +86,7 @@ export function PlaygroundPreview() {
                   <span>Ver no playground</span>
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>

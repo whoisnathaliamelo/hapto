@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -22,9 +23,9 @@ export function Cta() {
             <a href="#fundamentos" className={buttonVariants({ variant: "primary", size: "lg" })}>
               Começar pelos fundamentos <ArrowRight className="size-4" />
             </a>
-            <a href="#playground" className={buttonVariants({ variant: "secondary", size: "lg" })}>
+            <Link href="/playground" className={buttonVariants({ variant: "secondary", size: "lg" })}>
               Acessar o playground
-            </a>
+            </Link>
           </div>
         </div>
       </Reveal>
