@@ -5,7 +5,12 @@ import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
 import type { ComponentSection } from "../types";
-import { BottomNavShowcase, BOTTOM_NAV_CODE } from "../showcases";
+import {
+  BottomNavShowcase,
+  BOTTOM_NAV_CODE,
+  TopBarShowcase,
+  TOP_BAR_CODE,
+} from "../showcases";
 
 interface OrganismsGroupProps {
   activeSection: ComponentSection;
@@ -43,9 +48,11 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
             section="top-bar"
             title="Top App Bar"
             description="Cabeçalho mobile com navegação e ações secundárias."
-            placeholder="[Espaço reservado: TopBarShowcase]"
+            code={TOP_BAR_CODE}
             delay={0.08}
-          />
+          >
+            <TopBarShowcase />
+          </ShowcaseCard>
         )}
 
         {shouldRender("feedback") && (
