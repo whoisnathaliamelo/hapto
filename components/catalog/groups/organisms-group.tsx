@@ -5,6 +5,7 @@ import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
 import type { ComponentSection } from "../types";
+import { BottomNavShowcase, BOTTOM_NAV_CODE } from "../showcases";
 
 interface OrganismsGroupProps {
   activeSection: ComponentSection;
@@ -29,9 +30,11 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
             section="bottom-nav"
             title="Bottom Navigation"
             description="Barra inferior ergonômica com zona de alcance natural do polegar."
-            placeholder="[Espaço reservado: BottomNavShowcase]"
+            code={BOTTOM_NAV_CODE}
             delay={0}
-          />
+          >
+            <BottomNavShowcase />
+          </ShowcaseCard>
         )}
 
         {shouldRender("top-bar") && (
