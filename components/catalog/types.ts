@@ -1,7 +1,9 @@
-export type AtomicCategory = "all" | "atoms" | "molecules" | "organisms";
+export type AtomicCategory = "all" | "tokens" | "atoms" | "molecules" | "organisms";
 
 export type ComponentSection =
   | "all"
+  | "colors"
+  | "typography"
   | "buttons"
   | "inputs"
   | "switches"
@@ -15,5 +17,5 @@ export type ComponentSection =
 export interface SectionMeta {
   id: ComponentSection;
   label: string;
-  category: "atoms" | "molecules" | "organisms";
+  category: "tokens" | "atoms" | "molecules" | "organisms";
 }

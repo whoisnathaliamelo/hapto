@@ -2,17 +2,23 @@ import {
   Bell,
   IdCard,
   MousePointerClick,
+  Palette,
   PanelBottom,
   PanelTop,
   Search,
   Shapes,
   TextCursorInput,
   ToggleRight,
+  Type,
   type LucideIcon,
 } from "lucide-react";
 import type { AtomicCategory, ComponentSection, SectionMeta } from "./types";
 
 export const SECTIONS: SectionMeta[] = [
+  // Tokens
+  { id: "colors", label: "Cores & Contraste WCAG", category: "tokens" },
+  { id: "typography", label: "Tipografia & Escala", category: "tokens" },
+
   // Átomos
   { id: "buttons", label: "Botões (Normal, Secundário, FAB)", category: "atoms" },
   { id: "inputs", label: "Inputs de Texto", category: "atoms" },
@@ -30,6 +36,8 @@ export const SECTIONS: SectionMeta[] = [
 ];
 
 export const SECTION_ICONS: Record<Exclude<ComponentSection, "all">, LucideIcon> = {
+  colors: Palette,
+  typography: Type,
   buttons: MousePointerClick,
   inputs: TextCursorInput,
   switches: ToggleRight,
@@ -42,12 +50,14 @@ export const SECTION_ICONS: Record<Exclude<ComponentSection, "all">, LucideIcon>
 };
 
 export const CATEGORY_LABELS: Record<SectionMeta["category"], string> = {
+  tokens: "Token",
   atoms: "Átomo",
   molecules: "Molécula",
   organisms: "Organismo",
 };
 
 export const GROUPS: { id: Exclude<AtomicCategory, "all">; label: string }[] = [
+  { id: "tokens", label: "Tokens" },
   { id: "atoms", label: "Átomos" },
   { id: "molecules", label: "Moléculas" },
   { id: "organisms", label: "Organismos" },

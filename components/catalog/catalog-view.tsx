@@ -5,7 +5,12 @@ import { Reveal } from "@/components/reveal";
 import { FilterSidebar } from "./filter-sidebar";
 import { MobileFilterChips } from "./mobile-filter-chips";
 import { UsageGuide } from "./usage-guide";
-import { AtomsGroup, MoleculesGroup, OrganismsGroup } from "./groups";
+import {
+  TokensGroup,
+  AtomsGroup,
+  MoleculesGroup,
+  OrganismsGroup,
+} from "./groups";
 import { SECTIONS } from "./constants";
 import type { AtomicCategory, ComponentSection } from "./types";
 
@@ -78,6 +83,7 @@ export function CatalogView() {
 
               {/* Conteúdo Renderizado por Seção */}
               <div className="space-y-14 lg:space-y-16">
+                {showGroup("tokens") && <TokensGroup activeSection={activeSection} />}
                 {showGroup("atoms") && <AtomsGroup activeSection={activeSection} />}
                 {showGroup("molecules") && <MoleculesGroup activeSection={activeSection} />}
                 {showGroup("organisms") && <OrganismsGroup activeSection={activeSection} />}
