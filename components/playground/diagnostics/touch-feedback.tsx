@@ -76,9 +76,9 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
   }[targetSize];
 
   return (
-    <aside className="space-y-4">
-      {/* 1. Header do Painel */}
-      <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs">
+    <div className="h-[610px] sm:h-[640px] w-full rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col justify-between select-none">
+      {/* 1. Header do Painel e Target Calibrado */}
+      <div>
         <div className="flex items-center justify-between border-b border-line/50 pb-3">
           <div className="flex items-center gap-2">
             <div className="flex size-8 items-center justify-center rounded-lg bg-primary-light text-primary">
@@ -96,13 +96,13 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
           </span>
         </div>
 
-        {/* Status da Calibragem do Target */}
-        <div className="mt-3.5 flex items-center justify-between rounded-xl bg-surface-raised/60 border border-line/60 p-3">
+        {/* Status da Calibragem do Target (Altura Estável) */}
+        <div className="mt-3.5 flex items-center justify-between rounded-xl bg-surface-raised/60 border border-line/60 p-3 h-[60px]">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-muted">
               Target Calibrado
             </span>
-            <p className="text-base font-extrabold text-ink">{targetSize}</p>
+            <p className="text-base font-extrabold text-ink leading-tight">{targetSize}</p>
           </div>
           <div className="text-right">
             <span
@@ -113,103 +113,112 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
             >
               {targetEvaluation.tag}
             </span>
-            <p className="text-[10px] text-muted mt-0.5">
+            <p className="text-[10px] text-muted mt-0.5 truncate max-w-[190px]">
               {targetEvaluation.description}
             </p>
           </div>
         </div>
       </div>
 
-      {/* 2. Análise do Toque Atual */}
-      <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5 mb-3">
-          <Fingerprint className="size-3.5 text-primary" />
-          <span>Último Toque Registrado</span>
-        </h4>
+      {/* 2. Análise do Toque Atual (Altura Rigorosamente Estável: h-[280px]) */}
+      <div className="rounded-xl border border-line/70 bg-surface-raised/30 p-4 space-y-3 h-[290px] flex flex-col justify-between">
+        <div className="flex items-center justify-between border-b border-line/40 pb-2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
+            <Fingerprint className="size-3.5 text-primary" />
+            <span>Último Toque</span>
+          </h4>
+          <span className="text-[10px] text-muted font-medium">
+            {lastTouch ? "Registrado" : "Aguardando"}
+          </span>
+        </div>
 
-        {lastTouch ? (
-          <div className="space-y-4">
-            {/* Componente e Zona */}
-            <div className="rounded-xl border border-line/70 bg-surface-raised/40 p-3.5 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted">Elemento Tocado:</span>
-                <span className="text-xs font-bold text-ink flex items-center gap-1">
-                  <MousePointerClick className="size-3 text-primary" />
-                  {lastTouch.elementClicked}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-muted">Zona de Alcance:</span>
-                <span
-                  className={cn(
-                    "rounded-md border px-2 py-0.5 text-[10px] font-bold",
-                    getZoneEvaluation(lastTouch.zone).badgeColor
-                  )}
-                >
-                  {getZoneEvaluation(lastTouch.zone).title}
-                </span>
-              </div>
-            </div>
-
-            {/* Barra de Esforço Motor */}
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-semibold text-muted">Esforço Motor Estimado</span>
-                <span className="font-bold text-ink">
-                  {getZoneEvaluation(lastTouch.zone).effortLabel}
-                </span>
-              </div>
-
-              <div className="h-2 w-full rounded-full bg-surface-raised border border-line/60 overflow-hidden">
-                <div
-                  className={cn(
-                    "h-full transition-all duration-500 rounded-full",
-                    getZoneEvaluation(lastTouch.zone).barColor
-                  )}
-                  style={{
-                    width: `${getZoneEvaluation(lastTouch.zone).effortPercent}%`,
-                  }}
-                />
-              </div>
-            </div>
-
-            {/* Justificativa e Recomendação de UX */}
-            <div className="rounded-xl border border-line/50 bg-surface p-3 space-y-1.5 text-xs">
-              <div className="flex items-start gap-1.5 text-muted leading-relaxed">
-                <Info className="size-3.5 text-primary mt-0.5 shrink-0" />
-                <span>{getZoneEvaluation(lastTouch.zone).description}</span>
-              </div>
-              <div className="flex items-start gap-1.5 text-primary text-[11px] font-medium pt-1 border-t border-line/40">
-                <Sparkles className="size-3 mt-0.5 shrink-0" />
-                <span>{getZoneEvaluation(lastTouch.zone).recommendation}</span>
-              </div>
-            </div>
+        {/* Slot 1: Componente e Zona (Altura Fixa: 56px) */}
+        <div className="rounded-lg border border-line/60 bg-surface p-2.5 space-y-1.5 h-[62px] flex flex-col justify-center">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-muted">Elemento:</span>
+            <span className="text-[11px] font-bold text-ink flex items-center gap-1 truncate max-w-[180px]">
+              <MousePointerClick className="size-3 text-primary shrink-0" />
+              {lastTouch ? lastTouch.elementClicked : "Nenhum toque"}
+            </span>
           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-6 text-center text-muted border border-dashed border-line rounded-xl p-4">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-surface-raised text-primary mb-2">
-              <MousePointerClick className="size-5" />
-            </div>
-            <p className="text-xs font-semibold text-ink">Nenhum toque registrado</p>
-            <p className="mt-1 text-[11px] text-muted max-w-xs leading-relaxed">
-              Toque em qualquer botão, aba ou campo dentro do celular simulado para ver a análise ergonômica em tempo real.
-            </p>
+
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-muted">Zona:</span>
+            {lastTouch ? (
+              <span
+                className={cn(
+                  "rounded px-1.5 py-0.2 text-[9px] font-bold border",
+                  getZoneEvaluation(lastTouch.zone).badgeColor
+                )}
+              >
+                {getZoneEvaluation(lastTouch.zone).title}
+              </span>
+            ) : (
+              <span className="rounded bg-line/40 px-1.5 py-0.2 text-[9px] font-medium text-muted">
+                Toque no celular
+              </span>
+            )}
           </div>
-        )}
+        </div>
+
+        {/* Slot 2: Barra de Esforço Motor (Altura Fixa: 42px) */}
+        <div className="space-y-1 h-[42px] flex flex-col justify-center">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="font-semibold text-muted">Fadiga Motora</span>
+            <span className="font-bold text-ink">
+              {lastTouch
+                ? getZoneEvaluation(lastTouch.zone).effortLabel
+                : "0% — Sem esforço"}
+            </span>
+          </div>
+
+          <div className="h-2 w-full rounded-full bg-surface-raised border border-line/60 overflow-hidden">
+            <div
+              className={cn(
+                "h-full transition-all duration-300 rounded-full",
+                lastTouch
+                  ? getZoneEvaluation(lastTouch.zone).barColor
+                  : "bg-transparent"
+              )}
+              style={{
+                width: `${lastTouch ? getZoneEvaluation(lastTouch.zone).effortPercent : 0}%`,
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Slot 3: Justificativa e Recomendação de UX (Altura Fixa: 98px) */}
+        <div className="rounded-lg border border-line/50 bg-surface p-2.5 h-[105px] flex flex-col justify-between text-[11px]">
+          <div className="flex items-start gap-1.5 text-muted leading-relaxed line-clamp-2">
+            <Info className="size-3 text-primary mt-0.5 shrink-0" />
+            <span>
+              {lastTouch
+                ? getZoneEvaluation(lastTouch.zone).description
+                : "Toque em qualquer botão, aba ou campo dentro do celular simulado para ver a análise de ergonomia."}
+            </span>
+          </div>
+          <div className="flex items-start gap-1.5 text-primary text-[10px] font-semibold pt-1 border-t border-line/40 line-clamp-1">
+            <Sparkles className="size-3 shrink-0 mt-0.5" />
+            <span>
+              {lastTouch
+                ? getZoneEvaluation(lastTouch.zone).recommendation
+                : "Elementos na base reduzem o tempo de reação e o risco de miss-click."}
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* 3. Dica Rápida de Acessibilidade */}
-      <div className="rounded-2xl border border-primary/20 bg-primary/[0.04] p-4 text-xs space-y-1">
-        <div className="flex items-center gap-1.5 font-bold text-primary">
-          <CheckCircle2 className="size-3.5" />
+      {/* 3. Dica Rápida de Acessibilidade (Altura Fixa: 88px) */}
+      <div className="rounded-xl border border-primary/20 bg-primary/[0.04] p-3 text-xs space-y-1 h-[88px] flex flex-col justify-center">
+        <div className="flex items-center gap-1.5 font-bold text-primary text-[11px]">
+          <CheckCircle2 className="size-3.5 shrink-0" />
           <span>Regra dos 75% da Steven Hoober</span>
         </div>
-        <p className="text-[11px] text-muted leading-relaxed">
-          Mais de 75% das interações em smartphones são realizadas com o polegar de uma única mão. Desenhar respeitando o alcance inferior reduz a frustração e o cansaço articular.
+        <p className="text-[10px] text-muted leading-relaxed line-clamp-2">
+          Mais de 75% das interações mobile ocorrem com o polegar de uma só mão. Posicionar alvos na base previne quedas do aparelho e esforço articular.
         </p>
       </div>
-    </aside>
+    </div>
   );
 }
 

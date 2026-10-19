@@ -58,16 +58,16 @@ export function TargetCalibrator({ value, onChange }: TargetCalibratorProps) {
               aria-pressed={isSelected}
               onClick={() => onChange(option.id)}
               className={cn(
-                "group flex w-full items-center justify-between rounded-xl border p-2.5 text-left transition-all cursor-pointer",
+                "group flex w-full items-center justify-between rounded-xl border p-2.5 text-left transition-all cursor-pointer min-h-[58px]",
                 isSelected
                   ? "border-primary bg-primary-light/30 shadow-xs ring-1 ring-primary/30"
                   : "border-line bg-surface hover:border-line hover:bg-surface-raised/50"
               )}
             >
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 min-w-0">
                 <div
                   className={cn(
-                    "flex size-7 items-center justify-center rounded-lg text-xs font-bold transition-colors",
+                    "flex size-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold transition-colors",
                     isSelected
                       ? "bg-primary text-on-primary"
                       : "bg-surface-raised text-muted group-hover:text-ink"
@@ -75,8 +75,8 @@ export function TargetCalibrator({ value, onChange }: TargetCalibratorProps) {
                 >
                   {option.label}
                 </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 whitespace-nowrap">
                     <span className="text-xs font-bold text-ink">
                       Altura {option.label}
                     </span>
@@ -89,15 +89,18 @@ export function TargetCalibrator({ value, onChange }: TargetCalibratorProps) {
                       {option.badge}
                     </span>
                   </div>
-                  <p className="text-[10px] text-muted leading-tight mt-0.5">
+                  <p className="text-[10px] text-muted leading-tight mt-0.5 truncate">
                     {option.detail}
                   </p>
                 </div>
               </div>
 
-              {isSelected && (
-                <CheckCircle2 className="size-4 text-primary shrink-0 ml-2" />
-              )}
+              <CheckCircle2
+                className={cn(
+                  "size-4 text-primary shrink-0 ml-2 transition-opacity",
+                  isSelected ? "opacity-100" : "opacity-0"
+                )}
+              />
             </button>
           );
         })}

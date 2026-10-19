@@ -73,68 +73,74 @@ export function PlaygroundView() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* COLUNA 1: Painel de Controles e Calibragem */}
-          <div className="lg:col-span-4 xl:col-span-4 order-2 lg:order-1 space-y-4">
+          <div className="lg:col-span-4 xl:col-span-4 order-2 lg:order-1">
             <Reveal delay={0.05}>
-              <div className="rounded-2xl border border-line bg-surface p-5 shadow-xs space-y-5">
-                <div className="flex items-center gap-2 border-b border-line/50 pb-3">
-                  <div className="flex size-8 items-center justify-center rounded-lg bg-primary-light text-primary">
-                    <Sliders className="size-4" />
+              <div className="h-[610px] sm:h-[640px] w-full rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col justify-between select-none">
+                <div>
+                  <div className="flex items-center gap-2 border-b border-line/50 pb-3">
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-primary-light text-primary">
+                      <Sliders className="size-4" />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-ink">Painel de Parâmetros</h2>
+                      <p className="text-[11px] text-muted">Ajuste as variáveis do teste</p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-sm font-bold text-ink">Painel de Parâmetros</h2>
-                    <p className="text-[11px] text-muted">Ajuste as variáveis do teste</p>
+
+                  {/* Seletor de Pegada */}
+                  <div className="mt-4">
+                    <HandSelector
+                      value={settings.handGrip}
+                      onChange={(handGrip) => setSettings((s) => ({ ...s, handGrip }))}
+                    />
+                  </div>
+
+                  {/* Seletor de Cenário */}
+                  <div className="mt-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
+                        <Smartphone className="size-3.5 text-primary" />
+                        <span>Cenário da Tela</span>
+                      </label>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-1.5 rounded-xl border border-line bg-surface-raised/60 p-1">
+                      {scenarios.map((scen) => {
+                        const isSelected = settings.activeScreen === scen.id;
+                        return (
+                          <button
+                            key={scen.id}
+                            type="button"
+                            onClick={() => setSettings((s) => ({ ...s, activeScreen: scen.id }))}
+                            className={cn(
+                              "flex flex-col items-center justify-center rounded-lg px-2 py-2 text-center transition-all cursor-pointer border",
+                              isSelected
+                                ? "bg-surface text-ink font-bold shadow-xs border-line/80 ring-1 ring-primary/20"
+                                : "border-transparent text-muted hover:text-ink hover:bg-surface/50 font-medium"
+                            )}
+                          >
+                            <span className="text-xs">{scen.label}</span>
+                            <span className="text-[9px] text-muted/70">{scen.desc.split(" ")[0]}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
 
-                {/* Seletor de Pegada */}
-                <HandSelector
-                  value={settings.handGrip}
-                  onChange={(handGrip) => setSettings((s) => ({ ...s, handGrip }))}
-                />
+                <div className="space-y-4">
+                  {/* Toggle da Camada de Thumb Zone */}
+                  <ZoneToggle
+                    checked={settings.showOverlay}
+                    onChange={(showOverlay) => setSettings((s) => ({ ...s, showOverlay }))}
+                  />
 
-                {/* Seletor de Cenário */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
-                      <Smartphone className="size-3.5 text-primary" />
-                      <span>Cenário da Tela</span>
-                    </label>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-1.5 rounded-xl border border-line bg-surface-raised/60 p-1">
-                    {scenarios.map((scen) => {
-                      const isSelected = settings.activeScreen === scen.id;
-                      return (
-                        <button
-                          key={scen.id}
-                          type="button"
-                          onClick={() => setSettings((s) => ({ ...s, activeScreen: scen.id }))}
-                          className={cn(
-                            "flex flex-col items-center justify-center rounded-lg px-2 py-2 text-center transition-all cursor-pointer",
-                            isSelected
-                              ? "bg-surface text-ink font-bold shadow-xs border border-line/80 ring-1 ring-primary/20"
-                              : "text-muted hover:text-ink hover:bg-surface/50 font-medium"
-                          )}
-                        >
-                          <span className="text-xs">{scen.label}</span>
-                          <span className="text-[9px] text-muted/70">{scen.desc.split(" ")[0]}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
+                  {/* Calibragem de tamanho de alvo */}
+                  <TargetCalibrator
+                    value={settings.targetSize}
+                    onChange={(targetSize) => setSettings((s) => ({ ...s, targetSize }))}
+                  />
                 </div>
-
-                {/* Toggle da Camada de Thumb Zone */}
-                <ZoneToggle
-                  checked={settings.showOverlay}
-                  onChange={(showOverlay) => setSettings((s) => ({ ...s, showOverlay }))}
-                />
-
-                {/* Calibragem de tamanho de alvo */}
-                <TargetCalibrator
-                  value={settings.targetSize}
-                  onChange={(targetSize) => setSettings((s) => ({ ...s, targetSize }))}
-                />
               </div>
             </Reveal>
           </div>
