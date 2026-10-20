@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import {
-  Bell,
   Bookmark,
   Check,
   Compass,
   Home,
   Info,
   Plus,
-  Search,
   User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";

@@ -1,7 +1,6 @@
 import type { TargetSize, TouchEventData } from "../types";
 import {
   Activity,
-  AlertTriangle,
   CheckCircle2,
   Fingerprint,
   Info,

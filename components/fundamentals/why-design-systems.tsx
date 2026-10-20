@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check, X, Layers, SplitSquareVertical, ArrowRight, ShieldAlert, CheckCircle2, Sparkles, Terminal } from "lucide-react";
+import { Check, X, Layers, SplitSquareVertical, ShieldAlert, Sparkles } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 export function WhyDesignSystems() {

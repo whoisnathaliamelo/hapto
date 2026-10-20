@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
-import { MousePointerClick, TextCursorInput, Type, MoveVertical, ArrowRight, Layers } from "lucide-react";
+import { MousePointerClick, TextCursorInput, Type, MoveVertical, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 
 const tokenModules = [
@@ -70,7 +70,7 @@ export function TokensPreview() {
 
         {/* Grade de Módulos de Tokens (Preview do que há na página) */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {tokenModules.map(({ id, label, icon: Icon, title, description, badge }, i) => (
+          {tokenModules.map(({ id, icon: Icon, title, description, badge }, i) => (
             <Reveal key={id} delay={i * 0.08}>
               <div className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md">
                 <div>

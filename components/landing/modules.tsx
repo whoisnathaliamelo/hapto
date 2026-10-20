@@ -1,4 +1,4 @@
-import { BookOpen, Palette, Terminal, ArrowUpRight, Sparkles, Sliders, Check } from "lucide-react";
+import { BookOpen, Palette, Terminal, ArrowUpRight, Check } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 const modules = [

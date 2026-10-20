@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import {
-  AlertCircle,
   Check,
   CheckCircle2,
   Info,
   Smartphone,
-  Type,
   ZoomIn,
 } from "lucide-react";
 import { cn } from "@/lib/utils";

@@ -15,7 +15,7 @@ import { ThumbOverlay } from "./phone/thumb-overlay";
 import { ScreenContent } from "./phone/screen-content";
 import { TouchFeedback } from "./diagnostics/touch-feedback";
 import { Reveal } from "@/components/reveal";
-import { Sliders, Smartphone, Sparkles } from "lucide-react";
+import { Sliders, Smartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function PlaygroundView() {

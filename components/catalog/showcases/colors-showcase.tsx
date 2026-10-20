@@ -2,12 +2,9 @@
 
 import { useState } from "react";
 import {
-  AlertTriangle,
   Check,
   CheckCircle2,
   Info,
-  Palette,
-  Sparkles,
   Sun,
   XCircle,
 } from "lucide-react";

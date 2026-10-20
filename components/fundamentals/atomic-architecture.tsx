@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Atom, Boxes, Component, Layout, Smartphone, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Atom, Boxes, Component, Layout, Smartphone } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 export function AtomicArchitecture() {

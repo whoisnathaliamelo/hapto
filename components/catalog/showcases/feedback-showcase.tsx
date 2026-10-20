@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
-  AlertCircle,
   AlertTriangle,
-  Bell,
   Check,
   CheckCircle2,
   Info,
@@ -100,10 +98,7 @@ export function FeedbackShowcase() {
 
   const currentInfo = VARIATIONS_INFO[variant];
 
-  // Auto restaura notificação ao trocar de variação
-  useEffect(() => {
-    setActiveNotification(true);
-  }, [variant]);
+
 
   const triggerUndo = () => {
     setActiveNotification(false);
@@ -136,6 +131,7 @@ export function FeedbackShowcase() {
                 type="button"
                 onClick={() => {
                   setVariant(v);
+                  setActiveNotification(true);
                   setLastAction(`Variação selecionada: ${item.label}`);
                 }}
                 aria-pressed={isSelected}
