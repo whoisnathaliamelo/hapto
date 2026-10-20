@@ -20,9 +20,9 @@ export function Cta() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a href="#fundamentos" className={buttonVariants({ variant: "primary", size: "lg" })}>
+            <Link href="/fundamentals" className={buttonVariants({ variant: "primary", size: "lg" })}>
               Começar pelos fundamentos <ArrowRight className="size-4" />
-            </a>
+            </Link>
             <Link href="/playground" className={buttonVariants({ variant: "secondary", size: "lg" })}>
               Acessar o playground
             </Link>

@@ -113,13 +113,13 @@ export function RulesCheatSheet() {
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/#tokens"
+                href="/components"
                 className={buttonVariants({ variant: "primary", size: "md" })}
               >
                 Ver Design Tokens <ArrowRight className="size-4" />
               </Link>
               <Link
-                href="/#playground"
+                href="/playground"
                 className={buttonVariants({ variant: "outline", size: "md" })}
               >
                 Acessar Playground <ArrowUpRight className="size-3.5" />

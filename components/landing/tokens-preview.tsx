@@ -6,35 +6,35 @@ import { buttonVariants } from "@/components/ui/button";
 const tokenModules = [
   {
     id: "buttons",
-    label: "Buttons",
     icon: MousePointerClick,
     title: "Módulo Buttons",
     description: "Alturas de toque calibradas (40px a 56px), raio de borda, padding e micro-interações de clique.",
     badge: "Ações táteis",
+    href: "/components#buttons",
   },
   {
     id: "inputs",
-    label: "Inputs",
     icon: TextCursorInput,
     title: "Módulo Inputs",
     description: "Campos de texto com alvo generoso e tipografia mínima que evita zoom involuntário no iOS.",
     badge: "Formulários",
+    href: "/components#inputs",
   },
   {
     id: "typography",
-    label: "Typography",
     icon: Type,
     title: "Módulo Typography",
     description: "Escalas tipográficas com contraste e hierarquia legíveis mesmo sob luz solar externa.",
     badge: "Leitura",
+    href: "/components#typography",
   },
   {
     id: "spacing",
-    label: "Spacing & Targets",
     icon: MoveVertical,
     title: "Módulo Spacing & Targets",
     description: "Distâncias de segurança entre alvos adjacentes para evitar toques incorretos acidentais.",
     badge: "Áreas de toque",
+    href: "/components",
   },
 ];
 
@@ -70,9 +70,12 @@ export function TokensPreview() {
 
         {/* Grade de Módulos de Tokens (Preview do que há na página) */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {tokenModules.map(({ id, icon: Icon, title, description, badge }, i) => (
+          {tokenModules.map(({ id, icon: Icon, title, description, badge, href }, i) => (
             <Reveal key={id} delay={i * 0.08}>
-              <div className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md">
+              <Link
+                href={href}
+                className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-xs transition-all hover:-translate-y-1 hover:border-primary/50 hover:shadow-md"
+              >
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="flex size-10 items-center justify-center rounded-xl bg-primary-light text-primary">
@@ -95,7 +98,7 @@ export function TokensPreview() {
                   <span>Ver especificações</span>
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" />
                 </div>
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>

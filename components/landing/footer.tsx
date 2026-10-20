@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cacheLife } from "next/cache";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
@@ -18,15 +19,23 @@ export function Footer({ fluid = false }: { fluid?: boolean } = {}) {
         )}
       >
         <div className="flex items-center gap-3">
-          <Logo />
+          <Link href="/" className="transition hover:opacity-80" aria-label="Hapto início">
+            <Logo />
+          </Link>
           <span className="hidden text-line sm:inline">•</span>
           <span className="text-[11px]">Design system para ergonomia mobile</span>
         </div>
 
         <div className="flex items-center gap-5 text-[11px]">
-          <a href="#fundamentos" className="transition hover:text-ink">Início & Fundamento</a>
-          <a href="#tokens" className="transition hover:text-ink">Design Tokens</a>
-          <a href="#playground" className="transition hover:text-ink">Playground</a>
+          <Link href="/fundamentals" className="transition hover:text-ink">
+            Início & Fundamento
+          </Link>
+          <Link href="/components" className="transition hover:text-ink">
+            Design Tokens
+          </Link>
+          <Link href="/playground" className="transition hover:text-ink">
+            Playground
+          </Link>
         </div>
 
         <span className="text-[11px] opacity-75">
