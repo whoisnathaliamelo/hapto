@@ -15,9 +15,9 @@ const modules = [
     icon: BookOpen,
   },
   {
-    anchorHref: "#tokens",
+    anchorHref: "#componentes",
     pageHref: "/components",
-    label: "Design Tokens",
+    label: "Catálogo de Componentes",
     icon: Palette,
   },
   {

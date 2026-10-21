@@ -15,7 +15,7 @@ export function Cta() {
           </h2>
           
           <p className="mx-auto mt-4 max-w-xl text-base text-muted sm:text-lg">
-            Acesse os tokens, explore o playground interativo e entenda como pequenas alterações
+            Acesse o catálogo de componentes, explore o playground interativo e entenda como pequenas alterações
             em targets e zonas de toque transformam a usabilidade mobile.
           </p>
 

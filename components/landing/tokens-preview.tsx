@@ -41,7 +41,7 @@ const tokenModules = [
 export function TokensPreview() {
   return (
     <section
-      id="tokens"
+      id="componentes"
       className="flex min-h-[calc(100svh-5rem)] scroll-mt-20 items-center border-b border-line/40 bg-surface-raised/30 py-20"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
@@ -52,10 +52,10 @@ export function TokensPreview() {
                 Módulo 02
               </span>
               <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-                Design Tokens
+                Catálogo de Componentes
               </h2>
               <p className="mt-3 text-base text-muted">
-                Separados por módulos de uso prático: escolha a categoria que deseja consultar e explore medidas calibradas para telas sensíveis ao toque.
+                Biblioteca modular guiada por Atomic Design: tokens, átomos, moléculas e organismos calibrados para telas sensíveis ao toque.
               </p>
             </div>
 
@@ -63,7 +63,7 @@ export function TokensPreview() {
               href="/components"
               className={buttonVariants({ variant: "outline", size: "md", className: "self-start md:self-auto shrink-0" })}
             >
-              Explorar módulos de tokens <ArrowRight className="size-4" />
+              Explorar catálogo completo <ArrowRight className="size-4" />
             </Link>
           </div>
         </Reveal>

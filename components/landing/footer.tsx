@@ -31,7 +31,7 @@ export function Footer({ fluid = false }: { fluid?: boolean } = {}) {
             Início & Fundamento
           </Link>
           <Link href="/components" className="transition hover:text-ink">
-            Design Tokens
+            Catálogo de Componentes
           </Link>
           <Link href="/playground" className="transition hover:text-ink">
             Playground

@@ -116,7 +116,7 @@ export function RulesCheatSheet() {
                 href="/components"
                 className={buttonVariants({ variant: "primary", size: "md" })}
               >
-                Ver Design Tokens <ArrowRight className="size-4" />
+                Ver Catálogo de Componentes <ArrowRight className="size-4" />
               </Link>
               <Link
                 href="/playground"

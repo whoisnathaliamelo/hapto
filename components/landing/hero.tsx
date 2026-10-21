@@ -162,7 +162,7 @@ function ErgonomicPhonePreview() {
             </div>
             <div className="flex flex-col items-center cursor-pointer transition hover:text-ink">
               <Layers className="size-3.5" />
-              <span className="text-[9px] mt-0.5">Tokens</span>
+              <span className="text-[9px] mt-0.5">Catálogo</span>
             </div>
             <div className="flex flex-col items-center cursor-pointer transition hover:text-ink">
               <Code2 className="size-3.5" />

@@ -18,7 +18,7 @@ const modules = [
   {
     id: "tokens",
     badge: "Módulo 02",
-    title: "Design Tokens",
+    title: "Catálogo de Componentes",
     icon: Palette,
     description:
       "Escalas calibradas para interfaces táteis organizadas por módulos de uso prático para consistência total entre design e código.",
