@@ -35,7 +35,7 @@ export function AtomsGroup({ activeSection }: AtomsGroupProps) {
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {shouldRender("buttons") && (
           <ShowcaseCard
-            id="section-buttons"
+            id="buttons"
             section="buttons"
             title="Botões (Normal, Secundário, FAB)"
             description="Alvos táteis calibrados entre 40px e 56px para polegar."
@@ -48,7 +48,7 @@ export function AtomsGroup({ activeSection }: AtomsGroupProps) {
 
         {shouldRender("inputs") && (
           <ShowcaseCard
-            id="section-inputs"
+            id="inputs"
             section="inputs"
             title="Inputs de Texto"
             description="Campos com altura de 48dp e tipografia mínima que evita zoom involuntário."
@@ -61,7 +61,7 @@ export function AtomsGroup({ activeSection }: AtomsGroupProps) {
 
         {shouldRender("switches") && (
           <ShowcaseCard
-            id="section-switches"
+            id="switches"
             section="switches"
             title="Switches e Checkboxes"
             description="Controles binários com estados visuais claros e feedback tátil."
@@ -74,7 +74,7 @@ export function AtomsGroup({ activeSection }: AtomsGroupProps) {
 
         {shouldRender("icons") && (
           <ShowcaseCard
-            id="section-icons"
+            id="icons"
             section="icons"
             title="Ícones Ergonômicos"
             description="Metáforas visuais com grid de toque acessível."

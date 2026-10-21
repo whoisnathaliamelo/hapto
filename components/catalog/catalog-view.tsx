@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Reveal } from "@/components/reveal";
 import { FilterSidebar } from "./filter-sidebar";
 import { MobileFilterChips } from "./mobile-filter-chips";
@@ -11,16 +11,70 @@ import {
   MoleculesGroup,
   OrganismsGroup,
 } from "./groups";
-import { SECTIONS } from "./constants";
+import { SECTIONS, GROUPS } from "./constants";
 import type { AtomicCategory, ComponentSection } from "./types";
 
 export function CatalogView() {
   const [activeCategory, setActiveCategory] = useState<AtomicCategory>("all");
   const [activeSection, setActiveSection] = useState<ComponentSection>("all");
 
+  useEffect(() => {
+    const handleHash = () => {
+      const rawHash = window.location.hash.replace(/^#/, "");
+      if (!rawHash) return;
+
+      const clean = rawHash.replace(/^section-/, "");
+
+      // Verifica se o hash é um grupo (tokens, atoms, molecules, organisms)
+      const matchedGroup = GROUPS.find((g) => g.id === clean);
+      if (matchedGroup) {
+        setActiveCategory(matchedGroup.id);
+        setActiveSection("all");
+        setTimeout(() => {
+          const el = document.getElementById(`${matchedGroup.id}-group`);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+        return;
+      }
+
+      // Verifica se o hash é uma seção específica (buttons, inputs, etc.)
+      const matchedSection = SECTIONS.find((s) => s.id === clean);
+      if (matchedSection) {
+        setActiveCategory(matchedSection.category);
+        setActiveSection(matchedSection.id);
+        setTimeout(() => {
+          const el = document.getElementById(matchedSection.id);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 120);
+      }
+    };
+
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   const handleSelect = (category: AtomicCategory, section: ComponentSection) => {
     setActiveCategory(category);
     setActiveSection(section);
+
+    const hash =
+      section !== "all"
+        ? `#${section}`
+        : category !== "all"
+        ? `#${category}`
+        : "";
+
+    if (hash) {
+      window.history.pushState(null, "", hash);
+      setTimeout(() => {
+        const targetId = section !== "all" ? section : `${category}-group`;
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
+    } else {
+      window.history.pushState(null, "", window.location.pathname);
+    }
   };
 
   const showGroup = (category: Exclude<AtomicCategory, "all">) => {

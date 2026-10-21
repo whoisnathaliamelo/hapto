@@ -31,7 +31,7 @@ export function MoleculesGroup({ activeSection }: MoleculesGroupProps) {
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {shouldRender("search") && (
           <ShowcaseCard
-            id="section-search"
+            id="search"
             section="search"
             title="Barra de Busca"
             description="Campo com botão de limpar e atalho tátil de fácil alcance."
@@ -44,7 +44,7 @@ export function MoleculesGroup({ activeSection }: MoleculesGroupProps) {
 
         {shouldRender("cards") && (
           <ShowcaseCard
-            id="section-cards"
+            id="cards"
             section="cards"
             title="Cards Informativos"
             description="Superfícies táteis com hierarquia e feedback em toda a área."

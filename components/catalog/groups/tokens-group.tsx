@@ -31,7 +31,7 @@ export function TokensGroup({ activeSection }: TokensGroupProps) {
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {shouldRender("colors") && (
           <ShowcaseCard
-            id="section-colors"
+            id="colors"
             section="colors"
             title="Cores & Contraste WCAG"
             description="Padrões de contraste mínimo 4.5:1 e 3:1 para acessibilidade sob luz solar."
@@ -44,7 +44,7 @@ export function TokensGroup({ activeSection }: TokensGroupProps) {
 
         {shouldRender("typography") && (
           <ShowcaseCard
-            id="section-typography"
+            id="typography"
             section="typography"
             title="Tipografia & Escala"
             description="Hierarquia mobile e tamanho mínimo de 16px para prevenção de zoom no iOS."

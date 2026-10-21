@@ -33,7 +33,7 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {shouldRender("bottom-nav") && (
           <ShowcaseCard
-            id="section-bottom-nav"
+            id="bottom-nav"
             section="bottom-nav"
             title="Bottom Navigation"
             description="Barra inferior ergonômica com zona de alcance natural do polegar."
@@ -46,7 +46,7 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
 
         {shouldRender("top-bar") && (
           <ShowcaseCard
-            id="section-top-bar"
+            id="top-bar"
             section="top-bar"
             title="Top App Bar"
             description="Cabeçalho mobile com navegação e ações secundárias."
@@ -59,7 +59,7 @@ export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
 
         {shouldRender("feedback") && (
           <ShowcaseCard
-            id="section-feedback"
+            id="feedback"
             section="feedback"
             title="Alertas e Snackbars"
             description="Notificações efêmeras e contextuais posicionadas próximas ao polegar."
