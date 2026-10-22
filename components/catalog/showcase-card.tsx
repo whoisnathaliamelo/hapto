@@ -66,7 +66,6 @@ export function ShowcaseCard({
         </h3>
         <p className="mt-2 text-xs leading-relaxed text-muted min-h-[34px]">{description}</p>
 
-        {/* Barra de Abas (Visualizar / Código) e Ação de Copiar */}
         {code && (
           <div className="mt-4 flex items-center justify-between border-b border-line/60 pb-2">
             <div className="flex items-center gap-1 rounded-lg bg-surface-raised p-1">
@@ -120,7 +119,6 @@ export function ShowcaseCard({
           </div>
         )}
 
-        {/* Área de Apresentação com Altura Uniforme Calibrada */}
         <div className="mt-4 flex h-[380px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line/60 bg-surface-raised/40 p-4">
           {activeTab === "code" && code ? (
             <pre className="h-full w-full overflow-auto rounded-lg border border-line/40 bg-[#091311] p-4 text-left text-xs font-mono leading-relaxed text-[#e6f4ef] selection:bg-primary/40 [scrollbar-width:thin]">

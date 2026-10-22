@@ -31,12 +31,10 @@ export function HeroFundamentals() {
 
   return (
     <section id="hero" className="relative isolate overflow-hidden border-b border-line/40 py-16 lg:py-24">
-      {/* Background decorativo com grid dots e iluminação sutil */}
       <div className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)] opacity-70" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-72 w-full max-w-4xl bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl pointer-events-none" />
 
       <div className="mx-auto max-w-6xl px-6">
-        {/* Navegação / Breadcrumb de retorno */}
         <Reveal>
           <div className="flex items-center justify-between gap-4">
             <Link
@@ -49,7 +47,6 @@ export function HeroFundamentals() {
           </div>
         </Reveal>
 
-        {/* Cabeçalho Hero */}
         <div className="mt-8 max-w-3xl">
 
           <Reveal delay={0.15}>
@@ -68,7 +65,6 @@ export function HeroFundamentals() {
           </Reveal>
         </div>
 
-        {/* 3 Badges / Cards com Métricas de Impacto em 5 segundos */}
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {metrics.map((metric, i) => {
             const Icon = metric.icon;

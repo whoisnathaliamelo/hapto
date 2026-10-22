@@ -18,7 +18,6 @@ export function FilterSidebar({
 
   return (
     <aside className="hidden lg:block lg:sticky lg:top-24 lg:self-start w-64 xl:w-72 shrink-0">
-      {/* Desktop: lista vertical agrupada por nível */}
       <nav
         aria-label="Filtro de componentes"
         className="max-h-[calc(100svh-7.5rem)] overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:var(--line)_transparent]"

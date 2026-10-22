@@ -76,7 +76,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
 
   return (
     <div className="h-[610px] sm:h-[640px] w-full rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col justify-between select-none">
-      {/* 1. Header do Painel e Target Calibrado */}
       <div>
         <div className="flex items-center justify-between border-b border-line/50 pb-3">
           <div className="flex items-center gap-2">
@@ -95,7 +94,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
           </span>
         </div>
 
-        {/* Status da Calibragem do Target (Altura Estável) */}
         <div className="mt-3.5 flex items-center justify-between rounded-xl bg-surface-raised/60 border border-line/60 p-3 h-[60px]">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-muted">
@@ -119,7 +117,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
         </div>
       </div>
 
-      {/* 2. Análise do Toque Atual (Altura Rigorosamente Estável: h-[280px]) */}
       <div className="rounded-xl border border-line/70 bg-surface-raised/30 p-4 space-y-3 h-[290px] flex flex-col justify-between">
         <div className="flex items-center justify-between border-b border-line/40 pb-2">
           <h4 className="text-xs font-bold uppercase tracking-wider text-muted flex items-center gap-1.5">
@@ -131,7 +128,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
           </span>
         </div>
 
-        {/* Slot 1: Componente e Zona (Altura Fixa: 56px) */}
         <div className="rounded-lg border border-line/60 bg-surface p-2.5 space-y-1.5 h-[62px] flex flex-col justify-center">
           <div className="flex items-center justify-between">
             <span className="text-[11px] text-muted">Elemento:</span>
@@ -160,7 +156,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
           </div>
         </div>
 
-        {/* Slot 2: Barra de Esforço Motor (Altura Fixa: 42px) */}
         <div className="space-y-1 h-[42px] flex flex-col justify-center">
           <div className="flex items-center justify-between text-[11px]">
             <span className="font-semibold text-muted">Fadiga Motora</span>
@@ -186,7 +181,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
           </div>
         </div>
 
-        {/* Slot 3: Justificativa e Recomendação de UX (Altura Fixa: 98px) */}
         <div className="rounded-lg border border-line/50 bg-surface p-2.5 h-[105px] flex flex-col justify-between text-[11px]">
           <div className="flex items-start gap-1.5 text-muted leading-relaxed line-clamp-2">
             <Info className="size-3 text-primary mt-0.5 shrink-0" />
@@ -207,7 +201,6 @@ export function TouchFeedback({ lastTouch, targetSize }: TouchFeedbackProps) {
         </div>
       </div>
 
-      {/* 3. Dica Rápida de Acessibilidade (Altura Fixa: 88px) */}
       <div className="rounded-xl border border-primary/20 bg-primary/[0.04] p-3 text-xs space-y-1 h-[88px] flex flex-col justify-center">
         <div className="flex items-center gap-1.5 font-bold text-primary text-[11px]">
           <CheckCircle2 className="size-3.5 shrink-0" />

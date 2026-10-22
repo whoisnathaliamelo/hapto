@@ -44,7 +44,6 @@ export function RulesCheatSheet() {
   return (
     <section id="rules-cheat-sheet" className="scroll-mt-20 py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
-        {/* Cabeçalho */}
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -59,7 +58,6 @@ export function RulesCheatSheet() {
           </div>
         </Reveal>
 
-        {/* Grade das 4 Regras de Ouro sem Emojis */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {rules.map((item, index) => {
             const Icon = item.icon;
@@ -67,7 +65,6 @@ export function RulesCheatSheet() {
               <Reveal key={item.number} delay={0.1 + index * 0.1}>
                 <article className="group flex h-full flex-col justify-between rounded-3xl border border-line bg-surface p-6 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md">
                   <div>
-                    {/* Topo do Card */}
                     <div className="flex items-center justify-between border-b border-line/50 pb-4">
                       <span className="font-mono text-xs font-bold text-primary">
                         Regra {item.number}
@@ -99,7 +96,6 @@ export function RulesCheatSheet() {
           })}
         </div>
 
-        {/* Próximos Passos (Sem linguagem de 'conclusão de módulo escolar') */}
         <Reveal delay={0.35} className="mt-16">
           <div className="relative overflow-hidden rounded-3xl border border-line bg-surface p-8 sm:p-12 shadow-xs text-center">
             <div className="absolute inset-0 -z-10 bg-radial from-primary/10 via-transparent to-transparent opacity-70" />

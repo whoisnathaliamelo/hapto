@@ -26,7 +26,6 @@ export function ScreenContent({
 }: ScreenContentProps) {
   const [activeTab, setActiveTab] = useState<"home" | "explore" | "profile">("home");
 
-  // Calibra a classe de altura de acordo com a seleção de Target Size
   const targetHeightClass =
     targetSize === "40px"
       ? "min-h-10 h-10 text-xs"
@@ -39,7 +38,6 @@ export function ScreenContent({
       id="simulated-app-screen"
       className="relative flex h-full flex-col justify-between bg-bg text-ink overflow-y-auto select-none"
     >
-      {/* 1. TOPO DA TELA (Zona Difícil) */}
       <header className="sticky top-0 z-20 flex h-13 items-center justify-between border-b border-line/60 bg-surface/90 px-3 backdrop-blur-md">
         <button
           type="button"
@@ -65,7 +63,6 @@ export function ScreenContent({
         </button>
       </header>
 
-      {/* 2. MIOLO DA TELA (Zona Esticada) */}
       <main className="flex-1 p-3.5 space-y-3 overflow-y-auto">
         {scenario === "feed" && (
           <div className="space-y-3">
@@ -78,7 +75,6 @@ export function ScreenContent({
               </span>
             </div>
 
-            {/* Card Informativo com Botão Calibrado */}
             <article className="rounded-2xl border border-line bg-surface p-3.5 shadow-2xs space-y-2.5">
               <div className="flex items-center justify-between">
                 <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary">
@@ -105,7 +101,6 @@ export function ScreenContent({
               </button>
             </article>
 
-            {/* Segundo Card Compacto */}
             <div className="rounded-2xl border border-line bg-surface/70 p-3 space-y-2">
               <h4 className="text-xs font-bold text-ink">Diretrizes da Apple HIG</h4>
               <p className="text-[10px] text-muted leading-tight">
@@ -206,7 +201,6 @@ export function ScreenContent({
         )}
       </main>
 
-      {/* 3. BASE DA TELA (Zona Natural do Polegar) */}
       <footer className="relative z-20 border-t border-line/60 bg-surface/95 px-3 py-2 backdrop-blur-md">
         {scenario === "actions" ? (
           <div className="flex items-center justify-between">
@@ -221,7 +215,6 @@ export function ScreenContent({
               <span>Confirmar Ação</span>
             </button>
 
-            {/* Floating Action Button (FAB) com target mínimo 48px ou maior */}
             <button
               type="button"
               onClick={() => onElementClick("FAB (Botão Flutuante)", "natural")}

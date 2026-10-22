@@ -128,7 +128,6 @@ export function ColorsShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Token de Cor
@@ -160,12 +159,9 @@ export function ColorsShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação de Verificador & Paleta */}
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-between overflow-hidden rounded-2xl border border-line bg-surface p-3 shadow-xs">
-        {/* --- Variação 1: Verificador de Contraste WCAG 2.1 --- */}
         {variant === "contrast-checker" && (
           <div className="flex h-full flex-col justify-between">
-            {/* Seletor rápido de pares */}
             <div className="flex items-center justify-between gap-1">
               <span className="text-[10px] font-bold uppercase text-muted">Amostra:</span>
               <div className="flex gap-1">
@@ -190,7 +186,6 @@ export function ColorsShowcase() {
               </div>
             </div>
 
-            {/* Painel do Teste com Avaliação WCAG */}
             <div className="flex items-center justify-between rounded-xl border border-line bg-surface-raised/70 p-2.5">
               <div className="flex flex-col">
                 <span className={cn("text-xs font-bold", activePair.fg)}>
@@ -230,7 +225,6 @@ export function ColorsShowcase() {
           </div>
         )}
 
-        {/* --- Variação 2: Paleta Semântica --- */}
         {variant === "semantic-palette" && (
           <div className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between">
@@ -282,7 +276,6 @@ export function ColorsShowcase() {
           </div>
         )}
 
-        {/* --- Variação 3: Simulador de Luz Solar Direta --- */}
         {variant === "sunlight-sim" && (
           <div className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between">
@@ -308,7 +301,6 @@ export function ColorsShowcase() {
               </button>
             </div>
 
-            {/* Painel comparativo com filtro de ofuscamento solar */}
             <div
               className={cn(
                 "relative flex items-center justify-around rounded-xl border border-line p-2 transition-all",
@@ -339,7 +331,6 @@ export function ColorsShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa 86px calibrada) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -360,7 +351,6 @@ export function ColorsShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (altura fixa 26px calibrada) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           WCAG 2.1 AA • Normal: 4.5:1 • Grande: 3:1

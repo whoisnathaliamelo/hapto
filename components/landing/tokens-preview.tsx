@@ -68,7 +68,6 @@ export function TokensPreview() {
           </div>
         </Reveal>
 
-        {/* Grade de Módulos de Tokens (Preview do que há na página) */}
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {tokenModules.map(({ id, icon: Icon, title, description, badge, href }, i) => (
             <Reveal key={id} delay={i * 0.08}>

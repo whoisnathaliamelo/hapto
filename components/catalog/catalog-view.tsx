@@ -25,7 +25,6 @@ export function CatalogView() {
 
       const clean = rawHash.replace(/^section-/, "");
 
-      // Verifica se o hash é um grupo (tokens, atoms, molecules, organisms)
       const matchedGroup = GROUPS.find((g) => g.id === clean);
       if (matchedGroup) {
         setActiveCategory(matchedGroup.id);
@@ -37,7 +36,6 @@ export function CatalogView() {
         return;
       }
 
-      // Verifica se o hash é uma seção específica (buttons, inputs, etc.)
       const matchedSection = SECTIONS.find((s) => s.id === clean);
       if (matchedSection) {
         setActiveCategory(matchedSection.category);
@@ -87,24 +85,19 @@ export function CatalogView() {
 
   return (
     <section className="relative isolate overflow-clip border-b border-line/40">
-      {/* Background decorativo com grid dots e iluminação sutil */}
       <div className="bg-dots absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-72 w-full max-w-4xl -translate-x-1/2 bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl" />
 
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-8 pb-20 lg:pt-10 lg:pb-24">
-        {/* Layout no desktop: Sidebar à esquerda + Área Principal com conteúdo centralizado */}
         <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-10 xl:gap-14">
-          {/* Sidebar lateral no Desktop */}
           <FilterSidebar
             activeCategory={activeCategory}
             activeSection={activeSection}
             onSelect={handleSelect}
           />
 
-          {/* Área Principal centralizada */}
           <div className="min-w-0 flex-1 flex flex-col items-center">
             <div className="w-full max-w-4xl xl:max-w-5xl space-y-12 lg:space-y-16">
-              {/* Cabeçalho da Página Centralizado */}
               <header className="mx-auto max-w-2xl text-center">
                 <Reveal>
                   <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
@@ -123,10 +116,8 @@ export function CatalogView() {
                 </Reveal>
               </header>
 
-              {/* Card de Instruções de Uso para o Usuário */}
               <UsageGuide />
 
-              {/* Mobile: chips em linha logo após o cabeçalho */}
               <Reveal delay={0.1} className="lg:hidden w-full">
                 <MobileFilterChips
                   activeCategory={activeCategory}
@@ -135,7 +126,6 @@ export function CatalogView() {
                 />
               </Reveal>
 
-              {/* Conteúdo Renderizado por Seção */}
               <div className="space-y-14 lg:space-y-16">
                 {showGroup("tokens") && <TokensGroup activeSection={activeSection} />}
                 {showGroup("atoms") && <AtomsGroup activeSection={activeSection} />}

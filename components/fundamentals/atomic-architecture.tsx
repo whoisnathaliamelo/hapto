@@ -86,7 +86,6 @@ export function AtomicArchitecture() {
   return (
     <section id="atomic-architecture" className="scroll-mt-20 border-b border-line/40 bg-surface-raised/30 py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
-        {/* Cabeçalho */}
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -101,7 +100,6 @@ export function AtomicArchitecture() {
           </div>
         </Reveal>
 
-        {/* Stepper com 5 Passos Rigorosamente do Mesmo Tamanho */}
         <Reveal delay={0.15} className="mt-10">
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 items-stretch">
             {steps.map((item) => {
@@ -144,11 +142,9 @@ export function AtomicArchitecture() {
           </div>
         </Reveal>
 
-        {/* Painel de Visualização Detalhada com Altura Casada e Travada */}
         <Reveal delay={0.25} className="mt-8">
           <div className="rounded-3xl border border-line bg-surface p-6 sm:p-9 shadow-xs">
             <div className="grid gap-8 lg:grid-cols-12 items-stretch min-h-[420px]">
-              {/* Lado Esquerdo: Descrição e Componentes Chave */}
               <div className="lg:col-span-7 flex flex-col justify-between h-full">
                 <div>
                   <div className="flex items-center gap-2">
@@ -177,7 +173,6 @@ export function AtomicArchitecture() {
                   </p>
                 </div>
 
-                {/* Composição em Cards Padronizados de Altura Idêntica */}
                 <div className="mt-6 border-t border-line/60 pt-5">
                   <span className="text-xs font-bold uppercase tracking-wider text-ink block mb-3">
                     Elementos que compõem este nível:
@@ -196,10 +191,8 @@ export function AtomicArchitecture() {
                 </div>
               </div>
 
-              {/* Lado Direito: Preview de Arquitetura com Altura Casada e Estável */}
               <div className="lg:col-span-5 flex flex-col h-full">
                 <div className="h-full flex flex-col justify-between rounded-2xl border border-line bg-surface-raised p-6 shadow-xs">
-                  {/* Topo do Preview */}
                   <div className="flex items-center justify-between border-b border-line/60 pb-3">
                     <div className="flex items-center gap-2">
                       <span className="size-2 rounded-full bg-primary" />
@@ -212,7 +205,6 @@ export function AtomicArchitecture() {
                     </span>
                   </div>
 
-                  {/* Canvas de Demonstração em Altura Travada Estável */}
                   <div className="my-auto py-4 flex h-[220px] flex-col items-center justify-center w-full">
                     {current.step === 1 && (
                       <div className="w-full space-y-2.5">
@@ -294,7 +286,6 @@ export function AtomicArchitecture() {
                     )}
                   </div>
 
-                  {/* Rodapé de Inspeção do Preview */}
                   <div className="border-t border-line/60 pt-3 flex items-center justify-between text-xs">
                     <span className="text-muted">Hierarquia modular:</span>
                     <span className="font-semibold text-primary">

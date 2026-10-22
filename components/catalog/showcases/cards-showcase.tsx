@@ -116,13 +116,11 @@ export function CardsShowcase() {
     timerRef.current = setTimeout(() => setLastAction(null), 1800);
   };
 
-  // Todos os cards de exemplo ocupam exatamente o mesmo espaço (altura fixa do slot)
   const previewCardBase =
     "group flex h-full w-full cursor-pointer rounded-2xl border border-line bg-surface p-4 shadow-2xs transition-[border-color,box-shadow,transform] duration-200 hover:border-primary/50 hover:shadow-md active:scale-[0.98]";
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex h-[46px] max-w-full shrink-0 items-center gap-1 rounded-xl border border-line bg-surface p-1 shadow-xs">
         {(["interactive", "with-action", "metric"] as CardVariant[]).map((v) => {
           const isSelected = variant === v;
@@ -146,7 +144,6 @@ export function CardsShowcase() {
         })}
       </div>
 
-      {/* 2. Slot do Card com Altura Fixa (não varia entre variações) */}
       <div className="h-[160px] w-full max-w-sm shrink-0">
         {variant === "interactive" && (
           <article
@@ -198,12 +195,11 @@ export function CardsShowcase() {
                 </div>
               </div>
 
-              {/* Botão Secundário com Hitbox Isolada de 44x44dp */}
               <button
                 type="button"
                 aria-label="Salvar card nos favoritos"
                 onClick={(e) => {
-                  e.stopPropagation(); // Impede o clique no card principal!
+                  e.stopPropagation(); 
                   setSaved(!saved);
                   triggerAction(saved ? "Removido dos favoritos" : "Salvo nos favoritos!");
                 }}
@@ -260,7 +256,6 @@ export function CardsShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa, texto limitado a 2 linhas) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -281,7 +276,6 @@ export function CardsShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (uma única linha, nunca quebra) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           Alvo: Superfície Total • Respiro: 16px

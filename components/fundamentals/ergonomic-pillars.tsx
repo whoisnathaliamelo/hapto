@@ -85,7 +85,6 @@ export function ErgonomicPillars() {
   return (
     <section id="ergonomic-pillars" className="scroll-mt-20 border-b border-line/40 py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
-        {/* Cabeçalho */}
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -100,7 +99,6 @@ export function ErgonomicPillars() {
           </div>
         </Reveal>
 
-        {/* Resumo Sintético em Barra Minimalista */}
         <Reveal delay={0.15} className="mt-10">
           <div className="grid gap-3 sm:grid-cols-3 rounded-2xl border border-line bg-surface-raised p-2 shadow-2xs">
             {pillars.map((item) => {
@@ -125,7 +123,6 @@ export function ErgonomicPillars() {
           </div>
         </Reveal>
 
-        {/* Grade com os 3 Cards Detalhados */}
         <div className="mt-8 grid gap-8 lg:grid-cols-3">
           {pillars.map((item, index) => {
             const MainIcon = item.icon;
@@ -133,7 +130,6 @@ export function ErgonomicPillars() {
               <Reveal key={item.number} delay={0.2 + index * 0.1}>
                 <article className="group flex h-full flex-col justify-between rounded-3xl border border-line bg-surface p-7 shadow-xs transition-all duration-300 hover:border-primary/50 hover:shadow-md">
                   <div>
-                    {/* Topo do Card */}
                     <div className="flex items-center justify-between">
                       <div className="flex size-11 items-center justify-center rounded-xl bg-primary-light text-primary transition-transform group-hover:scale-105">
                         <MainIcon className="size-5" />
@@ -152,7 +148,6 @@ export function ErgonomicPillars() {
                       </p>
                     </div>
 
-                    {/* Lista de Pontos com Ícones Minimalistas */}
                     <ul className="mt-6 space-y-4">
                       {item.points.map((pt) => {
                         const PointIcon = pt.icon;
@@ -169,7 +164,6 @@ export function ErgonomicPillars() {
                     </ul>
                   </div>
 
-                  {/* Rodapé do Card com Regra Chave */}
                   <div className="mt-8 rounded-xl border border-line/60 bg-surface-raised p-3 text-center">
                     <span className="text-[11px] font-semibold text-primary">
                       {item.summary}

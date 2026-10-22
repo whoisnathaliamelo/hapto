@@ -69,15 +69,12 @@
   }
 }
 
-/* Durante a troca de tema, a View Transition faz o cross-fade; as transições por elemento são pausadas */
 .theme-switching *,
 .theme-switching *::before,
 .theme-switching *::after {
   transition: none !important;
 }
 
-/* Suporte à View Transitions API: o snapshot antigo fica parado e o novo surge por cima.
-   Evita o blend plus-lighter padrão, que exige uma passada extra de composição. */
 ::view-transition-old(root) {
   animation: none;
 }

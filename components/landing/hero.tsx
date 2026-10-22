@@ -9,7 +9,6 @@ export function Hero() {
       <div className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
       <div className="mx-auto grid w-full max-w-6xl items-center justify-items-center gap-8 px-6 py-8 lg:grid-cols-2 lg:gap-10 lg:py-0">
-        {/* Lado Esquerdo: Conteúdo Principal */}
         <div className="w-full max-w-lg text-center lg:text-left flex flex-col items-center lg:items-start justify-center">
           <Reveal>
             <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-[2.65rem] lg:leading-[1.15] xl:text-5xl xl:leading-[1.12]">
@@ -53,7 +52,6 @@ export function Hero() {
           </Reveal>
         </div>
 
-        {/* Lado Direito: Celular Comprido e Proporcional */}
         <div className="w-full flex justify-center items-center">
           <Reveal delay={0.15}>
             <ErgonomicPhonePreview />
@@ -67,17 +65,13 @@ export function Hero() {
 function ErgonomicPhonePreview() {
   return (
     <div className="relative mx-auto w-[275px] sm:w-[285px] lg:w-[290px] transition-transform duration-300 hover:-translate-y-1">
-      {/* Moldura de celular moderna, comprida (formato smartphone 19.5:9) */}
       <div className="relative h-[495px] sm:h-[510px] w-full rounded-[2.75rem] border-[3.5px] border-line/90 bg-surface p-3 shadow-2xl shadow-primary/10 transition-shadow duration-300 hover:shadow-primary/20 flex flex-col justify-between">
-        {/* Dynamic Island / Speaker */}
         <div className="mx-auto mb-2 flex h-3.5 w-24 shrink-0 items-center justify-center rounded-full bg-line/80 px-2">
           <div className="size-1.5 rounded-full bg-muted/50 mr-2" />
           <div className="h-1 w-7 rounded-full bg-muted/40" />
         </div>
 
-        {/* Tela Interna do Smartphone */}
         <div className="flex flex-1 flex-col justify-between rounded-[2.1rem] border border-line/40 bg-bg p-3.5 overflow-hidden">
-          {/* Top Status & Header */}
           <div className="flex items-center justify-between border-b border-line/50 pb-2">
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
@@ -90,7 +84,6 @@ function ErgonomicPhonePreview() {
             </span>
           </div>
 
-          {/* Zona 1: Superior (Leitura Passiva / Alcance Difícil) */}
           <div className="rounded-xl border border-line/70 bg-surface p-2.5 transition hover:border-line">
             <div className="flex items-center justify-between text-[11px]">
               <span className="font-semibold text-muted">Zona Superior</span>
@@ -103,7 +96,6 @@ function ErgonomicPhonePreview() {
             </p>
           </div>
 
-          {/* Zona 2: Central (Zona Neutra / Navegação Secundária) */}
           <div className="rounded-xl border border-line/60 bg-surface/50 p-2.5">
             <div className="flex items-center justify-between text-[11px]">
               <span className="font-medium text-muted">Zona Média</span>
@@ -119,7 +111,6 @@ function ErgonomicPhonePreview() {
             </div>
           </div>
 
-          {/* Zona 3: Inferior (Reach Zone / Zona do Polegar - Alcance Fácil) */}
           <div className="relative rounded-xl border-2 border-dashed border-primary/45 bg-primary-light/40 p-2.5 sm:p-3">
             <div className="mb-2 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-primary">
@@ -128,7 +119,6 @@ function ErgonomicPhonePreview() {
               </span>
             </div>
 
-            {/* Ação Primária (Target mínimo 48px) */}
             <button
               type="button"
               className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary text-xs font-semibold text-on-primary shadow-sm transition hover:brightness-110 active:scale-[0.98] cursor-pointer"
@@ -137,7 +127,6 @@ function ErgonomicPhonePreview() {
               <span className="rounded bg-black/15 px-1.5 py-0.5 text-[9px]">48px</span>
             </button>
 
-            {/* Ações Secundárias */}
             <div className="mt-2 grid grid-cols-2 gap-1.5">
               <button
                 type="button"
@@ -154,7 +143,6 @@ function ErgonomicPhonePreview() {
             </div>
           </div>
 
-          {/* Bottom Bar Simulator */}
           <div className="flex items-center justify-around border-t border-line/60 pt-2 text-muted">
             <div className="flex flex-col items-center text-primary cursor-pointer transition hover:opacity-80">
               <Smartphone className="size-3.5" />
@@ -170,7 +158,6 @@ function ErgonomicPhonePreview() {
             </div>
           </div>
 
-          {/* Home indicator bar */}
           <div className="mx-auto mt-0.5 h-1 w-20 shrink-0 rounded-full bg-muted/25" />
         </div>
       </div>

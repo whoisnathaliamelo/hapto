@@ -99,7 +99,6 @@ export function SwitchesShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Tipo do Controle */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Tipo de Controle Tátil
@@ -128,7 +127,6 @@ export function SwitchesShowcase() {
         </div>
       </div>
 
-      {/* 2. Área de Demonstração Interativa */}
       <div className="flex min-h-[92px] w-full max-w-sm items-center justify-center px-1">
         {type === "switch" && (
           <div className="w-full">
@@ -143,7 +141,6 @@ export function SwitchesShowcase() {
                 </span>
               </div>
 
-              {/* Componente Visual do Switch */}
               <div
                 role="switch"
                 aria-checked={switchOn}
@@ -224,7 +221,6 @@ export function SwitchesShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico */}
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 font-bold text-ink">
@@ -245,7 +241,6 @@ export function SwitchesShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status */}
       <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="font-mono text-[10px]">Alvo: 48dp • Container Clicável</span>
         <span className="font-medium text-ink">

@@ -108,7 +108,6 @@ export function IconsShowcase() {
   const [variant, setVariant] = useState<IconVariant>("action");
   const [showHitbox, setShowHitbox] = useState(true);
 
-  // Estados interativos
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
   const [hasNotif, setHasNotif] = useState(true);
@@ -124,7 +123,6 @@ export function IconsShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Controles: Seletor de Variação e Alternador de Hitbox */}
       <div className="flex w-full flex-col items-center gap-2">
         <div className="flex w-full items-center justify-between px-1">
           <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
@@ -171,11 +169,9 @@ export function IconsShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa */}
       <div className="flex min-h-[96px] w-full max-w-sm items-center justify-center px-1">
         {variant === "action" && (
           <div className="flex items-center gap-4">
-            {/* Botão de Curtir com Hitbox Visível */}
             <div className="relative">
               {showHitbox && (
                 <div
@@ -211,7 +207,6 @@ export function IconsShowcase() {
               )}
             </div>
 
-            {/* Botão de Salvar */}
             <div className="relative">
               {showHitbox && (
                 <div
@@ -251,7 +246,6 @@ export function IconsShowcase() {
 
         {variant === "badge" && (
           <div className="flex items-center gap-6">
-            {/* Ícone de Notificações com Badge e Área Tátil */}
             <div className="relative">
               {showHitbox && (
                 <div
@@ -293,7 +287,6 @@ export function IconsShowcase() {
         {variant === "cluster" && (
           <div className="flex flex-col items-center gap-2">
             <div className="flex items-center gap-2 rounded-2xl border border-line bg-surface p-1.5 shadow-2xs">
-              {/* Grupo de ações com gap de 8dp (gap-2) */}
               {[
                 { icon: Heart, label: "Curtir", action: () => showToast("Curtido!") },
                 { icon: Share2, label: "Compartilhar", action: () => showToast("Link copiado!") },
@@ -330,7 +323,6 @@ export function IconsShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico */}
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 font-bold text-ink">
@@ -351,7 +343,6 @@ export function IconsShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status */}
       <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="font-mono text-[10px]">
           Alvo: {variant === "cluster" ? "44x44dp (M)" : "48x48dp (G)"} • Glifo: 20px

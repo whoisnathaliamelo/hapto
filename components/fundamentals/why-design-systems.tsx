@@ -10,7 +10,6 @@ export function WhyDesignSystems() {
   return (
     <section id="why-design-systems" className="scroll-mt-20 border-b border-line/40 py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
-        {/* Cabeçalho da Seção */}
         <Reveal>
           <div className="max-w-2xl">
             <span className="text-xs font-bold uppercase tracking-widest text-primary">
@@ -25,7 +24,6 @@ export function WhyDesignSystems() {
           </div>
         </Reveal>
 
-        {/* Card: O que é? */}
         <Reveal delay={0.1} className="mt-10">
           <div className="relative overflow-hidden rounded-2xl border border-line bg-surface p-7 shadow-xs sm:p-8">
             <div className="absolute top-0 right-0 h-40 w-40 bg-radial from-primary/10 via-transparent to-transparent opacity-80 blur-2xl pointer-events-none" />
@@ -49,7 +47,6 @@ export function WhyDesignSystems() {
           </div>
         </Reveal>
 
-        {/* Comparativo Prático com Altura Estável e Mockups Refinados */}
         <Reveal delay={0.2} className="mt-10">
           <div className="rounded-3xl border border-line bg-surface p-6 sm:p-9 shadow-xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line/50 pb-6">
@@ -65,7 +62,6 @@ export function WhyDesignSystems() {
                 </h3>
               </div>
 
-              {/* Seletor de Abas Estável */}
               <div
                 role="tablist"
                 aria-label="Comparativo de adoção de design system"
@@ -109,11 +105,8 @@ export function WhyDesignSystems() {
               </div>
             </div>
 
-            {/* Grid 50/50 Balanceado com Altura Travada e Consistente */}
             <div className="mt-8 grid gap-8 lg:grid-cols-2 items-stretch min-h-[440px]">
-              {/* Coluna Esquerda: Lista de Argumentos com Cards de Altura Idêntica */}
               <div className="flex flex-col justify-between h-full">
-                {/* Cabeçalho da Coluna com Badge e Resumo */}
                 <div className="flex items-center justify-between pb-1">
                   <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
                     tab === "sem"
@@ -137,7 +130,6 @@ export function WhyDesignSystems() {
                   </span>
                 </div>
 
-                {/* Grade com 3 Cards rigorosamente do mesmo tamanho */}
                 <div className="grid grid-rows-3 gap-3.5 my-4 flex-1">
                   {tab === "sem" ? (
                     <>
@@ -278,7 +270,6 @@ export function WhyDesignSystems() {
                   )}
                 </div>
 
-                {/* Rodapé da Coluna Esquerda com Alinhamento Estável */}
                 <div className="rounded-xl border border-line/60 bg-surface-raised px-4 py-2.5 flex items-center justify-between text-xs">
                   <span className="text-muted">Impacto no projeto:</span>
                   <span className={`font-semibold ${tab === "sem" ? "text-red-600 dark:text-red-400" : "text-primary"}`}>
@@ -287,10 +278,8 @@ export function WhyDesignSystems() {
                 </div>
               </div>
 
-              {/* Coluna Direita: Mockup Visual de Inspeção com Cards de Altura Idêntica */}
               <div className="flex flex-col h-full">
                 <div className="h-full flex flex-col justify-between rounded-2xl border border-line bg-surface-raised p-6 shadow-xs">
-                  {/* Barra Superior estilo DevTools / Editor */}
                   <div className="flex items-center justify-between border-b border-line/60 pb-3">
                     <div className="flex items-center gap-1.5">
                       <span className="size-2 rounded-full bg-red-400" />
@@ -305,11 +294,9 @@ export function WhyDesignSystems() {
                     </span>
                   </div>
 
-                  {/* Grade com 3 Componentes rigorosamente do mesmo tamanho */}
                   <div className="grid grid-rows-3 gap-3.5 my-4 flex-1">
                     {tab === "sem" ? (
                       <>
-                        {/* Componente 1: Botão Checkout com alvo reduzido */}
                         <div className="rounded-xl border border-dashed border-red-500/40 bg-surface p-3.5 flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Botão Checkout</span>
@@ -322,7 +309,6 @@ export function WhyDesignSystems() {
                           </div>
                         </div>
 
-                        {/* Componente 2: Input com padding fora do grid */}
                         <div className="rounded-xl border border-dashed border-red-500/40 bg-surface p-3.5 flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Input Cupom</span>
@@ -335,7 +321,6 @@ export function WhyDesignSystems() {
                           </div>
                         </div>
 
-                        {/* Componente 3: Ação Secundária com cor fora da paleta */}
                         <div className="rounded-xl border border-dashed border-red-500/40 bg-surface p-3.5 flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Ação Secundária</span>
@@ -350,7 +335,6 @@ export function WhyDesignSystems() {
                       </>
                     ) : (
                       <>
-                        {/* Componente 1: Botão Padronizado 48dp Fitts */}
                         <div className="rounded-xl border border-primary/30 bg-surface p-3.5 shadow-2xs flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Button Primary</span>
@@ -363,7 +347,6 @@ export function WhyDesignSystems() {
                           </div>
                         </div>
 
-                        {/* Componente 2: Input Calibrado no Grid de 8dp */}
                         <div className="rounded-xl border border-primary/30 bg-surface p-3.5 shadow-2xs flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Input Standard</span>
@@ -376,7 +359,6 @@ export function WhyDesignSystems() {
                           </div>
                         </div>
 
-                        {/* Componente 3: Botão Secundário com Tokens */}
                         <div className="rounded-xl border border-primary/30 bg-surface p-3.5 shadow-2xs flex flex-col justify-between h-full">
                           <div className="flex items-center justify-between text-[11px] text-muted">
                             <span className="font-mono font-medium text-ink">Button Secondary</span>
@@ -392,7 +374,6 @@ export function WhyDesignSystems() {
                     )}
                   </div>
 
-                  {/* Rodapé do Mockup com Alinhamento Estável */}
                   <div className="border-t border-line/60 pt-3 flex items-center justify-between text-xs">
                     <span className="text-muted">Diagnóstico tátil:</span>
                     <span className={`font-semibold ${tab === "sem" ? "text-red-500" : "text-primary"}`}>

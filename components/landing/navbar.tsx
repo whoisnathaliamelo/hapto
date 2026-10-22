@@ -59,7 +59,6 @@ export function Navbar({ fluid = false }: { fluid?: boolean } = {}) {
           fluid ? "w-full max-w-[1600px] lg:px-8 xl:px-12" : "max-w-6xl"
         )}
       >
-        {/* Brand */}
         <Link
           href="/"
           onClick={handleLogoClick}
@@ -69,7 +68,6 @@ export function Navbar({ fluid = false }: { fluid?: boolean } = {}) {
           <Logo />
         </Link>
 
-        {/* Módulos centralizados na Nav */}
         <nav className="hidden items-center md:flex" aria-label="Módulos do Design System">
           <ul className="flex items-center gap-1 rounded-full border border-line bg-surface/70 p-1 shadow-xs">
             {modules.map(({ anchorHref, pageHref, label }, index) => {
@@ -119,13 +117,11 @@ export function Navbar({ fluid = false }: { fluid?: boolean } = {}) {
           </ul>
         </nav>
 
-        {/* Theme Toggle no canto direito */}
         <div className="flex items-center gap-3 shrink-0">
           <ThemeToggle />
         </div>
       </div>
 
-      {/* Menu mobile de módulos */}
       <div className="border-t border-line/40 bg-surface/40 px-4 py-2 md:hidden">
         <ul className="flex items-center justify-around gap-1 text-[11px] font-medium text-muted">
           {modules.map(({ anchorHref, pageHref, label }, idx) => {

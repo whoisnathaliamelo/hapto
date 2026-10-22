@@ -77,7 +77,6 @@ export function TypographyShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação Tipográfica
@@ -109,9 +108,7 @@ export function TypographyShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação Tipográfica */}
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-between overflow-hidden rounded-2xl border border-line bg-surface p-3 shadow-xs">
-        {/* --- Variação 1: Prevenção de Auto-Zoom no iOS --- */}
         {variant === "ios-zoom-guard" && (
           <div className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between">
@@ -150,7 +147,6 @@ export function TypographyShowcase() {
               </div>
             </div>
 
-            {/* Simulação de Input com feedback de zoom */}
             <div
               className={cn(
                 "flex items-center justify-between rounded-xl border p-2.5 transition-all",
@@ -192,7 +188,6 @@ export function TypographyShowcase() {
           </div>
         )}
 
-        {/* --- Variação 2: Escala Hierárquica --- */}
         {variant === "scale-hierarchy" && (
           <div className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between gap-1">
@@ -219,7 +214,6 @@ export function TypographyShowcase() {
               </div>
             </div>
 
-            {/* Amostra visual do nível tipográfico */}
             <div className="flex min-h-[50px] items-center justify-center rounded-xl border border-line bg-surface-raised p-2 text-center">
               {selectedScale === "display" && (
                 <span className="text-xl font-extrabold tracking-tight text-ink">
@@ -250,7 +244,6 @@ export function TypographyShowcase() {
           </div>
         )}
 
-        {/* --- Variação 3: Leading / Respiro de Linha --- */}
         {variant === "line-height-thumb" && (
           <div className="flex h-full flex-col justify-between">
             <div className="flex items-center justify-between">
@@ -273,7 +266,6 @@ export function TypographyShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa 86px calibrada) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -294,7 +286,6 @@ export function TypographyShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (altura fixa 26px calibrada) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           Base: 16px (1rem) • Leading: 1.5x • Sem Zoom iOS

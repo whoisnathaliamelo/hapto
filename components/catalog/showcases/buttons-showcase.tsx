@@ -34,8 +34,6 @@ const SIZES_INFO: Record<
   },
 };
 
-// Código puro com Tailwind CSS (Caminho 1: Zero Dependências)
-// Qualquer desenvolvedor pode copiar e colar diretamente no projeto sem precisar instalar componentes extras
 export const BUTTONS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
 // Dica: Instale 'lucide-react' para os ícones ou use seus próprios SVGs
 
@@ -87,7 +85,6 @@ export function ButtonsShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center gap-5 py-1">
-      {/* 1. Seletor Ergonômico de Tamanhos (P, M, G) */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Calibrar Tamanho do Alvo Tátil
@@ -117,9 +114,7 @@ export function ButtonsShowcase() {
         </div>
       </div>
 
-      {/* 2. Área de Demonstração Interativa */}
       <div className="flex w-full flex-wrap items-center justify-center gap-3 py-2">
-        {/* Botão Primário */}
         <Button
           variant="primary"
           size={size}
@@ -130,7 +125,6 @@ export function ButtonsShowcase() {
           <span>Principal</span>
         </Button>
 
-        {/* Botão Secundário */}
         <Button
           variant="secondary"
           size={size}
@@ -139,7 +133,6 @@ export function ButtonsShowcase() {
           <span>Secundário</span>
         </Button>
 
-        {/* FAB Flutuante (56px) */}
         <button
           type="button"
           onClick={() => handleClick("FAB Flutuante (56px)")}
@@ -151,7 +144,6 @@ export function ButtonsShowcase() {
         </button>
       </div>
 
-      {/* 3. Diagnóstico Ergonômico do Tamanho Selecionado */}
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 font-bold text-ink">
@@ -172,7 +164,6 @@ export function ButtonsShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback de Toque */}
       <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="font-mono text-[10px]">Alvo ativo: {currentSizeInfo.height}</span>
         <span className="font-medium text-ink">

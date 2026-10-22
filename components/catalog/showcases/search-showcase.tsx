@@ -119,7 +119,6 @@ export function SearchShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação da Barra de Busca
@@ -148,9 +147,7 @@ export function SearchShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa com Campo de Busca */}
       <div className="flex min-h-[108px] w-full max-w-sm flex-col justify-center gap-2.5 px-1">
-        {/* Barra de Busca Principal (48dp) */}
         <div className="relative flex min-h-12 w-full items-center rounded-xl border border-line bg-surface shadow-2xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
           <Search className="ml-3.5 size-5 shrink-0 text-muted transition-colors focus-within:text-primary" />
 
@@ -165,7 +162,6 @@ export function SearchShowcase() {
             className="w-full bg-transparent px-3 text-sm sm:text-base text-ink placeholder:text-muted focus:outline-none"
           />
 
-          {/* Botão de Limpar Tátil com 40px de Hitbox */}
           {query && (
             <button
               type="button"
@@ -178,7 +174,6 @@ export function SearchShowcase() {
             </button>
           )}
 
-          {/* Botão de Filtro (apenas em 'with-filter') */}
           {variant === "with-filter" && (
             <button
               type="button"
@@ -197,7 +192,6 @@ export function SearchShowcase() {
           )}
         </div>
 
-        {/* Chips de Sugestões / Filtros Rápidos (em 'suggestions') */}
         {variant === "suggestions" && (
           <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 [scrollbar-width:none]">
             <span className="flex items-center gap-1 text-[10px] font-semibold text-muted shrink-0 pr-1">
@@ -225,7 +219,6 @@ export function SearchShowcase() {
           </div>
         )}
 
-        {/* Feedback de Filtro Ativo (em 'with-filter') */}
         {variant === "with-filter" && filterActive && (
           <div className="flex items-center gap-1.5 text-[11px] text-primary">
             <Sparkles className="size-3" />
@@ -234,7 +227,6 @@ export function SearchShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico */}
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 font-bold text-ink">
@@ -255,7 +247,6 @@ export function SearchShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status */}
       <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="font-mono text-[10px]">
           Alvo: 48dp • Limpar: 36-40dp • Fonte: 16px

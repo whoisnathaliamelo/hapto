@@ -22,7 +22,6 @@ export function ZoneToggle({ checked, onChange }: ZoneToggleProps) {
           </div>
         </div>
 
-        {/* Switch Toggle */}
         <button
           type="button"
           role="switch"
@@ -42,7 +41,6 @@ export function ZoneToggle({ checked, onChange }: ZoneToggleProps) {
         </button>
       </div>
 
-      {/* Legenda de Cores Integrada (Altura Estável, sem empurrar o celular) */}
       <div className="flex items-center justify-between border-t border-line/50 pt-2 text-[10px] font-semibold">
         <div className="flex items-center gap-1.5">
           <span

@@ -116,7 +116,6 @@ export function FeedbackShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Organismo
@@ -149,9 +148,7 @@ export function FeedbackShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação de Tela Mobile (altura mantida em 142px) */}
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-between overflow-hidden rounded-2xl border border-line bg-surface p-3 shadow-xs">
-        {/* Topo do Mock Mobile: Contexto da Tela */}
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5 text-xs font-semibold text-ink">
@@ -161,17 +158,14 @@ export function FeedbackShowcase() {
             <span className="text-[10px] text-muted">Zona de Feedback</span>
           </div>
 
-          {/* Linhas sutis simulando conteúdo da interface sem poluição visual */}
           <div className="space-y-1 opacity-25">
             <div className="h-1.5 w-3/5 rounded-full bg-ink" />
             <div className="h-1.5 w-2/5 rounded-full bg-ink" />
           </div>
         </div>
 
-        {/* Notificação Ativa (posicionada em fluxo natural sem sobreposição de texto) */}
         {activeNotification ? (
           <div>
-            {/* --- Variação 1: Snackbar Inferior com Ação "Desfazer" --- */}
             {variant === "snackbar" && (
               <div
                 role="status"
@@ -205,7 +199,6 @@ export function FeedbackShowcase() {
               </div>
             )}
 
-            {/* --- Variação 2: Banner de Aviso / Card Persistente --- */}
             {variant === "banner" && (
               <div
                 role="alert"
@@ -242,7 +235,6 @@ export function FeedbackShowcase() {
               </div>
             )}
 
-            {/* --- Variação 3: Floating Toast (Pill) --- */}
             {variant === "floating" && (
               <div className="flex w-full items-center justify-center">
                 <div
@@ -266,7 +258,6 @@ export function FeedbackShowcase() {
             )}
           </div>
         ) : (
-          /* Estado quando a notificação é fechada */
           <div className="flex w-full items-center justify-between rounded-xl border border-dashed border-line bg-surface-raised/40 px-3 py-2">
             <span className="text-[11px] text-muted">Notificação fechada</span>
             <button
@@ -284,7 +275,6 @@ export function FeedbackShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa 86px calibrada) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -305,7 +295,6 @@ export function FeedbackShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (altura fixa 26px calibrada) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           Posicionamento: Base • Alcance: Thumb Zone

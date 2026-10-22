@@ -72,7 +72,6 @@ export function Modules() {
                   className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-primary/60 hover:shadow-lg hover:shadow-primary/5"
                 >
                   <div>
-                    {/* Header do Card com numeração proporcional */}
                     <div className="flex items-center justify-between border-b border-line/50 pb-5">
                       <span className="inline-flex items-center gap-1.5 rounded-lg bg-primary-light px-2.5 py-1 text-xs font-bold text-primary">
                         {m.badge}
@@ -89,7 +88,6 @@ export function Modules() {
                       {m.description}
                     </p>
 
-                    {/* Lista de tópicos dentro do módulo */}
                     <ul className="mt-6 space-y-2.5 border-t border-line/40 pt-5">
                       {m.features.map((feat) => (
                         <li key={feat} className="flex items-start gap-2.5 text-xs text-muted">

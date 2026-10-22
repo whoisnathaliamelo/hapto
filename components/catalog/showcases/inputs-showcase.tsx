@@ -90,7 +90,6 @@ export function InputsShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Estados do Campo */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Campo
@@ -119,7 +118,6 @@ export function InputsShowcase() {
         </div>
       </div>
 
-      {/* 2. Campo de Texto Interativo */}
       <div className="w-full max-w-sm px-1 py-1">
         <div className="flex items-center justify-between pb-1.5">
           <label
@@ -159,7 +157,6 @@ export function InputsShowcase() {
             )}
           />
 
-          {/* Botão de Limpar com área tátil confortável */}
           {value && (
             <button
               type="button"
@@ -172,7 +169,6 @@ export function InputsShowcase() {
           )}
         </div>
 
-        {/* Mensagem de Erro ou Apoio */}
         <div className="mt-1.5 flex min-h-[18px] items-center gap-1.5 text-[11px]">
           {isError ? (
             <span className="flex items-center gap-1 text-rose-600 font-medium animate-in fade-in">
@@ -187,7 +183,6 @@ export function InputsShowcase() {
         </div>
       </div>
 
-      {/* 3. Diagnóstico Ergonômico */}
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2">
           <span className="flex items-center gap-1.5 font-bold text-ink">
@@ -208,7 +203,6 @@ export function InputsShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status */}
       <div className="flex w-full items-center justify-between border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="font-mono text-[10px]">Alvo: 48dp • Fonte: 16px</span>
         <span className="font-medium text-ink">

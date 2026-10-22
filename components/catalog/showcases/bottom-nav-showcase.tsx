@@ -138,7 +138,6 @@ export function BottomNavShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Organismo
@@ -170,9 +169,7 @@ export function BottomNavShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação de Moldura Mobile */}
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-end overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
-        {/* Mock de Conteúdo da Tela Mobile */}
         <div className="flex flex-1 flex-col items-center justify-center p-3 text-center">
           <div className="flex items-center gap-1.5 text-xs font-semibold text-ink">
             <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -188,7 +185,6 @@ export function BottomNavShowcase() {
           </p>
         </div>
 
-        {/* --- Variação 1: Standard (4 Destinos) --- */}
         {variant === "standard" && (
           <nav
             role="navigation"
@@ -227,14 +223,12 @@ export function BottomNavShowcase() {
           </nav>
         )}
 
-        {/* --- Variação 2: With FAB (Ação Central em Relevo) --- */}
         {variant === "with-fab" && (
           <nav
             role="navigation"
             aria-label="Navegação inferior com FAB"
             className="relative flex h-14 w-full items-center justify-around border-t border-line/70 bg-surface-raised/80 px-1 backdrop-blur-sm"
           >
-            {/* Lado Esquerdo: Início e Explorar */}
             <button
               type="button"
               onClick={() => triggerNav("Início", "home")}
@@ -261,7 +255,6 @@ export function BottomNavShowcase() {
               <span className="text-[10px]">Explorar</span>
             </button>
 
-            {/* Botão Central FAB (Hitbox 48dp elevado na Thumb Zone) */}
             <div className="relative -mt-6 flex flex-col items-center justify-center">
               <button
                 type="button"
@@ -275,7 +268,6 @@ export function BottomNavShowcase() {
               <span className="mt-0.5 text-[9px] font-bold text-primary">Criar</span>
             </div>
 
-            {/* Lado Direito: Salvos e Perfil */}
             <button
               type="button"
               onClick={() => triggerNav("Salvos", "saved")}
@@ -309,7 +301,6 @@ export function BottomNavShowcase() {
           </nav>
         )}
 
-        {/* --- Variação 3: Floating / Pill (Barra Flutuante) --- */}
         {variant === "floating" && (
           <div className="flex w-full items-center justify-center pb-2.5 px-3">
             <nav
@@ -343,7 +334,6 @@ export function BottomNavShowcase() {
         )}
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa 86px calibrada) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -364,7 +354,6 @@ export function BottomNavShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (altura fixa 26px calibrada) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           Alvo: 48x48dp • Zona: Thumb Zone Inferior

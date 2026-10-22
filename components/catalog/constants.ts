@@ -15,21 +15,17 @@ import {
 import type { AtomicCategory, ComponentSection, SectionMeta } from "./types";
 
 export const SECTIONS: SectionMeta[] = [
-  // Tokens
   { id: "colors", label: "Cores & Contraste WCAG", category: "tokens" },
   { id: "typography", label: "Tipografia & Escala", category: "tokens" },
 
-  // Átomos
   { id: "buttons", label: "Botões (Normal, Secundário, FAB)", category: "atoms" },
   { id: "inputs", label: "Inputs de Texto", category: "atoms" },
   { id: "switches", label: "Switches e Checkboxes", category: "atoms" },
   { id: "icons", label: "Ícones Ergonômicos", category: "atoms" },
 
-  // Moléculas
   { id: "search", label: "Barra de Busca", category: "molecules" },
   { id: "cards", label: "Cards Informativos", category: "molecules" },
 
-  // Organismos
   { id: "bottom-nav", label: "Bottom Navigation", category: "organisms" },
   { id: "top-bar", label: "Top App Bar", category: "organisms" },
   { id: "feedback", label: "Alertas e Snackbars", category: "organisms" },

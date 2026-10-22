@@ -105,7 +105,6 @@ export function TopBarShowcase() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between gap-4 py-1">
-      {/* 1. Seletor de Variação Ergonômica */}
       <div className="flex flex-col items-center gap-2">
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Organismo
@@ -137,9 +136,7 @@ export function TopBarShowcase() {
         </div>
       </div>
 
-      {/* 2. Área Central Interativa: Simulação de Moldura Superior Mobile */}
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-start overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
-        {/* --- Variação 1: Standard (Voltar + Título + Ações) --- */}
         {variant === "standard" && (
           <header className="flex h-13 w-full shrink-0 items-center justify-between border-b border-line/70 bg-surface-raised/80 px-1 backdrop-blur-sm">
             <button
@@ -176,7 +173,6 @@ export function TopBarShowcase() {
           </header>
         )}
 
-        {/* --- Variação 2: Large Title (Título Expandido) --- */}
         {variant === "large-title" && (
           <div className="flex w-full shrink-0 flex-col border-b border-line/70 bg-surface-raised/80 backdrop-blur-sm">
             <header className="flex h-11 w-full items-center justify-between px-1">
@@ -208,7 +204,6 @@ export function TopBarShowcase() {
           </div>
         )}
 
-        {/* --- Variação 3: Contextual (Modo Seleção em Lote) --- */}
         {variant === "contextual" && (
           <header className="flex h-13 w-full shrink-0 items-center justify-between border-b border-line/70 bg-primary/10 px-1 backdrop-blur-sm">
             <div className="flex items-center gap-1">
@@ -254,7 +249,6 @@ export function TopBarShowcase() {
           </header>
         )}
 
-        {/* Conteúdo Simulado da Página abaixo da Top Bar */}
         <div className="flex flex-1 flex-col items-center justify-center p-3 text-center">
           <p className="text-[11px] font-medium text-ink">
             {variant === "standard" && "Corpo da Tela: rolagem sob o cabeçalho"}
@@ -267,7 +261,6 @@ export function TopBarShowcase() {
         </div>
       </div>
 
-      {/* 3. Diagnóstico Ergonômico (altura fixa 86px calibrada) */}
       <div className="h-[86px] w-full shrink-0 overflow-hidden rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
         <div className="flex items-center justify-between gap-2 whitespace-nowrap">
           <span className="flex min-w-0 items-center gap-1.5 font-bold text-ink">
@@ -288,7 +281,6 @@ export function TopBarShowcase() {
         </p>
       </div>
 
-      {/* 4. Feedback e Status (altura fixa 26px calibrada) */}
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
           Alvo: 44-48dp • Espaço entre Ações: 8dp

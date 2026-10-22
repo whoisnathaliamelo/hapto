@@ -45,12 +45,10 @@ export function PlaygroundView() {
 
   return (
     <section className="relative isolate overflow-clip border-b border-line/40">
-      {/* Background decorativo com grid dots e iluminação sutil */}
       <div className="bg-dots absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-72 w-full max-w-4xl -translate-x-1/2 bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl" />
 
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-8 pb-20 lg:pt-10 lg:pb-24">
-        {/* Cabeçalho da Seção */}
         <header className="mx-auto max-w-3xl text-center mb-10 lg:mb-14">
           <Reveal>
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
@@ -69,10 +67,8 @@ export function PlaygroundView() {
           </Reveal>
         </header>
 
-        {/* Grid de 3 Colunas: Controles | Celular | Diagnóstico */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* COLUNA 1: Painel de Controles e Calibragem */}
           <div className="lg:col-span-4 xl:col-span-4 order-2 lg:order-1">
             <Reveal delay={0.05}>
               <div className="h-[610px] sm:h-[640px] w-full rounded-2xl border border-line bg-surface p-5 shadow-xs flex flex-col justify-between select-none">
@@ -87,7 +83,6 @@ export function PlaygroundView() {
                     </div>
                   </div>
 
-                  {/* Seletor de Pegada */}
                   <div className="mt-4">
                     <HandSelector
                       value={settings.handGrip}
@@ -95,7 +90,6 @@ export function PlaygroundView() {
                     />
                   </div>
 
-                  {/* Seletor de Cenário */}
                   <div className="mt-4 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-muted">
@@ -129,13 +123,11 @@ export function PlaygroundView() {
                 </div>
 
                 <div className="space-y-4">
-                  {/* Toggle da Camada de Thumb Zone */}
                   <ZoneToggle
                     checked={settings.showOverlay}
                     onChange={(showOverlay) => setSettings((s) => ({ ...s, showOverlay }))}
                   />
 
-                  {/* Calibragem de tamanho de alvo */}
                   <TargetCalibrator
                     value={settings.targetSize}
                     onChange={(targetSize) => setSettings((s) => ({ ...s, targetSize }))}
@@ -145,7 +137,6 @@ export function PlaygroundView() {
             </Reveal>
           </div>
 
-          {/* COLUNA 2: O Celular Simulado Centralizado (Posição Estática Fixa) */}
           <div className="lg:col-span-4 xl:col-span-4 order-1 lg:order-2 flex items-center justify-center">
             <Reveal delay={0.1}>
               <PhoneFrame>
@@ -162,7 +153,6 @@ export function PlaygroundView() {
             </Reveal>
           </div>
 
-          {/* COLUNA 3: Painel de Diagnóstico em Tempo Real */}
           <div className="lg:col-span-4 xl:col-span-4 order-3 lg:order-3">
             <Reveal delay={0.15}>
               <TouchFeedback
