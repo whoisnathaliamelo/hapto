@@ -116,7 +116,7 @@ export function CatalogView() {
                 </Reveal>
               </header>
 
-              <UsageGuide />
+              {activeCategory === "all" && activeSection === "all" && <UsageGuide />}
 
               <Reveal delay={0.1} className="lg:hidden w-full">
                 <MobileFilterChips
