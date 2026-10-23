@@ -122,33 +122,34 @@ export function Navbar({ fluid = false }: { fluid?: boolean } = {}) {
         </div>
       </div>
 
-      <div className="border-t border-line/40 bg-surface/40 px-4 py-2 md:hidden">
+      <div className="border-t border-line/40 bg-surface/40 px-3 py-1.5 md:hidden">
         <ul className="flex items-center justify-around gap-1 text-[11px] font-medium text-muted">
           {modules.map(({ anchorHref, pageHref, label }, idx) => {
             const targetHref = isHome ? anchorHref : pageHref;
             const isActive = !isHome && pathname === pageHref;
 
+            const linkClasses = cn(
+              "flex min-h-11 items-center justify-center gap-1.5 rounded-xl px-3 py-2 transition-all duration-200 active:scale-95",
+              isActive
+                ? "bg-surface-raised font-bold text-primary shadow-2xs"
+                : "hover:text-ink active:bg-surface-raised"
+            );
+
             return (
-              <li key={pageHref}>
+              <li key={pageHref} className="flex-1">
                 {isHome ? (
                   <a
                     href={targetHref}
                     onClick={(e) => handleScroll(e, targetHref)}
-                    className="flex items-center gap-1.5 rounded-lg px-2 py-1 transition hover:text-ink active:bg-surface-raised"
+                    className={linkClasses}
                   >
                     <span className="font-bold text-primary">{idx + 1}.</span>
-                    <span>{label.split(" ")[0]}</span>
+                    <span className="truncate">{label.split(" ")[0]}</span>
                   </a>
                 ) : (
-                  <Link
-                    href={targetHref}
-                    className={cn(
-                      "flex items-center gap-1.5 rounded-lg px-2 py-1 transition hover:text-ink active:bg-surface-raised",
-                      isActive && "font-bold text-primary"
-                    )}
-                  >
+                  <Link href={targetHref} className={linkClasses}>
                     <span className="font-bold text-primary">{idx + 1}.</span>
-                    <span>{label.split(" ")[0]}</span>
+                    <span className="truncate">{label.split(" ")[0]}</span>
                   </Link>
                 )}
               </li>

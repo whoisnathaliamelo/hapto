@@ -34,7 +34,7 @@ export function ThemeToggle() {
       type="button"
       aria-label="Alternar tema claro/escuro"
       onClick={toggleTheme}
-      className="group relative inline-flex size-10 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all duration-300 hover:border-primary/50 hover:bg-surface-raised active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
+      className="group relative inline-flex size-11 md:size-10 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all duration-300 hover:border-primary/50 hover:bg-surface-raised active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
     >
       <div className="relative size-[18px]">
         <Sun className="absolute inset-0 size-[18px] text-ink rotate-0 scale-100 transition-all duration-300 ease-out dark:-rotate-90 dark:scale-0 dark:opacity-0" />

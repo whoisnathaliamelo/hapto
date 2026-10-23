@@ -73,7 +73,7 @@ export function ShowcaseCard({
                 type="button"
                 onClick={() => setActiveTab("preview")}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all",
+                  "flex min-h-9 md:min-h-7 items-center gap-1.5 rounded-md px-3 md:px-2.5 py-1.5 md:py-1 text-xs font-semibold transition-all active:scale-95",
                   activeTab === "preview"
                     ? "bg-surface text-ink shadow-xs"
                     : "text-muted hover:text-ink"
@@ -86,7 +86,7 @@ export function ShowcaseCard({
                 type="button"
                 onClick={() => setActiveTab("code")}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-md px-2.5 py-1 text-xs font-semibold transition-all",
+                  "flex min-h-9 md:min-h-7 items-center gap-1.5 rounded-md px-3 md:px-2.5 py-1.5 md:py-1 text-xs font-semibold transition-all active:scale-95",
                   activeTab === "code"
                     ? "bg-surface text-ink shadow-xs"
                     : "text-muted hover:text-ink"
@@ -101,7 +101,7 @@ export function ShowcaseCard({
               <button
                 type="button"
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 rounded-md border border-line bg-surface px-2.5 py-1 text-xs font-medium text-muted transition-all hover:border-primary hover:text-primary active:scale-95"
+                className="flex min-h-9 md:min-h-7 items-center gap-1.5 rounded-md border border-line bg-surface px-3 md:px-2.5 py-1.5 md:py-1 text-xs font-medium text-muted transition-all hover:border-primary hover:text-primary active:scale-95"
               >
                 {copied ? (
                   <>
