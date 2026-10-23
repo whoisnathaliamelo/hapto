@@ -10,6 +10,8 @@ import {
   COLORS_CODE,
   TypographyShowcase,
   TYPOGRAPHY_CODE,
+  SpacingShowcase,
+  SPACING_CODE,
 } from "../showcases";
 
 interface TokensGroupProps {
@@ -52,6 +54,19 @@ export function TokensGroup({ activeSection }: TokensGroupProps) {
             delay={0.08}
           >
             <TypographyShowcase />
+          </ShowcaseCard>
+        )}
+
+        {shouldRender("spacing") && (
+          <ShowcaseCard
+            id="spacing"
+            section="spacing"
+            title="Espaçamentos & Targets"
+            description="Distâncias de segurança entre alvos adjacentes (8dp+) para evitar toques incorretos acidentais."
+            code={SPACING_CODE}
+            delay={0.16}
+          >
+            <SpacingShowcase />
           </ShowcaseCard>
         )}
       </div>

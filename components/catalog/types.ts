@@ -4,6 +4,7 @@ export type ComponentSection =
   | "all"
   | "colors"
   | "typography"
+  | "spacing"
   | "buttons"
   | "inputs"
   | "switches"

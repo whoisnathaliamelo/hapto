@@ -1,5 +1,6 @@
 export * from "./colors-showcase";
 export * from "./typography-showcase";
+export * from "./spacing-showcase";
 export * from "./buttons-showcase";
 export * from "./inputs-showcase";
 export * from "./switches-showcase";

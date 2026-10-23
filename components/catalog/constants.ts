@@ -2,6 +2,7 @@ import {
   Bell,
   IdCard,
   MousePointerClick,
+  MoveVertical,
   Palette,
   PanelBottom,
   PanelTop,
@@ -17,6 +18,7 @@ import type { AtomicCategory, ComponentSection, SectionMeta } from "./types";
 export const SECTIONS: SectionMeta[] = [
   { id: "colors", label: "Cores & Contraste WCAG", category: "tokens" },
   { id: "typography", label: "Tipografia & Escala", category: "tokens" },
+  { id: "spacing", label: "Espaçamentos & Targets", category: "tokens" },
 
   { id: "buttons", label: "Botões (Normal, Secundário, FAB)", category: "atoms" },
   { id: "inputs", label: "Inputs de Texto", category: "atoms" },
@@ -34,6 +36,7 @@ export const SECTIONS: SectionMeta[] = [
 export const SECTION_ICONS: Record<Exclude<ComponentSection, "all">, LucideIcon> = {
   colors: Palette,
   typography: Type,
+  spacing: MoveVertical,
   buttons: MousePointerClick,
   inputs: TextCursorInput,
   switches: ToggleRight,

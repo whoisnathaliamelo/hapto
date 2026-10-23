@@ -34,7 +34,7 @@ const tokenModules = [
     title: "Módulo Spacing & Targets",
     description: "Distâncias de segurança entre alvos adjacentes para evitar toques incorretos acidentais.",
     badge: "Áreas de toque",
-    href: "/components",
+    href: "/components#spacing",
   },
 ];
 
