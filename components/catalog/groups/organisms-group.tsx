@@ -4,7 +4,7 @@ import { Shapes } from "lucide-react";
 import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
-import type { ComponentSection } from "../types";
+import type { CatalogGroupProps, ComponentSection } from "../types";
 import {
   BottomNavShowcase,
   BOTTOM_NAV_CODE,
@@ -14,17 +14,20 @@ import {
   FEEDBACK_CODE,
 } from "../showcases";
 
-interface OrganismsGroupProps {
-  activeSection: ComponentSection;
-}
-
-export function OrganismsGroup({ activeSection }: OrganismsGroupProps) {
-  const shouldRender = (id: ComponentSection) =>
-    activeSection === "all" || activeSection === id;
+export function OrganismsGroup({ activeSection, visibleSections }: CatalogGroupProps) {
+  const shouldRender = (id: ComponentSection) => {
+    const matchesActive = activeSection === "all" || activeSection === id;
+    const matchesSearch = !visibleSections || visibleSections.has(id);
+    return matchesActive && matchesSearch;
+  };
 
   const count = SECTIONS.filter(
     (s) => s.category === "organisms" && shouldRender(s.id)
   ).length;
+
+  if (visibleSections && count === 0) {
+    return null;
+  }
 
   return (
     <section id="organisms-group" className="scroll-mt-24">

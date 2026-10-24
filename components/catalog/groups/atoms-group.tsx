@@ -4,7 +4,7 @@ import { Blocks } from "lucide-react";
 import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
-import type { ComponentSection } from "../types";
+import type { CatalogGroupProps, ComponentSection } from "../types";
 import {
   ButtonsShowcase,
   BUTTONS_CODE,
@@ -16,17 +16,20 @@ import {
   ICONS_CODE,
 } from "../showcases";
 
-interface AtomsGroupProps {
-  activeSection: ComponentSection;
-}
-
-export function AtomsGroup({ activeSection }: AtomsGroupProps) {
-  const shouldRender = (id: ComponentSection) =>
-    activeSection === "all" || activeSection === id;
+export function AtomsGroup({ activeSection, visibleSections }: CatalogGroupProps) {
+  const shouldRender = (id: ComponentSection) => {
+    const matchesActive = activeSection === "all" || activeSection === id;
+    const matchesSearch = !visibleSections || visibleSections.has(id);
+    return matchesActive && matchesSearch;
+  };
 
   const count = SECTIONS.filter(
     (s) => s.category === "atoms" && shouldRender(s.id)
   ).length;
+
+  if (visibleSections && count === 0) {
+    return null;
+  }
 
   return (
     <section id="atoms-group" className="scroll-mt-24">

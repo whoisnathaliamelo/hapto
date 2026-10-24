@@ -4,7 +4,7 @@ import { Sparkles } from "lucide-react";
 import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
-import type { ComponentSection } from "../types";
+import type { CatalogGroupProps, ComponentSection } from "../types";
 import {
   SearchShowcase,
   SEARCH_CODE,
@@ -12,17 +12,20 @@ import {
   CARDS_CODE,
 } from "../showcases";
 
-interface MoleculesGroupProps {
-  activeSection: ComponentSection;
-}
-
-export function MoleculesGroup({ activeSection }: MoleculesGroupProps) {
-  const shouldRender = (id: ComponentSection) =>
-    activeSection === "all" || activeSection === id;
+export function MoleculesGroup({ activeSection, visibleSections }: CatalogGroupProps) {
+  const shouldRender = (id: ComponentSection) => {
+    const matchesActive = activeSection === "all" || activeSection === id;
+    const matchesSearch = !visibleSections || visibleSections.has(id);
+    return matchesActive && matchesSearch;
+  };
 
   const count = SECTIONS.filter(
     (s) => s.category === "molecules" && shouldRender(s.id)
   ).length;
+
+  if (visibleSections && count === 0) {
+    return null;
+  }
 
   return (
     <section id="molecules-group" className="scroll-mt-24">

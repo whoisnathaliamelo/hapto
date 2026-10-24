@@ -6,15 +6,18 @@ import type { AtomicCategory, ComponentSection } from "./types";
 interface FilterSidebarProps {
   activeCategory: AtomicCategory;
   activeSection: ComponentSection;
+  visibleSections?: Set<ComponentSection>;
   onSelect: (category: AtomicCategory, section: ComponentSection) => void;
 }
 
 export function FilterSidebar({
   activeCategory,
   activeSection,
+  visibleSections,
   onSelect,
 }: FilterSidebarProps) {
   const isAllActive = activeCategory === "all" && activeSection === "all";
+  const totalDisplayCount = visibleSections ? visibleSections.size : SECTIONS.length;
 
   return (
     <aside className="hidden lg:block lg:sticky lg:top-24 lg:self-start w-64 xl:w-72 shrink-0">
@@ -47,13 +50,20 @@ export function FilterSidebar({
               isAllActive ? "bg-on-primary/20 text-on-primary" : "bg-surface-raised text-muted"
             )}
           >
-            {SECTIONS.length}
+            {totalDisplayCount}
           </span>
         </button>
 
         {GROUPS.map((group) => {
           const items = SECTIONS.filter((item) => item.category === group.id);
+          const matchingItems = items.filter(
+            (item) => !visibleSections || visibleSections.has(item.id)
+          );
           const isGroupActive = activeCategory === group.id && activeSection === "all";
+
+          if (visibleSections && matchingItems.length === 0) {
+            return null;
+          }
 
           return (
             <div key={group.id} className="mt-6">
@@ -68,12 +78,15 @@ export function FilterSidebar({
               >
                 <span>{group.label}</span>
                 <span className="rounded-full border border-line/60 bg-surface-raised px-2 py-0.5 text-[10px] tracking-normal">
-                  {items.length}
+                  {matchingItems.length}
                 </span>
               </button>
 
               <ul className="mt-2 ml-3 border-l border-line">
                 {items.map((item) => {
+                  const isVisible = !visibleSections || visibleSections.has(item.id);
+                  if (visibleSections && !isVisible) return null;
+
                   const Icon = SECTION_ICONS[item.id as Exclude<ComponentSection, "all">];
                   const isActive = activeSection === item.id;
                   return (

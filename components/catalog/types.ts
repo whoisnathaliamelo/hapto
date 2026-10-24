@@ -19,4 +19,11 @@ export interface SectionMeta {
   id: ComponentSection;
   label: string;
   category: "tokens" | "atoms" | "molecules" | "organisms";
+  description?: string;
+  keywords?: string[];
+}
+
+export interface CatalogGroupProps {
+  activeSection: ComponentSection;
+  visibleSections?: Set<ComponentSection>;
 }

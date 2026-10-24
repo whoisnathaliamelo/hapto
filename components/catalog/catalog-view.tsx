@@ -1,22 +1,42 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Reveal } from "@/components/reveal";
 import { FilterSidebar } from "./filter-sidebar";
 import { MobileFilterChips } from "./mobile-filter-chips";
 import { UsageGuide } from "./usage-guide";
+import { CatalogSearch, CatalogSearchEmptyState } from "./catalog-search";
 import {
   TokensGroup,
   AtomsGroup,
   MoleculesGroup,
   OrganismsGroup,
 } from "./groups";
-import { SECTIONS, GROUPS } from "./constants";
+import { SECTIONS, GROUPS, CATEGORY_LABELS, normalizeSearch } from "./constants";
 import type { AtomicCategory, ComponentSection } from "./types";
 
 export function CatalogView() {
   const [activeCategory, setActiveCategory] = useState<AtomicCategory>("all");
   const [activeSection, setActiveSection] = useState<ComponentSection>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  const visibleSections = useMemo(() => {
+    if (!isSearching) return undefined;
+    const query = normalizeSearch(searchQuery);
+
+    const matches = SECTIONS.filter((section) => {
+      if (normalizeSearch(section.label).includes(query)) return true;
+      if (normalizeSearch(section.id).includes(query)) return true;
+      if (normalizeSearch(CATEGORY_LABELS[section.category]).includes(query)) return true;
+      if (section.description && normalizeSearch(section.description).includes(query)) return true;
+      if (section.keywords?.some((kw) => normalizeSearch(kw).includes(query))) return true;
+      return false;
+    });
+
+    return new Set<ComponentSection>(matches.map((s) => s.id));
+  }, [searchQuery, isSearching]);
 
   useEffect(() => {
     const handleHash = () => {
@@ -76,12 +96,19 @@ export function CatalogView() {
   };
 
   const showGroup = (category: Exclude<AtomicCategory, "all">) => {
+    if (visibleSections) {
+      return SECTIONS.some(
+        (s) => s.category === category && visibleSections.has(s.id)
+      );
+    }
     const matchesCategory = activeCategory === "all" || activeCategory === category;
     const matchesSection =
       activeSection === "all" ||
       SECTIONS.some((s) => s.category === category && s.id === activeSection);
     return matchesCategory && matchesSection;
   };
+
+  const hasNoResults = visibleSections && visibleSections.size === 0;
 
   return (
     <section className="relative isolate overflow-clip border-b border-line/40">
@@ -93,11 +120,12 @@ export function CatalogView() {
           <FilterSidebar
             activeCategory={activeCategory}
             activeSection={activeSection}
+            visibleSections={visibleSections}
             onSelect={handleSelect}
           />
 
           <div className="min-w-0 flex-1 flex flex-col items-center">
-            <div className="w-full max-w-4xl xl:max-w-5xl space-y-12 lg:space-y-16">
+            <div className="w-full max-w-4xl xl:max-w-5xl space-y-10 lg:space-y-14">
               <header className="mx-auto max-w-2xl text-center">
                 <Reveal>
                   <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
@@ -116,22 +144,63 @@ export function CatalogView() {
                 </Reveal>
               </header>
 
-              {activeCategory === "all" && activeSection === "all" && <UsageGuide />}
+              {/* Quick Search Bar */}
+              <Reveal delay={0.05} className="w-full">
+                <CatalogSearch
+                  value={searchQuery}
+                  onChange={setSearchQuery}
+                  resultCount={visibleSections ? visibleSections.size : SECTIONS.length}
+                  totalCount={SECTIONS.length}
+                />
+              </Reveal>
+
+              {/* Usage Guide only shown when not actively filtering by search */}
+              {activeCategory === "all" && activeSection === "all" && !isSearching && (
+                <UsageGuide />
+              )}
 
               <Reveal delay={0.1} className="lg:hidden w-full">
                 <MobileFilterChips
                   activeCategory={activeCategory}
                   activeSection={activeSection}
+                  visibleSections={visibleSections}
                   onSelect={handleSelect}
                 />
               </Reveal>
 
-              <div className="space-y-14 lg:space-y-16">
-                {showGroup("tokens") && <TokensGroup activeSection={activeSection} />}
-                {showGroup("atoms") && <AtomsGroup activeSection={activeSection} />}
-                {showGroup("molecules") && <MoleculesGroup activeSection={activeSection} />}
-                {showGroup("organisms") && <OrganismsGroup activeSection={activeSection} />}
-              </div>
+              {hasNoResults ? (
+                <CatalogSearchEmptyState
+                  query={searchQuery}
+                  onClear={() => setSearchQuery("")}
+                />
+              ) : (
+                <div className="space-y-14 lg:space-y-16">
+                  {showGroup("tokens") && (
+                    <TokensGroup
+                      activeSection={activeSection}
+                      visibleSections={visibleSections}
+                    />
+                  )}
+                  {showGroup("atoms") && (
+                    <AtomsGroup
+                      activeSection={activeSection}
+                      visibleSections={visibleSections}
+                    />
+                  )}
+                  {showGroup("molecules") && (
+                    <MoleculesGroup
+                      activeSection={activeSection}
+                      visibleSections={visibleSections}
+                    />
+                  )}
+                  {showGroup("organisms") && (
+                    <OrganismsGroup
+                      activeSection={activeSection}
+                      visibleSections={visibleSections}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

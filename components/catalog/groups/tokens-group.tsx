@@ -4,7 +4,7 @@ import { Palette } from "lucide-react";
 import { GroupHeading } from "../group-heading";
 import { ShowcaseCard } from "../showcase-card";
 import { SECTIONS } from "../constants";
-import type { ComponentSection } from "../types";
+import type { CatalogGroupProps, ComponentSection } from "../types";
 import {
   ColorsShowcase,
   COLORS_CODE,
@@ -14,17 +14,20 @@ import {
   SPACING_CODE,
 } from "../showcases";
 
-interface TokensGroupProps {
-  activeSection: ComponentSection;
-}
-
-export function TokensGroup({ activeSection }: TokensGroupProps) {
-  const shouldRender = (id: ComponentSection) =>
-    activeSection === "all" || activeSection === id;
+export function TokensGroup({ activeSection, visibleSections }: CatalogGroupProps) {
+  const shouldRender = (id: ComponentSection) => {
+    const matchesActive = activeSection === "all" || activeSection === id;
+    const matchesSearch = !visibleSections || visibleSections.has(id);
+    return matchesActive && matchesSearch;
+  };
 
   const count = SECTIONS.filter(
     (s) => s.category === "tokens" && shouldRender(s.id)
   ).length;
+
+  if (visibleSections && count === 0) {
+    return null;
+  }
 
   return (
     <section id="tokens-group" className="scroll-mt-24">
