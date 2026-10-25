@@ -40,7 +40,6 @@ export function CatalogSearch({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // ⌘K or Ctrl+K to focus search
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         inputRef.current?.focus();
@@ -48,7 +47,6 @@ export function CatalogSearch({
         return;
       }
 
-      // Quick / to focus if not in an input
       if (
         e.key === "/" &&
         document.activeElement?.tagName !== "INPUT" &&
@@ -60,7 +58,6 @@ export function CatalogSearch({
         return;
       }
 
-      // Escape to clear & blur
       if (e.key === "Escape" && document.activeElement === inputRef.current) {
         if (value) {
           onChange("");
@@ -83,7 +80,6 @@ export function CatalogSearch({
 
   return (
     <div className="w-full space-y-3">
-      {/* Search Input Container - Min 48dp height ergonomic touch target */}
       <div
         className={cn(
           "relative flex min-h-12 w-full items-center rounded-2xl border bg-surface/90 backdrop-blur-md px-3.5 transition-all duration-200 shadow-2xs",
@@ -138,7 +134,6 @@ export function CatalogSearch({
         </div>
       </div>
 
-      {/* Suggestion Chips */}
       <div className="flex flex-wrap items-center gap-1.5 px-1 text-xs text-muted">
         <span className="font-medium mr-1 hidden sm:inline">Sugestões:</span>
         {QUICK_SUGGESTIONS.map((suggestion) => {

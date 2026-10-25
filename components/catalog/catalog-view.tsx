@@ -144,7 +144,6 @@ export function CatalogView() {
                 </Reveal>
               </header>
 
-              {/* Quick Search Bar */}
               <Reveal delay={0.05} className="w-full">
                 <CatalogSearch
                   value={searchQuery}
@@ -154,7 +153,6 @@ export function CatalogView() {
                 />
               </Reveal>
 
-              {/* Usage Guide only shown when not actively filtering by search */}
               {activeCategory === "all" && activeSection === "all" && !isSearching && (
                 <UsageGuide />
               )}
