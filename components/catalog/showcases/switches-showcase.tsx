@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Check, Info, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Switch } from "@/components/ui/switch";
 
 type ControlType = "switch" | "checkbox" | "row";
 
@@ -130,33 +131,13 @@ export function SwitchesShowcase() {
       <div className="flex min-h-[92px] w-full max-w-sm items-center justify-center px-1">
         {type === "switch" && (
           <div className="w-full">
-            <label
-              onClick={() => setSwitchOn(!switchOn)}
-              className="flex min-h-12 w-full cursor-pointer items-center justify-between rounded-xl border border-line bg-surface px-4 py-2.5 shadow-2xs transition-all hover:border-primary/50 active:scale-[0.99]"
-            >
-              <div className="flex flex-col">
-                <span className="text-xs font-bold text-ink">Modo Ergonômico</span>
-                <span className="text-[10px] text-muted">
-                  {switchOn ? "Ativo (Foco aumentado)" : "Inativo (Padrão)"}
-                </span>
-              </div>
-
-              <div
-                role="switch"
-                aria-checked={switchOn}
-                className={cn(
-                  "relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-200",
-                  switchOn ? "bg-primary" : "bg-line"
-                )}
-              >
-                <span
-                  className={cn(
-                    "inline-block size-5 transform rounded-full bg-white shadow-md transition-transform duration-200",
-                    switchOn ? "translate-x-6" : "translate-x-1"
-                  )}
-                />
-              </div>
-            </label>
+            <Switch
+              checked={switchOn}
+              onCheckedChange={setSwitchOn}
+              label="Modo Ergonômico"
+              description={switchOn ? "Ativo (Foco aumentado)" : "Inativo (Padrão)"}
+              className="shadow-2xs"
+            />
           </div>
         )}
 
