@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, Check, Info, Mail, X } from "lucide-react";
+import { Check, Info, Mail, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
 
 type InputState = "normal" | "icon" | "error";
 
@@ -129,58 +130,48 @@ export function InputsShowcase() {
           <span className="text-[10px] font-medium text-muted">min-h-12 (48px)</span>
         </div>
 
-        <div className="relative flex items-center">
-          {hasIcon && (
-            <Mail
-              className={cn(
-                "pointer-events-none absolute left-3.5 size-5 transition-colors",
-                isFocused ? "text-primary" : "text-muted"
-              )}
-            />
-          )}
-
-          <input
-            id="showcase-input"
-            type="text"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            placeholder="Digite algo aqui..."
-            className={cn(
-              "min-h-12 w-full rounded-xl border bg-surface text-base text-ink shadow-2xs transition-all duration-200 placeholder:text-muted/60 focus:outline-none",
-              hasIcon ? "pl-11" : "pl-4",
-              value ? "pr-11" : "pr-4",
-              isError
-                ? "border-rose-500/80 bg-rose-500/5 focus:border-rose-600 focus:ring-2 focus:ring-rose-500/20"
-                : "border-line focus:border-primary focus:ring-2 focus:ring-primary/20"
-            )}
-          />
-
-          {value && (
-            <button
-              type="button"
-              onClick={() => setValue("")}
-              aria-label="Limpar campo de texto"
-              className="absolute right-2 flex size-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-raised hover:text-ink active:scale-90"
-            >
-              <X className="size-4" />
-            </button>
-          )}
-        </div>
-
-        <div className="mt-1.5 flex min-h-[18px] items-center gap-1.5 text-[11px]">
-          {isError ? (
-            <span className="flex items-center gap-1 text-rose-600 font-medium animate-in fade-in">
-              <AlertCircle className="size-3.5 shrink-0" />
-              Formato de e-mail inválido. Verifique o endereço.
-            </span>
-          ) : (
-            <span className="text-muted/80">
-              {isFocused ? "Digitando... alvo confortável para o polegar." : "Toque no campo para interagir."}
-            </span>
-          )}
-        </div>
+        <Input
+          id="showcase-input"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Digite algo aqui..."
+          startIcon={
+            hasIcon ? (
+              <Mail
+                className={cn(
+                  "size-5 transition-colors",
+                  isFocused ? "text-primary" : "text-muted"
+                )}
+              />
+            ) : undefined
+          }
+          endIcon={
+            value ? (
+              <button
+                type="button"
+                onClick={() => setValue("")}
+                aria-label="Limpar campo de texto"
+                className="flex size-7 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-raised hover:text-ink active:scale-90 cursor-pointer"
+              >
+                <X className="size-4" />
+              </button>
+            ) : undefined
+          }
+          error={
+            isError
+              ? "Formato de e-mail inválido. Verifique o endereço."
+              : undefined
+          }
+          helperText={
+            !isError
+              ? isFocused
+                ? "Digitando... alvo confortável para o polegar."
+                : "Toque no campo para interagir."
+              : undefined
+          }
+        />
       </div>
 
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
