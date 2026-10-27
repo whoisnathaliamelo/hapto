@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Info, Shield } from "lucide-react";
+import { Info, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Switch } from "@/components/ui/switch";
+import { Switch, Checkbox } from "@/components/ui";
 
 type ControlType = "switch" | "checkbox" | "row";
 
@@ -143,26 +143,13 @@ export function SwitchesShowcase() {
 
         {type === "checkbox" && (
           <div className="w-full">
-            <label
-              onClick={() => setCheckboxOn(!checkboxOn)}
-              className="flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-xl border border-line bg-surface px-4 py-2.5 shadow-2xs transition-all hover:border-primary/50 active:scale-[0.99]"
-            >
-              <div
-                className={cn(
-                  "flex size-6 shrink-0 items-center justify-center rounded-lg border transition-all duration-200",
-                  checkboxOn
-                    ? "border-primary bg-primary text-on-primary shadow-xs"
-                    : "border-line bg-surface-raised"
-                )}
-              >
-                {checkboxOn && <Check className="size-4 stroke-[2.5]" />}
-              </div>
-
-              <div className="flex flex-col">
-                <span className="text-xs font-bold text-ink">Habilitar Feedback Háptico</span>
-                <span className="text-[10px] text-muted">Toque em qualquer ponto da linha</span>
-              </div>
-            </label>
+            <Checkbox
+              variant="card"
+              checked={checkboxOn}
+              onCheckedChange={setCheckboxOn}
+              label="Habilitar Feedback Háptico"
+              description="Toque em qualquer ponto da linha"
+            />
           </div>
         )}
 
