@@ -13,6 +13,13 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardAction,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui";
 
 type CardVariant = "interactive" | "with-action" | "metric";
 
@@ -116,9 +123,6 @@ export function CardsShowcase() {
     timerRef.current = setTimeout(() => setLastAction(null), 1800);
   };
 
-  const previewCardBase =
-    "group flex h-full w-full cursor-pointer rounded-2xl border border-line bg-surface p-4 shadow-2xs transition-[border-color,box-shadow,transform] duration-200 hover:border-primary/50 hover:shadow-md active:scale-[0.98]";
-
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
       <div className="flex h-[46px] max-w-full shrink-0 items-center gap-1 rounded-xl border border-line bg-surface p-1 shadow-xs">
@@ -146,9 +150,10 @@ export function CardsShowcase() {
 
       <div className="h-[160px] w-full max-w-sm shrink-0">
         {variant === "interactive" && (
-          <article
+          <Card
+            variant="interactive"
             onClick={() => triggerAction("Card aberto (Superfície Total)")}
-            className={cn(previewCardBase, "flex-col justify-between")}
+            className="flex h-full w-full flex-col justify-between"
           >
             <div className="flex items-center justify-between gap-2 whitespace-nowrap">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-line/60 bg-surface-raised px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
@@ -162,25 +167,26 @@ export function CardsShowcase() {
             </div>
 
             <div>
-              <h4 className="truncate text-sm font-bold text-ink transition-colors group-hover:text-primary">
+              <CardTitle className="truncate text-sm">
                 Regra dos 48dp no Polegar
-              </h4>
-              <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-muted">
+              </CardTitle>
+              <CardDescription className="mt-0.5 line-clamp-2">
                 Alvos de toque calibrados para prevenir falhas e fadiga muscular em smartphones.
-              </p>
+              </CardDescription>
             </div>
 
-            <div className="flex items-center justify-between border-t border-line/40 pt-2 text-xs font-semibold text-primary">
+            <CardFooter>
               <span>Acessar conteúdo</span>
               <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </div>
-          </article>
+            </CardFooter>
+          </Card>
         )}
 
         {variant === "with-action" && (
-          <article
+          <Card
+            variant="interactive"
             onClick={() => triggerAction("Card principal acionado")}
-            className={cn(previewCardBase, "flex-col justify-between")}
+            className="flex h-full w-full flex-col justify-between"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 items-center gap-2.5">
@@ -188,26 +194,24 @@ export function CardsShowcase() {
                   <Sparkles className="size-4.5" />
                 </div>
                 <div className="min-w-0">
-                  <h4 className="truncate text-sm font-bold text-ink transition-colors group-hover:text-primary">
+                  <CardTitle className="truncate text-sm">
                     Biblioteca de Gestos
-                  </h4>
+                  </CardTitle>
                   <span className="block truncate text-[10px] text-muted">24 componentes táteis</span>
                 </div>
               </div>
 
-              <button
-                type="button"
+              <CardAction
                 aria-label="Salvar card nos favoritos"
-                onClick={(e) => {
-                  e.stopPropagation(); 
+                onClick={() => {
                   setSaved(!saved);
                   triggerAction(saved ? "Removido dos favoritos" : "Salvo nos favoritos!");
                 }}
                 className={cn(
-                  "flex size-11 shrink-0 items-center justify-center rounded-xl border transition-colors active:scale-90",
+                  "border text-muted",
                   saved
                     ? "border-primary/40 bg-primary/10 text-primary shadow-xs"
-                    : "border-line bg-surface text-muted hover:border-primary/50 hover:text-ink"
+                    : "border-line bg-surface hover:border-primary/50 hover:text-ink"
                 )}
                 title={saved ? "Salvo" : "Salvar"}
               >
@@ -217,24 +221,25 @@ export function CardsShowcase() {
                     saved && "fill-primary scale-110"
                   )}
                 />
-              </button>
+              </CardAction>
             </div>
 
-            <p className="line-clamp-2 text-xs leading-relaxed text-muted">
+            <CardDescription className="line-clamp-2">
               Toque no ícone à direita para isolar a ação sem abrir o card principal.
-            </p>
+            </CardDescription>
 
-            <div className="flex items-center justify-between border-t border-line/40 pt-2 text-xs font-semibold text-primary">
+            <CardFooter>
               <span>Abrir biblioteca</span>
               <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
-            </div>
-          </article>
+            </CardFooter>
+          </Card>
         )}
 
         {variant === "metric" && (
-          <article
+          <Card
+            variant="interactive"
             onClick={() => triggerAction("Relatório de ergonomia aberto")}
-            className={cn(previewCardBase, "items-center justify-between")}
+            className="flex h-full w-full items-center justify-between"
           >
             <div className="flex min-w-0 items-center gap-3.5">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-600">
@@ -252,7 +257,7 @@ export function CardsShowcase() {
             <div className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-line bg-surface-raised text-muted transition-colors group-hover:border-primary group-hover:text-primary">
               <ArrowRight className="size-4" />
             </div>
-          </article>
+          </Card>
         )}
       </div>
 
