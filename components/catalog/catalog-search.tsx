@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
-import { Search, X, SearchX, RotateCcw } from "lucide-react";
+import { SearchX, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SearchInput } from "@/components/ui";
 
 interface CatalogSearchProps {
   value: string;
@@ -80,47 +81,23 @@ export function CatalogSearch({
 
   return (
     <div className="w-full space-y-3">
-      <div
+      <SearchInput
+        inputRef={inputRef}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onClear={handleClear}
+        variant="glass"
+        placeholder="Pesquisar componentes, tokens ou ergonomia (ex: botões, inputs, wcag)..."
+        aria-label="Pesquisar componentes no catálogo"
         className={cn(
-          "relative flex min-h-12 w-full items-center rounded-2xl border bg-surface/90 backdrop-blur-md px-3.5 transition-all duration-200 shadow-2xs",
-          isSearching
-            ? "border-primary/60 ring-2 ring-primary/15"
-            : "border-line hover:border-primary/40 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20"
+          "rounded-2xl",
+          isSearching && "border-primary/60 ring-2 ring-primary/15"
         )}
-      >
-        <Search
-          className={cn(
-            "size-5 shrink-0 transition-colors",
-            isSearching ? "text-primary" : "text-muted"
-          )}
-        />
-
-        <input
-          ref={inputRef}
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="Pesquisar componentes, tokens ou ergonomia (ex: botões, inputs, wcag)..."
-          aria-label="Pesquisar componentes no catálogo"
-          className="min-h-12 w-full bg-transparent px-3 text-base sm:text-sm text-ink placeholder:text-muted/70 focus:outline-hidden"
-        />
-
-        <div className="flex shrink-0 items-center gap-2">
-          {isSearching ? (
-            <>
-              <span className="hidden sm:inline-flex rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-xs font-semibold text-primary">
-                {resultCount} {resultCount === 1 ? "resultado" : "resultados"}
-              </span>
-
-              <button
-                type="button"
-                onClick={handleClear}
-                aria-label="Limpar busca"
-                className="flex size-9 items-center justify-center rounded-xl text-muted hover:bg-surface-raised hover:text-ink transition-colors active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
-              >
-                <X className="size-4" />
-              </button>
-            </>
+        endAdornment={
+          isSearching ? (
+            <span className="hidden sm:inline-flex rounded-full bg-primary/10 border border-primary/20 px-2.5 py-0.5 text-xs font-semibold text-primary">
+              {resultCount} {resultCount === 1 ? "resultado" : "resultados"}
+            </span>
           ) : (
             <kbd
               title={`Pressione ${isMac ? "⌘K" : "Ctrl+K"} ou / para focar`}
@@ -130,9 +107,9 @@ export function CatalogSearch({
               <span>{isMac ? "⌘" : "Ctrl"}</span>
               <span>K</span>
             </kbd>
-          )}
-        </div>
-      </div>
+          )
+        }
+      />
 
       <div className="flex flex-wrap items-center gap-1.5 px-1 text-xs text-muted">
         <span className="font-medium mr-1 hidden sm:inline">Sugestões:</span>

@@ -3,3 +3,4 @@ export * from "./input";
 export * from "./switch";
 export * from "./checkbox";
 export * from "./card";
+export * from "./search-input";

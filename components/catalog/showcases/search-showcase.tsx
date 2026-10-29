@@ -5,12 +5,11 @@ import {
   Check,
   Clock,
   Info,
-  Search,
   SlidersHorizontal,
   Sparkles,
-  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SearchInput } from "@/components/ui";
 
 type SearchVariant = "standard" | "with-filter" | "suggestions";
 
@@ -148,49 +147,33 @@ export function SearchShowcase() {
       </div>
 
       <div className="flex min-h-[108px] w-full max-w-sm flex-col justify-center gap-2.5 px-1">
-        <div className="relative flex min-h-12 w-full items-center rounded-xl border border-line bg-surface shadow-2xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-          <Search className="ml-3.5 size-5 shrink-0 text-muted transition-colors focus-within:text-primary" />
-
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setSelectedTag(null);
-            }}
-            placeholder="Digite para buscar..."
-            className="w-full bg-transparent px-3 text-sm sm:text-base text-ink placeholder:text-muted focus:outline-none"
-          />
-
-          {query && (
-            <button
-              type="button"
-              aria-label="Limpar campo de busca"
-              onClick={handleClear}
-              className="mr-1 flex size-9 shrink-0 items-center justify-center rounded-lg text-muted transition-all hover:bg-surface-raised hover:text-ink active:scale-90"
-              title="Limpar texto"
-            >
-              <X className="size-4" />
-            </button>
-          )}
-
-          {variant === "with-filter" && (
-            <button
-              type="button"
-              aria-label="Alternar filtros"
-              onClick={() => setFilterActive(!filterActive)}
-              className={cn(
-                "mr-1.5 flex size-9 shrink-0 items-center justify-center rounded-lg transition-all active:scale-90",
-                filterActive
-                  ? "bg-primary text-on-primary shadow-xs"
-                  : "text-muted hover:bg-surface-raised hover:text-ink"
-              )}
-              title={filterActive ? "Filtro ativo" : "Aplicar filtro"}
-            >
-              <SlidersHorizontal className="size-4" />
-            </button>
-          )}
-        </div>
+        <SearchInput
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setSelectedTag(null);
+          }}
+          onClear={handleClear}
+          placeholder="Digite para buscar..."
+          endAction={
+            variant === "with-filter" ? (
+              <button
+                type="button"
+                aria-label="Alternar filtros"
+                onClick={() => setFilterActive(!filterActive)}
+                className={cn(
+                  "mr-1 flex size-9 shrink-0 items-center justify-center rounded-lg transition-all active:scale-90 cursor-pointer",
+                  filterActive
+                    ? "bg-primary text-on-primary shadow-xs"
+                    : "text-muted hover:bg-surface-raised hover:text-ink"
+                )}
+                title={filterActive ? "Filtro ativo" : "Aplicar filtro"}
+              >
+                <SlidersHorizontal className="size-4" />
+              </button>
+            ) : undefined
+          }
+        />
 
         {variant === "suggestions" && (
           <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 [scrollbar-width:none]">
