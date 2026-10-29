@@ -42,7 +42,7 @@ export function HeroFundamentals() {
               className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
             >
               <ArrowLeft className="size-3.5 text-primary" />
-              <span>Voltar para a visão geral</span>
+              <span>Voltar ao Início</span>
             </Link>
           </div>
         </Reveal>

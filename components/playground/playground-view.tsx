@@ -15,7 +15,8 @@ import { ThumbOverlay } from "./phone/thumb-overlay";
 import { ScreenContent } from "./phone/screen-content";
 import { TouchFeedback } from "./diagnostics/touch-feedback";
 import { Reveal } from "@/components/reveal";
-import { Sliders, Smartphone } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Sliders, Smartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function PlaygroundView() {
@@ -51,6 +52,16 @@ export function PlaygroundView() {
       <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-8 pb-20 lg:pt-10 lg:pb-24">
         <header className="mx-auto max-w-3xl text-center mb-10 lg:mb-14">
           <Reveal>
+            <div className="mb-4 flex items-center justify-start">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
+              >
+                <ArrowLeft className="size-3.5 text-primary" />
+                <span>Voltar ao Início</span>
+              </Link>
+            </div>
+
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
               <span className="size-2 rounded-full bg-primary animate-pulse" />
               <span>Módulo 03 • Laboratório Interativo</span>
