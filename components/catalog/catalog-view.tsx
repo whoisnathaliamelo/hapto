@@ -14,6 +14,8 @@ import {
 } from "./groups";
 import { SECTIONS, GROUPS, CATEGORY_LABELS, normalizeSearch } from "./constants";
 import type { AtomicCategory, ComponentSection } from "./types";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export function CatalogView() {
   const [activeCategory, setActiveCategory] = useState<AtomicCategory>("all");
@@ -128,10 +130,21 @@ export function CatalogView() {
             <div className="w-full max-w-4xl xl:max-w-5xl space-y-10 lg:space-y-14">
               <header className="mx-auto max-w-2xl text-center">
                 <Reveal>
+                  <div className="mb-4 flex items-center justify-start">
+                    <Link
+                      href="/"
+                      className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
+                    >
+                      <ArrowLeft className="size-3.5 text-primary" />
+                      <span>Voltar ao Início</span>
+                    </Link>
+                  </div>
+
                   <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
                     <span className="size-2 rounded-full bg-primary animate-pulse" />
                     <span>Design System Mobile-First</span>
                   </div>
+
                   <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl lg:leading-[1.15]">
                     Catálogo de{" "}
                     <span className="text-primary underline decoration-primary/30 underline-offset-8">
