@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function FundamentalsPage() {
   return (
     <>
-      <Navbar />
+      <Navbar fluid />
       <main className="w-full">
         <HeroFundamentals />
         <WhyDesignSystems />
@@ -24,7 +24,7 @@ export default function FundamentalsPage() {
         <ErgonomicPillars />
         <RulesCheatSheet />
       </main>
-      <Footer />
+      <Footer fluid />
     </>
   );
 }

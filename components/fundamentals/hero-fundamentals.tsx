@@ -30,22 +30,23 @@ export function HeroFundamentals() {
   ];
 
   return (
-    <section id="hero" className="relative isolate overflow-hidden border-b border-line/40 py-16 lg:py-24">
+    <section id="hero" className="relative isolate overflow-hidden border-b border-line/40 pt-6 sm:pt-8 pb-16 lg:pb-24">
       <div className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)] opacity-70" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10 h-72 w-full max-w-4xl bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl pointer-events-none" />
 
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="mb-6 flex items-center justify-start">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
+          >
+            <ArrowLeft className="size-3.5 text-primary" />
+            <span>Voltar ao Início</span>
+          </Link>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <div className="flex items-center justify-between gap-4">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
-            >
-              <ArrowLeft className="size-3.5 text-primary" />
-              <span>Voltar ao Início</span>
-            </Link>
-          </div>
-        </Reveal>
 
         <div className="mt-8 max-w-3xl">
 

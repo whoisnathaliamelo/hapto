@@ -117,7 +117,17 @@ export function CatalogView() {
       <div className="bg-dots absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="pointer-events-none absolute top-0 left-1/2 -z-10 h-72 w-full max-w-4xl -translate-x-1/2 bg-radial from-primary/15 via-transparent to-transparent opacity-60 blur-2xl" />
 
-      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-8 pb-20 lg:pt-10 lg:pb-24">
+      <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8 xl:px-12 pt-6 sm:pt-8 pb-20 lg:pb-24">
+        <div className="mb-6 flex items-center justify-start">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
+          >
+            <ArrowLeft className="size-3.5 text-primary" />
+            <span>Voltar ao Início</span>
+          </Link>
+        </div>
+
         <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-10 xl:gap-14">
           <FilterSidebar
             activeCategory={activeCategory}
@@ -130,16 +140,6 @@ export function CatalogView() {
             <div className="w-full max-w-4xl xl:max-w-5xl space-y-10 lg:space-y-14">
               <header className="mx-auto max-w-2xl text-center">
                 <Reveal>
-                  <div className="mb-4 flex items-center justify-start">
-                    <Link
-                      href="/"
-                      className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-muted backdrop-blur-sm transition-all hover:border-primary/50 hover:bg-surface-raised hover:text-ink active:scale-95 shadow-2xs"
-                    >
-                      <ArrowLeft className="size-3.5 text-primary" />
-                      <span>Voltar ao Início</span>
-                    </Link>
-                  </div>
-
                   <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
                     <span className="size-2 rounded-full bg-primary animate-pulse" />
                     <span>Design System Mobile-First</span>
