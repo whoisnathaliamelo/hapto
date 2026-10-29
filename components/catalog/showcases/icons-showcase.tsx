@@ -12,6 +12,7 @@ import {
   Share2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IconButton } from "@/components/ui";
 
 type IconVariant = "action" | "badge" | "cluster";
 
@@ -179,15 +180,13 @@ export function IconsShowcase() {
                   className="pointer-events-none absolute -inset-1 rounded-2xl border-2 border-dashed border-primary/50 bg-primary/5 animate-pulse"
                 />
               )}
-              <button
-                type="button"
+              <IconButton
                 aria-label="Curtir"
                 onClick={() => {
                   setLiked(!liked);
                   showToast(!liked ? "Curtido!" : "Descurtido");
                 }}
                 className={cn(
-                  "relative flex size-12 items-center justify-center rounded-xl border bg-surface transition-all duration-200 active:scale-90",
                   liked
                     ? "border-red-500/40 text-red-500 shadow-xs"
                     : "border-line text-muted hover:border-primary/50 hover:text-ink"
@@ -199,7 +198,7 @@ export function IconsShowcase() {
                     liked && "fill-red-500 scale-110"
                   )}
                 />
-              </button>
+              </IconButton>
               {showHitbox && (
                 <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold text-primary">
                   48dp
@@ -214,15 +213,13 @@ export function IconsShowcase() {
                   className="pointer-events-none absolute -inset-1 rounded-2xl border-2 border-dashed border-primary/50 bg-primary/5 animate-pulse"
                 />
               )}
-              <button
-                type="button"
+              <IconButton
                 aria-label="Salvar"
                 onClick={() => {
                   setSaved(!saved);
                   showToast(!saved ? "Salvo nos favoritos!" : "Removido");
                 }}
                 className={cn(
-                  "relative flex size-12 items-center justify-center rounded-xl border bg-surface transition-all duration-200 active:scale-90",
                   saved
                     ? "border-primary/40 text-primary shadow-xs"
                     : "border-line text-muted hover:border-primary/50 hover:text-ink"
@@ -234,7 +231,7 @@ export function IconsShowcase() {
                     saved && "fill-primary scale-110"
                   )}
                 />
-              </button>
+              </IconButton>
               {showHitbox && (
                 <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold text-primary">
                   48dp
@@ -253,24 +250,17 @@ export function IconsShowcase() {
                   className="pointer-events-none absolute -inset-1 rounded-2xl border-2 border-dashed border-primary/50 bg-primary/5 animate-pulse"
                 />
               )}
-              <button
-                type="button"
+              <IconButton
                 aria-label="Notificações"
+                badge={hasNotif}
                 onClick={() => {
                   setHasNotif(!hasNotif);
                   showToast(hasNotif ? "Notificações marcadas como lidas" : "Novas notificações!");
                 }}
-                className="relative flex size-12 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all duration-200 hover:border-primary/50 active:scale-90"
+                className="text-ink"
               >
                 <Bell className="size-5 text-ink" />
-
-                {hasNotif && (
-                  <span className="absolute top-2.5 right-2.5 flex size-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                    <span className="relative inline-flex size-2.5 rounded-full bg-primary shadow-2xs" />
-                  </span>
-                )}
-              </button>
+              </IconButton>
               {showHitbox && (
                 <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-[9px] font-mono font-bold text-primary">
                   48x48dp
@@ -302,14 +292,15 @@ export function IconsShowcase() {
                         className="pointer-events-none absolute -inset-0.5 rounded-xl border border-dashed border-primary/40 bg-primary/5"
                       />
                     )}
-                    <button
-                      type="button"
+                    <IconButton
+                      size="md"
+                      variant="ghost"
                       aria-label={item.label}
                       onClick={item.action}
-                      className="flex size-11 items-center justify-center rounded-xl text-muted transition-all duration-200 hover:bg-surface-raised hover:text-primary active:scale-90 focus-visible:outline-2 focus-visible:outline-primary"
+                      className="hover:text-primary"
                     >
                       <IconComponent className="size-4.5" />
-                    </button>
+                    </IconButton>
                   </div>
                 );
               })}
