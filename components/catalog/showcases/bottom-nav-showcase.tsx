@@ -11,8 +11,12 @@ import {
   User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type BottomNavVariant = "standard" | "with-fab" | "floating";
+import {
+  BottomNav,
+  BottomNavItem,
+  BottomNavFab,
+  type BottomNavVariant,
+} from "@/components/ui";
 
 const VARIATIONS_INFO: Record<
   BottomNavVariant,
@@ -186,150 +190,69 @@ export function BottomNavShowcase() {
         </div>
 
         {variant === "standard" && (
-          <nav
-            role="navigation"
-            aria-label="Navegação inferior padrão"
-            className="flex h-14 w-full items-center justify-around border-t border-line/70 bg-surface-raised/80 px-1 backdrop-blur-sm"
-          >
-            {STANDARD_NAV_ITEMS.map((item) => {
-              const isActive = activeTab === item.id;
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => triggerNav(item.label, item.id)}
-                  aria-current={isActive ? "page" : undefined}
-                  className={cn(
-                    "relative flex min-h-[44px] min-w-[48px] flex-1 flex-col items-center justify-center rounded-xl py-1 transition-transform active:scale-90",
-                    isActive ? "text-primary font-semibold" : "text-muted hover:text-ink"
-                  )}
-                >
-                  <div className="relative">
-                    <Icon className={cn("size-4.5 transition-transform", isActive && "scale-110")} />
-                    {item.badge && (
-                      <span className="absolute -right-2 -top-1 flex size-3.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-on-primary">
-                        {item.badge}
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-[10px] tracking-tight">{item.label}</span>
-                  {isActive && (
-                    <span className="absolute -top-[1px] h-0.5 w-6 rounded-full bg-primary" />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
+          <BottomNav variant="standard" aria-label="Navegação inferior padrão">
+            {STANDARD_NAV_ITEMS.map((item) => (
+              <BottomNavItem
+                key={item.id}
+                icon={item.icon}
+                label={item.label}
+                badge={item.badge}
+                active={activeTab === item.id}
+                onClick={() => triggerNav(item.label, item.id)}
+              />
+            ))}
+          </BottomNav>
         )}
 
         {variant === "with-fab" && (
-          <nav
-            role="navigation"
-            aria-label="Navegação inferior com FAB"
-            className="relative flex h-14 w-full items-center justify-around border-t border-line/70 bg-surface-raised/80 px-1 backdrop-blur-sm"
-          >
-            <button
-              type="button"
+          <BottomNav variant="with-fab" aria-label="Navegação inferior com FAB">
+            <BottomNavItem
+              icon={Home}
+              label="Início"
+              active={activeTab === "home"}
               onClick={() => triggerNav("Início", "home")}
-              aria-current={activeTab === "home" ? "page" : undefined}
-              className={cn(
-                "flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center rounded-xl py-1 transition-transform active:scale-90",
-                activeTab === "home" ? "text-primary font-semibold" : "text-muted hover:text-ink"
-              )}
-            >
-              <Home className="size-4.5" />
-              <span className="text-[10px]">Início</span>
-            </button>
-
-            <button
-              type="button"
+            />
+            <BottomNavItem
+              icon={Compass}
+              label="Explorar"
+              active={activeTab === "explore"}
               onClick={() => triggerNav("Explorar", "explore")}
-              aria-current={activeTab === "explore" ? "page" : undefined}
-              className={cn(
-                "flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center rounded-xl py-1 transition-transform active:scale-90",
-                activeTab === "explore" ? "text-primary font-semibold" : "text-muted hover:text-ink"
-              )}
-            >
-              <Compass className="size-4.5" />
-              <span className="text-[10px]">Explorar</span>
-            </button>
-
-            <div className="relative -mt-6 flex flex-col items-center justify-center">
-              <button
-                type="button"
-                onClick={triggerFab}
-                aria-label="Adicionar novo item"
-                className="flex size-11 items-center justify-center rounded-full bg-primary text-on-primary shadow-md transition-all hover:scale-105 active:scale-90 focus-visible:outline-2 focus-visible:outline-primary"
-                title="Ação Primária Central"
-              >
-                <Plus className="size-5 stroke-[2.5]" />
-              </button>
-              <span className="mt-0.5 text-[9px] font-bold text-primary">Criar</span>
-            </div>
-
-            <button
-              type="button"
+            />
+            <BottomNavFab
+              icon={Plus}
+              label="Criar"
+              onClick={triggerFab}
+              aria-label="Adicionar novo item"
+            />
+            <BottomNavItem
+              icon={Bookmark}
+              label="Salvos"
+              badge={3}
+              active={activeTab === "saved"}
               onClick={() => triggerNav("Salvos", "saved")}
-              aria-current={activeTab === "saved" ? "page" : undefined}
-              className={cn(
-                "flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center rounded-xl py-1 transition-transform active:scale-90",
-                activeTab === "saved" ? "text-primary font-semibold" : "text-muted hover:text-ink"
-              )}
-            >
-              <div className="relative">
-                <Bookmark className="size-4.5" />
-                <span className="absolute -right-2 -top-1 flex size-3.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-on-primary">
-                  3
-                </span>
-              </div>
-              <span className="text-[10px]">Salvos</span>
-            </button>
-
-            <button
-              type="button"
+            />
+            <BottomNavItem
+              icon={User}
+              label="Perfil"
+              active={activeTab === "profile"}
               onClick={() => triggerNav("Perfil", "profile")}
-              aria-current={activeTab === "profile" ? "page" : undefined}
-              className={cn(
-                "flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center rounded-xl py-1 transition-transform active:scale-90",
-                activeTab === "profile" ? "text-primary font-semibold" : "text-muted hover:text-ink"
-              )}
-            >
-              <User className="size-4.5" />
-              <span className="text-[10px]">Perfil</span>
-            </button>
-          </nav>
+            />
+          </BottomNav>
         )}
 
         {variant === "floating" && (
           <div className="flex w-full items-center justify-center pb-2.5 px-3">
-            <nav
-              role="navigation"
-              aria-label="Navegação inferior flutuante"
-              className="flex h-12 w-full max-w-[280px] items-center justify-around rounded-full border border-line bg-surface/90 px-2 shadow-md backdrop-blur-md"
-            >
-              {STANDARD_NAV_ITEMS.map((item) => {
-                const isActive = activeTab === item.id;
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => triggerNav(item.label, item.id)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "flex size-9 items-center justify-center rounded-full transition-all active:scale-85",
-                      isActive
-                        ? "bg-primary text-on-primary shadow-xs"
-                        : "text-muted hover:bg-surface-raised hover:text-ink"
-                    )}
-                    title={item.label}
-                  >
-                    <Icon className="size-4" />
-                  </button>
-                );
-              })}
-            </nav>
+            <BottomNav variant="floating" aria-label="Navegação inferior flutuante">
+              {STANDARD_NAV_ITEMS.map((item) => (
+                <BottomNavItem
+                  key={item.id}
+                  icon={item.icon}
+                  title={item.label}
+                  active={activeTab === item.id}
+                  onClick={() => triggerNav(item.label, item.id)}
+                />
+              ))}
+            </BottomNav>
           </div>
         )}
       </div>
