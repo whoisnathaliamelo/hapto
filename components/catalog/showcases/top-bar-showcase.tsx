@@ -13,8 +13,16 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type TopBarVariant = "standard" | "large-title" | "contextual";
+import {
+  TopBar,
+  TopBarAction,
+  TopBarTitle,
+  TopBarActions,
+  TopBarSection,
+  TopBarNavRow,
+  TopBarLargeTitleArea,
+  type TopBarVariant,
+} from "@/components/ui";
 
 const VARIATIONS_INFO: Record<
   TopBarVariant,
@@ -138,115 +146,94 @@ export function TopBarShowcase() {
 
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-start overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
         {variant === "standard" && (
-          <header className="flex h-13 w-full shrink-0 items-center justify-between border-b border-line/70 bg-surface-raised/80 px-1 backdrop-blur-sm">
-            <button
-              type="button"
+          <TopBar variant="standard">
+            <TopBarAction
               aria-label="Voltar"
+              icon={ArrowLeft}
               onClick={() => triggerAction("Ação: Voltar acionado")}
-              className="flex size-10 shrink-0 items-center justify-center rounded-xl text-ink transition-all hover:bg-surface active:scale-90"
-            >
-              <ArrowLeft className="size-4.5" />
-            </button>
+            />
 
-            <span className="truncate px-2 text-xs font-bold text-ink">
-              Design Systems
-            </span>
+            <TopBarTitle>Design Systems</TopBarTitle>
 
-            <div className="flex items-center gap-0.5">
-              <button
-                type="button"
+            <TopBarActions>
+              <TopBarAction
+                variant="muted"
                 aria-label="Compartilhar"
+                icon={Share2}
                 onClick={() => triggerAction("Ação: Compartilhar aberto")}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-muted transition-all hover:bg-surface hover:text-ink active:scale-90"
-              >
-                <Share2 className="size-4" />
-              </button>
-              <button
-                type="button"
+              />
+              <TopBarAction
+                variant="muted"
                 aria-label="Mais opções"
+                icon={MoreVertical}
                 onClick={() => triggerAction("Ação: Menu de opções aberto")}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-muted transition-all hover:bg-surface hover:text-ink active:scale-90"
-              >
-                <MoreVertical className="size-4" />
-              </button>
-            </div>
-          </header>
+              />
+            </TopBarActions>
+          </TopBar>
         )}
 
         {variant === "large-title" && (
-          <div className="flex w-full shrink-0 flex-col border-b border-line/70 bg-surface-raised/80 backdrop-blur-sm">
-            <header className="flex h-11 w-full items-center justify-between px-1">
-              <button
-                type="button"
+          <TopBar variant="large-title">
+            <TopBarNavRow>
+              <TopBarAction
                 aria-label="Voltar"
+                icon={ArrowLeft}
                 onClick={() => triggerAction("Ação: Voltar acionado")}
-                className="flex size-9 shrink-0 items-center justify-center rounded-xl text-ink transition-all hover:bg-surface active:scale-90"
-              >
-                <ArrowLeft className="size-4.5" />
-              </button>
+              />
 
-              <div className="flex items-center gap-0.5">
-                <button
-                  type="button"
+              <TopBarActions>
+                <TopBarAction
+                  variant="muted"
                   aria-label="Buscar"
+                  icon={Search}
                   onClick={() => triggerAction("Ação: Busca aberta")}
-                  className="flex size-9 shrink-0 items-center justify-center rounded-xl text-muted transition-all hover:bg-surface hover:text-ink active:scale-90"
-                >
-                  <Search className="size-4" />
-                </button>
-              </div>
-            </header>
-            <div className="px-3.5 pb-2">
-              <h2 className="text-base font-extrabold tracking-tight text-ink">
-                Componentes
-              </h2>
-            </div>
-          </div>
+                />
+              </TopBarActions>
+            </TopBarNavRow>
+
+            <TopBarLargeTitleArea>
+              <TopBarTitle variant="large">Componentes</TopBarTitle>
+            </TopBarLargeTitleArea>
+          </TopBar>
         )}
 
         {variant === "contextual" && (
-          <header className="flex h-13 w-full shrink-0 items-center justify-between border-b border-line/70 bg-primary/10 px-1 backdrop-blur-sm">
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
+          <TopBar variant="contextual">
+            <TopBarSection gap="normal">
+              <TopBarAction
+                variant="primary"
                 aria-label="Fechar seleção"
+                icon={X}
                 onClick={() => triggerAction("Seleção cancelada")}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-primary transition-all hover:bg-surface active:scale-90"
-              >
-                <X className="size-4.5" />
-              </button>
+              />
               <span className="text-xs font-bold text-primary">
                 {selectedCount} selecionados
               </span>
-            </div>
+            </TopBarSection>
 
-            <div className="flex items-center gap-0.5">
-              <button
-                type="button"
+            <TopBarActions>
+              <TopBarAction
+                variant="primary"
                 aria-label="Selecionar todos"
+                title="Selecionar todos"
+                icon={CheckSquare}
                 onClick={() => {
                   setSelectedCount(5);
                   triggerAction("Todos (5) selecionados");
                 }}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-primary transition-all hover:bg-surface active:scale-90"
-                title="Selecionar todos"
-              >
-                <CheckSquare className="size-4" />
-              </button>
-              <button
-                type="button"
+              />
+              <TopBarAction
+                variant="destructive"
                 aria-label="Excluir selecionados"
+                title="Excluir"
+                icon={Trash2}
                 onClick={() => {
                   setSelectedCount(0);
                   triggerAction("Itens excluídos com segurança");
                 }}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl text-red-500 transition-all hover:bg-red-500/10 active:scale-90"
-                title="Excluir"
-              >
-                <Trash2 className="size-4" />
-              </button>
-            </div>
-          </header>
+              />
+            </TopBarActions>
+          </TopBar>
         )}
 
         <div className="flex flex-1 flex-col items-center justify-center p-3 text-center">
