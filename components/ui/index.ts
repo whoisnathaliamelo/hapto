@@ -7,3 +7,4 @@ export * from "./search-input";
 export * from "./icon-button";
 export * from "./bottom-nav";
 export * from "./top-bar";
+export * from "./feedback";

@@ -9,9 +9,17 @@ import {
   RefreshCw,
   RotateCcw,
   Sparkles,
-  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Feedback,
+  FeedbackIcon,
+  FeedbackTitle,
+  FeedbackDescription,
+  FeedbackActions,
+  FeedbackAction,
+  FeedbackClose,
+} from "@/components/ui";
 
 type FeedbackVariant = "snackbar" | "banner" | "floating";
 
@@ -39,11 +47,19 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const FEEDBACK_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
+export const FEEDBACK_CODE = `// Exemplo com componente modular Feedback (Hapto Design System)
 // Ergonomia: Ancorado na base da tela (Thumb Zone) para alcance imediato do botão "Desfazer"
 
 import { useState } from "react";
-import { CheckCircle2, RotateCcw, X } from "lucide-react";
+import { CheckCircle2, RotateCcw } from "lucide-react";
+import {
+  Feedback,
+  FeedbackIcon,
+  FeedbackTitle,
+  FeedbackActions,
+  FeedbackAction,
+  FeedbackClose,
+} from "@/components/ui";
 
 export function SnackbarErgonomica() {
   const [visivel, setVisivel] = useState(true);
@@ -51,45 +67,29 @@ export function SnackbarErgonomica() {
   if (!visivel) return null;
 
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="fixed bottom-4 left-4 right-4 z-50 mx-auto flex max-w-md items-center justify-between gap-3 rounded-2xl border border-line bg-surface-raised p-3 shadow-lg transition-all animate-in fade-in slide-in-from-bottom-2"
-    >
+    <Feedback variant="snackbar" fixed>
       {/* 1. Ícone + Mensagem Contextual */}
-      <div className="flex items-center gap-2.5">
-        <CheckCircle2 className="size-5 shrink-0 text-emerald-500" />
-        <span className="text-xs font-medium text-ink">
-          Item arquivado com sucesso
-        </span>
+      <div className="flex items-center gap-2">
+        <FeedbackIcon icon={CheckCircle2} className="text-emerald-500" />
+        <FeedbackTitle>Item arquivado com sucesso</FeedbackTitle>
       </div>
 
       {/* 2. Botão de Ação Imediata (Desfazer) na Zona de Alcance */}
-      <div className="flex items-center gap-1.5">
-        <button
-          type="button"
+      <FeedbackActions>
+        <FeedbackAction
+          icon={RotateCcw}
           onClick={() => {
             alert("Ação desfeita!");
             setVisivel(false);
           }}
-          className="flex min-h-[36px] items-center gap-1 rounded-xl px-2.5 text-xs font-bold text-primary transition-all hover:bg-primary/10 active:scale-95"
         >
-          <RotateCcw className="size-3.5" />
-          <span>Desfazer</span>
-        </button>
-
-        <button
-          type="button"
-          aria-label="Dispensar notificação"
-          onClick={() => setVisivel(false)}
-          className="flex size-8 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-ink active:scale-90"
-        >
-          <X className="size-4" />
-        </button>
-      </div>
-    </div>
+          Desfazer
+        </FeedbackAction>
+        <FeedbackClose onClick={() => setVisivel(false)} />
+      </FeedbackActions>
+    </Feedback>
   );
-}`;
+};`;
 
 export function FeedbackShowcase() {
   const [variant, setVariant] = useState<FeedbackVariant>("snackbar");
@@ -167,93 +167,46 @@ export function FeedbackShowcase() {
         {activeNotification ? (
           <div>
             {variant === "snackbar" && (
-              <div
-                role="status"
-                className="flex w-full items-center justify-between gap-2 rounded-xl border border-line bg-surface-raised/95 p-2 shadow-sm backdrop-blur-sm transition-all"
-              >
+              <Feedback variant="snackbar">
                 <div className="flex min-w-0 items-center gap-2">
-                  <CheckCircle2 className="size-4 shrink-0 text-emerald-500" />
-                  <span className="truncate text-[11px] font-medium text-ink">
-                    Item salvo nos favoritos
-                  </span>
+                  <FeedbackIcon icon={CheckCircle2} className="text-emerald-500" />
+                  <FeedbackTitle>Item salvo nos favoritos</FeedbackTitle>
                 </div>
 
-                <div className="flex shrink-0 items-center gap-1">
-                  <button
-                    type="button"
-                    onClick={triggerUndo}
-                    className="flex h-7 items-center gap-1 rounded-lg px-2 text-[11px] font-bold text-primary transition-colors hover:bg-primary/10 active:scale-90"
-                  >
-                    <RotateCcw className="size-3" />
-                    <span>Desfazer</span>
-                  </button>
-                  <button
-                    type="button"
-                    aria-label="Dispensar"
-                    onClick={triggerDismiss}
-                    className="flex size-7 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface hover:text-ink active:scale-90"
-                  >
-                    <X className="size-3.5" />
-                  </button>
-                </div>
-              </div>
+                <FeedbackActions>
+                  <FeedbackAction icon={RotateCcw} onClick={triggerUndo}>
+                    Desfazer
+                  </FeedbackAction>
+                  <FeedbackClose aria-label="Dispensar" onClick={triggerDismiss} />
+                </FeedbackActions>
+              </Feedback>
             )}
 
             {variant === "banner" && (
-              <div
-                role="alert"
-                className="flex w-full flex-col gap-1 rounded-xl border border-amber-500/30 bg-amber-500/10 p-2 shadow-xs transition-all"
-              >
+              <Feedback variant="banner" status="warning">
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex min-w-0 items-center gap-1.5">
-                    <AlertTriangle className="size-3.5 shrink-0 text-amber-600" />
-                    <span className="truncate text-[11px] font-bold text-ink">
-                      Modo offline ativado
-                    </span>
+                    <FeedbackIcon icon={AlertTriangle} />
+                    <FeedbackTitle>Modo offline ativado</FeedbackTitle>
                   </div>
-                  <button
-                    type="button"
-                    aria-label="Fechar alerta"
-                    onClick={triggerDismiss}
-                    className="flex size-5 shrink-0 items-center justify-center rounded text-muted transition-colors hover:text-ink active:scale-90"
-                  >
-                    <X className="size-3" />
-                  </button>
+                  <FeedbackClose aria-label="Fechar alerta" onClick={triggerDismiss} />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] text-muted">
-                    Sincronização em pausa
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => triggerAction("Tentando reconexão...")}
-                    className="rounded bg-amber-600/20 px-2 py-0.5 text-[10px] font-bold text-amber-700 transition-colors hover:bg-amber-600/30 active:scale-90"
-                  >
+                  <FeedbackDescription>Sincronização em pausa</FeedbackDescription>
+                  <FeedbackAction onClick={() => triggerAction("Tentando reconexão...")}>
                     Reconectar
-                  </button>
+                  </FeedbackAction>
                 </div>
-              </div>
+              </Feedback>
             )}
 
             {variant === "floating" && (
               <div className="flex w-full items-center justify-center">
-                <div
-                  role="status"
-                  className="flex items-center gap-2 rounded-full border border-line bg-surface/95 px-3 py-1.5 shadow-md backdrop-blur-sm transition-all"
-                >
-                  <Sparkles className="size-3.5 text-primary" />
-                  <span className="text-[11px] font-semibold text-ink">
-                    Preferências salvas
-                  </span>
-                  <button
-                    type="button"
-                    aria-label="Dispensar toast"
-                    onClick={triggerDismiss}
-                    className="ml-1 flex size-5 items-center justify-center rounded-full text-muted hover:bg-surface-raised hover:text-ink active:scale-80"
-                  >
-                    <X className="size-3" />
-                  </button>
-                </div>
+                <Feedback variant="floating">
+                  <FeedbackIcon icon={Sparkles} />
+                  <FeedbackTitle>Preferências salvas</FeedbackTitle>
+                  <FeedbackClose aria-label="Dispensar toast" onClick={triggerDismiss} />
+                </Feedback>
               </div>
             )}
           </div>
