@@ -9,7 +9,7 @@ export interface SwitchProps {
     disabled?: boolean; 
     className?: string;
     id?: string;
-    
+    tabIndex?: number;
 }
 
 export function Switch({
@@ -20,6 +20,7 @@ export function Switch({
   disabled = false,
   className,
   id,
+  tabIndex,
 }: SwitchProps) {
   const handleClick = () => {
     if (!disabled && onCheckedChange) {
@@ -47,6 +48,7 @@ export function Switch({
         aria-checked={checked}
         aria-describedby={description ? descriptionId : undefined}
         disabled={disabled}
+        tabIndex={tabIndex}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         className={cn(

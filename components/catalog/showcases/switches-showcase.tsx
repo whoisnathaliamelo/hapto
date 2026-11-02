@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Info, Shield } from "lucide-react";
+import { Info, Shield, Bell, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Switch, Checkbox } from "@/components/ui";
+import { Switch, Checkbox, SwitchRow } from "@/components/ui";
 
 type ControlType = "switch" | "checkbox" | "row";
 
@@ -31,64 +31,46 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const SWITCHES_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: O container tem 'min-h-12' (48px) para garantir a Regra dos 48dp de toque
-
+export const SWITCHES_CODE = `// Exemplo com Hapto Design System
 import { useState } from "react";
-import { Check, Bell } from "lucide-react";
+import { Shield } from "lucide-react";
+import { Switch, Checkbox, SwitchRow } from "@/components/ui";
 
 export function ControlesErgonomicos() {
   const [switchAtivo, setSwitchAtivo] = useState(true);
   const [checkAtivo, setCheckAtivo] = useState(false);
+  const [rowAtivo, setRowAtivo] = useState(true);
 
   return (
     <div className="w-full max-w-sm space-y-3">
-      {/* 1. Switch Ergonômico — Área de toque de 48dp com Label Clicável */}
-      <label className="flex min-h-12 cursor-pointer items-center justify-between rounded-xl border border-line bg-surface p-3 transition-colors hover:border-primary/40 active:bg-surface-raised">
-        <span className="text-sm font-semibold text-ink">
-          Notificações Push
-        </span>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={switchAtivo}
-          onClick={() => setSwitchAtivo(!switchAtivo)}
-          className={\`relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary/20 \${
-            switchAtivo ? "bg-primary" : "bg-line"
-          }\`}
-        >
-          <span
-            className={\`inline-block size-5 transform rounded-full bg-white shadow-md transition-transform duration-200 \${
-              switchAtivo ? "translate-x-6" : "translate-x-1"
-            }\`}
-          />
-        </button>
-      </label>
+      {/* 1. Switch Tátil de 48dp com Label Clicável */}
+      <Switch
+        checked={switchAtivo}
+        onCheckedChange={setSwitchAtivo}
+        label="Notificações Push"
+        description="Alertas em tempo real"
+      />
 
-      {/* 2. Checkbox Ergonômico — Todo o container é o alvo de toque */}
-      <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-line bg-surface p-3 transition-colors hover:border-primary/40 active:bg-surface-raised">
-        <input
-          type="checkbox"
-          checked={checkAtivo}
-          onChange={(e) => setCheckAtivo(e.target.checked)}
-          className="sr-only"
-        />
-        <div
-          className={\`flex size-6 shrink-0 items-center justify-center rounded-lg border transition-all duration-200 \${
-            checkAtivo
-              ? "border-primary bg-primary text-white"
-              : "border-line bg-surface"
-          }\`}
-        >
-          {checkAtivo && <Check className="size-4 stroke-[3]" />}
-        </div>
-        <span className="text-sm font-medium text-ink">
-          Concordo com os termos do Hapto
-        </span>
-      </label>
+      {/* 2. Checkbox Ergonômico de 48dp em Formato Card */}
+      <Checkbox
+        variant="card"
+        checked={checkAtivo}
+        onCheckedChange={setCheckAtivo}
+        label="Feedback Háptico"
+        description="Vibração ao interagir"
+      />
+
+      {/* 3. Linha de Ajuste (56dp para Polegar) com Ícone */}
+      <SwitchRow
+        checked={rowAtivo}
+        onCheckedChange={setRowAtivo}
+        icon={Shield}
+        label="Proteção de Toque"
+        description="Bloqueio de cliques duplos"
+      />
     </div>
   );
-}`;
+};`;
 
 export function SwitchesShowcase() {
   const [type, setType] = useState<ControlType>("switch");
@@ -155,36 +137,13 @@ export function SwitchesShowcase() {
 
         {type === "row" && (
           <div className="w-full">
-            <div
-              onClick={() => setRowSwitchOn(!rowSwitchOn)}
-              className="flex min-h-14 w-full cursor-pointer items-center justify-between rounded-xl border border-line bg-surface px-4 py-2 shadow-2xs transition-all hover:border-primary/50 active:scale-[0.99]"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-primary-light text-primary">
-                  <Shield className="size-4.5" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-bold text-ink">Proteção de Toque</span>
-                  <span className="text-[10px] text-muted">Bloqueio de cliques duplos</span>
-                </div>
-              </div>
-
-              <div
-                role="switch"
-                aria-checked={rowSwitchOn}
-                className={cn(
-                  "relative inline-flex h-7 w-12 shrink-0 items-center rounded-full transition-colors duration-200",
-                  rowSwitchOn ? "bg-primary" : "bg-line"
-                )}
-              >
-                <span
-                  className={cn(
-                    "inline-block size-5 transform rounded-full bg-white shadow-md transition-transform duration-200",
-                    rowSwitchOn ? "translate-x-6" : "translate-x-1"
-                  )}
-                />
-              </div>
-            </div>
+            <SwitchRow
+              checked={rowSwitchOn}
+              onCheckedChange={setRowSwitchOn}
+              icon={Shield}
+              label="Proteção de Toque"
+              description="Bloqueio de cliques duplos"
+            />
           </div>
         )}
       </div>

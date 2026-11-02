@@ -10,3 +10,4 @@ export * from "./top-bar";
 export * from "./feedback";
 export * from "./fab";
 export * from "./chip";
+export * from "./switch-row";
