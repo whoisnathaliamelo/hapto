@@ -8,8 +8,7 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { SearchInput } from "@/components/ui";
+import { SearchInput, Chip } from "@/components/ui";
 
 type SearchVariant = "standard" | "with-filter" | "suggestions";
 
@@ -184,19 +183,14 @@ export function SearchShowcase() {
             {SUGGESTIONS.map((tag) => {
               const isTagSelected = selectedTag === tag;
               return (
-                <button
+                <Chip
                   key={tag}
-                  type="button"
+                  size="sm"
+                  selected={isTagSelected}
                   onClick={() => handleSelectTag(tag)}
-                  className={cn(
-                    "inline-flex min-h-7 shrink-0 items-center rounded-lg border px-2.5 text-[11px] font-medium transition-all duration-150 active:scale-95",
-                    isTagSelected
-                      ? "border-primary bg-primary text-on-primary shadow-2xs"
-                      : "border-line bg-surface text-muted hover:border-primary/40 hover:text-ink"
-                  )}
                 >
-                  <span>{tag}</span>
-                </button>
+                  {tag}
+                </Chip>
               );
             })}
           </div>
