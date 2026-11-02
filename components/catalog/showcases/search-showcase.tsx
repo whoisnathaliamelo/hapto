@@ -8,6 +8,7 @@ import {
   SlidersHorizontal,
   Sparkles,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { SearchInput, Chip } from "@/components/ui";
 
 type SearchVariant = "standard" | "with-filter" | "suggestions";
