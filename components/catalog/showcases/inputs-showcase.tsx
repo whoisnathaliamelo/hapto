@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Check, Info, Mail, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
+import {
+  Badge,
+  Input,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 type InputState = "normal" | "icon" | "error";
 
@@ -31,54 +36,45 @@ const STATES_INFO: Record<
   },
 };
 
-export const INPUTS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: 'min-h-12' garante 48dp para toque e 'text-base' (16px) impede zoom no iOS
-
+export const INPUTS_CODE = `// Exemplo com Hapto Design System
 import { useState } from "react";
-import { Mail, X, AlertCircle } from "lucide-react";
+import { Mail, X } from "lucide-react";
+import { Input } from "@/components/ui";
 
 export function InputErgonomico() {
   const [valor, setValor] = useState("");
 
   return (
     <div className="w-full max-w-sm space-y-1.5">
-      {/* 1. Label claro e legível */}
       <label className="text-xs font-semibold text-ink">
         E-mail de Contato
       </label>
 
-      {/* 2. Container do campo com 48dp de altura */}
-      <div className="relative flex items-center">
-        <Mail className="pointer-events-none absolute left-3.5 size-5 text-muted" />
-
-        <input
-          type="email"
-          value={valor}
-          onChange={(e) => setValor(e.target.value)}
-          placeholder="exemplo@hapto.design"
-          className="min-h-12 w-full rounded-xl border border-line bg-surface pl-11 pr-11 text-base text-ink shadow-2xs transition-all duration-200 placeholder:text-muted/60 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-        />
-
-        {/* 3. Botão de limpar com alvo tátil confortável */}
-        {valor && (
-          <button
-            type="button"
-            onClick={() => setValor("")}
-            aria-label="Limpar campo"
-            className="absolute right-2 flex size-8 items-center justify-center rounded-lg text-muted hover:bg-surface-raised hover:text-ink active:scale-90"
-          >
-            <X className="size-4" />
-          </button>
-        )}
-      </div>
-
-      {/* 4. Mensagem de apoio acessível */}
-      <p className="text-[11px] text-muted">
-        Toque fácil com polegar e sem zoom involuntário no mobile.
-      </p>
+      {/* Input de 48dp (Prevenção de auto-zoom no iOS) */}
+      <Input
+        inputSize="lg"
+        type="email"
+        value={valor}
+        onChange={(e) => setValor(e.target.value)}
+        placeholder="exemplo@hapto.design"
+        startIcon={<Mail className="size-5" />}
+        endIcon={
+          valor ? (
+            <button
+              type="button"
+              onClick={() => setValor("")}
+              aria-label="Limpar campo"
+              className="flex size-7 items-center justify-center rounded-lg text-muted hover:bg-surface-raised active:scale-90"
+            >
+              <X className="size-4" />
+            </button>
+          ) : undefined
+        }
+        helperText="Alvo tátil confortável de 48dp e sem zoom involuntário no mobile."
+      />
     </div>
   );
-}`;
+};`;
 
 export function InputsShowcase() {
   const [state, setState] = useState<InputState>("normal");
@@ -95,28 +91,16 @@ export function InputsShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Campo
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["normal", "icon", "error"] as InputState[]).map((st) => {
-            const isSelected = state === st;
-            const item = STATES_INFO[st];
-            return (
-              <button
-                key={st}
-                type="button"
-                onClick={() => setState(st)}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={state}
+          onValueChange={(val) => setState(val as InputState)}
+        >
+          {(["normal", "icon", "error"] as InputState[]).map((st) => (
+            <SegmentedControlItem key={st} value={st}>
+              {STATES_INFO[st].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="w-full max-w-sm px-1 py-1">
@@ -180,14 +164,9 @@ export function InputsShowcase() {
             <Info className="size-3.5 text-primary" />
             <span>Ergonomia do Input ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

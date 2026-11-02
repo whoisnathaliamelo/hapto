@@ -9,7 +9,13 @@ import {
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SearchInput, Chip } from "@/components/ui";
+import {
+  Badge,
+  Chip,
+  SearchInput,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 type SearchVariant = "standard" | "with-filter" | "suggestions";
 
@@ -37,11 +43,9 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const SEARCH_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: 'min-h-12' (48px) garante a Regra dos 48dp e 'text-base' (16px) evita o auto-zoom no iOS
-
+export const SEARCH_CODE = `// Exemplo com Hapto Design System
 import { useState } from "react";
-import { Search, X, SlidersHorizontal } from "lucide-react";
+import { SearchInput, Chip } from "@/components/ui";
 
 export function BarraDeBuscaErgonomica() {
   const [busca, setBusca] = useState("");
@@ -49,47 +53,27 @@ export function BarraDeBuscaErgonomica() {
 
   return (
     <div className="w-full max-w-md space-y-2">
-      {/* 1. Container de Busca — Altura de 48dp calibrada para o polegar */}
-      <div className="relative flex min-h-12 w-full items-center rounded-xl border border-line bg-surface shadow-2xs transition-all focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-        <Search className="ml-3.5 size-5 shrink-0 text-muted" />
+      {/* 1. Componente SearchInput com alvo de 48dp para polegar */}
+      <SearchInput
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+        onClear={() => setBusca("")}
+        filterActive={filtroAtivo}
+        onFilterClick={() => setFiltroAtivo(!filtroAtivo)}
+        placeholder="Buscar componentes..."
+      />
 
-        <input
-          type="text"
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar no sistema..."
-          className="w-full bg-transparent px-3 text-base text-ink placeholder:text-muted focus:outline-none"
-        />
-
-        {/* 2. Botão Limpar com Hitbox Confortável de Toque */}
-        {busca && (
-          <button
-            type="button"
-            aria-label="Limpar busca"
-            onClick={() => setBusca("")}
-            className="flex size-10 shrink-0 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-raised hover:text-ink active:scale-90"
-          >
-            <X className="size-4" />
-          </button>
-        )}
-
-        {/* 3. Ação Lateral de Filtro Integrado */}
-        <button
-          type="button"
-          aria-label="Abrir filtros"
-          onClick={() => setFiltroAtivo(!filtroAtivo)}
-          className={\`mr-1.5 flex size-10 shrink-0 items-center justify-center rounded-lg transition-all active:scale-95 \${
-            filtroAtivo
-              ? "bg-primary text-on-primary shadow-xs"
-              : "text-muted hover:bg-surface-raised hover:text-ink"
-          }\`}
-        >
-          <SlidersHorizontal className="size-4" />
-        </button>
+      {/* 2. Chips Rápidos na Thumb Zone */}
+      <div className="flex gap-2">
+        {["Botões", "Inputs", "Feedback"].map((tag) => (
+          <Chip key={tag} size="sm" onClick={() => setBusca(tag)}>
+            {tag}
+          </Chip>
+        ))}
       </div>
     </div>
   );
-}`;
+};`;
 
 const SUGGESTIONS = ["Botões", "Inputs", "Feedback", "48dp"];
 
@@ -122,28 +106,16 @@ export function SearchShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação da Barra de Busca
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["standard", "with-filter", "suggestions"] as SearchVariant[]).map((v) => {
-            const isSelected = variant === v;
-            const item = VARIATIONS_INFO[v];
-            return (
-              <button
-                key={v}
-                type="button"
-                onClick={() => setVariant(v)}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={variant}
+          onValueChange={(val) => setVariant(val as SearchVariant)}
+        >
+          {(["standard", "with-filter", "suggestions"] as SearchVariant[]).map((v) => (
+            <SegmentedControlItem key={v} value={v}>
+              {VARIATIONS_INFO[v].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="flex min-h-[108px] w-full max-w-sm flex-col justify-center gap-2.5 px-1">
@@ -211,14 +183,9 @@ export function SearchShowcase() {
             <Info className="size-3.5 text-primary" />
             <span>Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

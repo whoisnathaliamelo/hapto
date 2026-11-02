@@ -1,9 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Info, Shield, Bell, Check } from "lucide-react";
+import { Info, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Switch, Checkbox, SwitchRow } from "@/components/ui";
+import {
+  Badge,
+  Switch,
+  Checkbox,
+  SwitchRow,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 type ControlType = "switch" | "checkbox" | "row";
 
@@ -86,28 +93,16 @@ export function SwitchesShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Tipo de Controle Tátil
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["switch", "checkbox", "row"] as ControlType[]).map((t) => {
-            const isSelected = type === t;
-            const item = VARIATIONS_INFO[t];
-            return (
-              <button
-                key={t}
-                type="button"
-                onClick={() => setType(t)}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={type}
+          onValueChange={(val) => setType(val as ControlType)}
+        >
+          {(["switch", "checkbox", "row"] as ControlType[]).map((t) => (
+            <SegmentedControlItem key={t} value={t}>
+              {VARIATIONS_INFO[t].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="flex min-h-[92px] w-full max-w-sm items-center justify-center px-1">
@@ -154,14 +149,9 @@ export function SwitchesShowcase() {
             <Info className="size-3.5 text-primary" />
             <span>Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

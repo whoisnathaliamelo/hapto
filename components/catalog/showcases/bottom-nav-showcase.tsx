@@ -12,9 +12,12 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
+  Badge,
   BottomNav,
   BottomNavItem,
   BottomNavFab,
+  SegmentedControl,
+  SegmentedControlItem,
   type BottomNavVariant,
 } from "@/components/ui";
 
@@ -146,31 +149,20 @@ export function BottomNavShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Organismo
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["standard", "with-fab", "floating"] as BottomNavVariant[]).map((v) => {
-            const isSelected = variant === v;
-            const item = VARIATIONS_INFO[v];
-            return (
-              <button
-                key={v}
-                type="button"
-                onClick={() => {
-                  setVariant(v);
-                  setLastAction(`Variação selecionada: ${item.label}`);
-                }}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={variant}
+          onValueChange={(val) => {
+            const v = val as BottomNavVariant;
+            setVariant(v);
+            setLastAction(`Variação selecionada: ${VARIATIONS_INFO[v].label}`);
+          }}
+        >
+          {(["standard", "with-fab", "floating"] as BottomNavVariant[]).map((v) => (
+            <SegmentedControlItem key={v} value={v}>
+              {VARIATIONS_INFO[v].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-end overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
@@ -263,14 +255,9 @@ export function BottomNavShowcase() {
             <Info className="size-3.5 shrink-0 text-primary" />
             <span className="truncate">Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "shrink-0 rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

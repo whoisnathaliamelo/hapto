@@ -12,7 +12,12 @@ import {
   Share2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { IconButton } from "@/components/ui";
+import {
+  Badge,
+  IconButton,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 type IconVariant = "action" | "badge" | "cluster";
 
@@ -40,11 +45,12 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const ICONS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: O ícone mede 20-24px, mas o botão possui 'size-12' (48x48px) para a Regra dos 48dp
+export const ICONS_CODE = `// Exemplo com Hapto Design System
+// Hitbox calibrada de 48x48dp com suporte a feedback e badges de estado
 
 import { useState } from "react";
 import { Bell, Bookmark, Heart, Share2 } from "lucide-react";
+import { IconButton } from "@/components/ui";
 
 export function IconesErgonomicos() {
   const [curtido, setCurtido] = useState(false);
@@ -53,57 +59,51 @@ export function IconesErgonomicos() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       {/* 1. Icon Button com Alvo Tátil de 48x48dp (Regra dos 48dp) */}
-      <button
-        type="button"
+      <IconButton
+        size="lg"
         aria-label="Curtir"
         onClick={() => setCurtido(!curtido)}
-        className="relative inline-flex size-12 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all hover:border-primary/50 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
       >
         <Heart
           className={\`size-5 transition-transform duration-200 \${
             curtido ? "fill-red-500 text-red-500 scale-110" : "text-muted"
           }\`}
         />
-      </button>
+      </IconButton>
 
       {/* 2. Ícone com Badge de Notificação Efêmero */}
-      <button
-        type="button"
+      <IconButton
+        size="lg"
+        badge={true}
         aria-label="Notificações"
-        className="relative inline-flex size-12 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all hover:border-primary/50 hover:text-primary active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
       >
         <Bell className="size-5 text-muted" />
-        <span className="absolute top-2.5 right-2.5 flex size-2.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-          <span className="relative inline-flex size-2.5 rounded-full bg-primary" />
-        </span>
-      </button>
+      </IconButton>
 
       {/* 3. Ícone com Estado Salvo / Bookmark */}
-      <button
-        type="button"
+      <IconButton
+        size="lg"
         aria-label="Salvar item"
         onClick={() => setSalvo(!salvo)}
-        className="relative inline-flex size-12 items-center justify-center rounded-xl border border-line bg-surface text-ink transition-all hover:border-primary/50 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
       >
         <Bookmark
           className={\`size-5 transition-transform duration-200 \${
             salvo ? "fill-primary text-primary scale-110" : "text-muted"
           }\`}
         />
-      </button>
+      </IconButton>
 
       {/* 4. Ação com Respiro de Segurança de 8dp */}
-      <button
-        type="button"
+      <IconButton
+        size="lg"
+        variant="ghost"
         aria-label="Compartilhar"
-        className="inline-flex size-12 items-center justify-center rounded-xl border border-line bg-surface text-muted transition-all hover:border-primary/50 hover:text-ink active:scale-95 focus-visible:outline-2 focus-visible:outline-primary"
       >
         <Share2 className="size-5" />
-      </button>
+      </IconButton>
     </div>
   );
-}`;
+};`;
 
 export function IconsShowcase() {
   const [variant, setVariant] = useState<IconVariant>("action");
@@ -146,28 +146,16 @@ export function IconsShowcase() {
           </button>
         </div>
 
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["action", "badge", "cluster"] as IconVariant[]).map((v) => {
-            const isSelected = variant === v;
-            const item = VARIATIONS_INFO[v];
-            return (
-              <button
-                key={v}
-                type="button"
-                onClick={() => setVariant(v)}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={variant}
+          onValueChange={(val) => setVariant(val as IconVariant)}
+        >
+          {(["action", "badge", "cluster"] as IconVariant[]).map((v) => (
+            <SegmentedControlItem key={v} value={v}>
+              {VARIATIONS_INFO[v].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="flex min-h-[96px] w-full max-w-sm items-center justify-center px-1">
@@ -320,14 +308,9 @@ export function IconsShowcase() {
             <Info className="size-3.5 text-primary" />
             <span>Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

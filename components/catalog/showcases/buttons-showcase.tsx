@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import { Plus, Sparkles, Check, Info } from "lucide-react";
-import { Button, FAB } from "@/components/ui";
+import {
+  Badge,
+  Button,
+  FAB,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type ButtonSize = "sm" | "md" | "lg";
@@ -80,29 +86,20 @@ export function ButtonsShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Calibrar Tamanho do Alvo Tátil
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["sm", "md", "lg"] as ButtonSize[]).map((s) => {
-            const isSelected = size === s;
-            const item = SIZES_INFO[s];
-            return (
-              <button
-                key={s}
-                type="button"
-                onClick={() => setSize(s)}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-                <span className="text-[10px] opacity-80">({item.height})</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={size}
+          onValueChange={(val) => setSize(val as ButtonSize)}
+        >
+          {(["sm", "md", "lg"] as ButtonSize[]).map((s) => (
+            <SegmentedControlItem
+              key={s}
+              value={s}
+              detail={`(${SIZES_INFO[s].height})`}
+            >
+              {SIZES_INFO[s].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="flex w-full flex-wrap items-center justify-center gap-3 py-2">
@@ -138,14 +135,9 @@ export function ButtonsShowcase() {
             <Info className="size-3.5 text-primary" />
             <span>Tamanho {currentSizeInfo.label} ({currentSizeInfo.height})</span>
           </span>
-          <span
-            className={cn(
-              "rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentSizeInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentSizeInfo.badgeColor)}>
             {currentSizeInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted">
           {currentSizeInfo.ergonomicNote}

@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
+  Badge,
+  SegmentedControl,
+  SegmentedControlItem,
   TopBar,
   TopBarAction,
   TopBarTitle,
@@ -48,57 +51,33 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const TOP_BAR_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Ergonomia: Hitboxes >= 48dp, espaçamento seguro entre ações e suporte a Safe Area no topo
-
-import { useState } from "react";
+export const TOP_BAR_CODE = `// Exemplo com Hapto Design System
 import { ArrowLeft, Share2, MoreVertical } from "lucide-react";
+import { TopBar, TopBarAction, TopBarTitle, TopBarActions } from "@/components/ui";
 
 export function TopAppBarErgonomica() {
-  const [menuAberto, setMenuAberto] = useState(false);
-
   return (
-    <header
-      role="banner"
-      className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-line bg-surface/95 px-2 pt-safe backdrop-blur-md"
-    >
-      {/* 1. Botão de Navegação Primário com Hitbox Generosa (48x48dp) */}
-      <button
-        type="button"
+    <TopBar variant="standard" position="sticky">
+      {/* 1. Botão Voltar com hitbox calibrada de 48dp */}
+      <TopBarAction
+        icon={ArrowLeft}
         aria-label="Voltar à tela anterior"
         onClick={() => history.back()}
-        className="flex size-11 items-center justify-center rounded-xl text-ink transition-colors hover:bg-surface-raised active:scale-90"
-      >
-        <ArrowLeft className="size-5" />
-      </button>
+      />
 
       {/* 2. Título Central com Truncamento Seguro */}
-      <h1 className="max-w-[200px] truncate text-center text-sm font-bold text-ink">
+      <TopBarTitle align="center">
         Detalhes do Componente
-      </h1>
+      </TopBarTitle>
 
-      {/* 3. Ações Secundárias com Espaçamento Ergonômico de 8px */}
-      <div className="flex items-center gap-1">
-        <button
-          type="button"
-          aria-label="Compartilhar"
-          className="flex size-11 items-center justify-center rounded-xl text-muted transition-colors hover:bg-surface-raised hover:text-ink active:scale-90"
-        >
-          <Share2 className="size-4.5" />
-        </button>
-
-        <button
-          type="button"
-          aria-label="Mais opções"
-          onClick={() => setMenuAberto(!menuAberto)}
-          className="flex size-11 items-center justify-center rounded-xl text-muted transition-colors hover:bg-surface-raised hover:text-ink active:scale-90"
-        >
-          <MoreVertical className="size-4.5" />
-        </button>
-      </div>
-    </header>
+      {/* 3. Ações Secundárias com Respiro Ergonômico */}
+      <TopBarActions>
+        <TopBarAction icon={Share2} aria-label="Compartilhar" />
+        <TopBarAction icon={MoreVertical} aria-label="Mais opções" />
+      </TopBarActions>
+    </TopBar>
   );
-}`;
+};`;
 
 export function TopBarShowcase() {
   const [variant, setVariant] = useState<TopBarVariant>("standard");
@@ -117,31 +96,20 @@ export function TopBarShowcase() {
         <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
           Variação do Organismo
         </span>
-        <div className="flex items-center gap-1.5 rounded-xl border border-line bg-surface p-1 shadow-xs">
-          {(["standard", "large-title", "contextual"] as TopBarVariant[]).map((v) => {
-            const isSelected = variant === v;
-            const item = VARIATIONS_INFO[v];
-            return (
-              <button
-                key={v}
-                type="button"
-                onClick={() => {
-                  setVariant(v);
-                  setLastAction(`Variação selecionada: ${item.label}`);
-                }}
-                aria-pressed={isSelected}
-                className={cn(
-                  "flex min-h-9 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold transition-all duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                  isSelected
-                    ? "bg-primary text-on-primary shadow-xs"
-                    : "text-muted hover:bg-surface-raised hover:text-ink"
-                )}
-              >
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <SegmentedControl
+          value={variant}
+          onValueChange={(val) => {
+            const v = val as TopBarVariant;
+            setVariant(v);
+            setLastAction(`Variação selecionada: ${VARIATIONS_INFO[v].label}`);
+          }}
+        >
+          {(["standard", "large-title", "contextual"] as TopBarVariant[]).map((v) => (
+            <SegmentedControlItem key={v} value={v}>
+              {VARIATIONS_INFO[v].label}
+            </SegmentedControlItem>
+          ))}
+        </SegmentedControl>
       </div>
 
       <div className="relative flex h-[142px] w-full max-w-sm flex-col justify-start overflow-hidden rounded-2xl border border-line bg-surface shadow-xs">
@@ -254,14 +222,9 @@ export function TopBarShowcase() {
             <Info className="size-3.5 shrink-0 text-primary" />
             <span className="truncate">Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "shrink-0 rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

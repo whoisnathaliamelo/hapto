@@ -218,7 +218,7 @@ export function FeedbackDescription({
   );
 }
 
-export interface FeedbackActionsProps extends React.ComponentProps<"div"> {}
+export type FeedbackActionsProps = React.ComponentProps<"div">;
 
 export function FeedbackActions({
   className,

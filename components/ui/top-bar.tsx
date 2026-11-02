@@ -54,7 +54,7 @@ export function TopBar({
       <Component
         role={role}
         className={cn(topBarVariants({ variant: resolvedVariant }), className)}
-        {...(props as any)}
+        {...props}
       >
         {children}
       </Component>
@@ -154,7 +154,7 @@ export function TopBarTitle({
           : "truncate px-2 text-xs font-bold text-ink",
         className
       )}
-      {...(props as any)}
+      {...props}
     >
       {children}
     </Component>
@@ -176,12 +176,12 @@ export function TopBarNavRow({
         "flex h-11 w-full items-center justify-between px-1",
         className
       )}
-      {...(props as any)}
+      {...props}
     />
   );
 }
 
-export interface TopBarLargeTitleAreaProps extends React.ComponentProps<"div"> {}
+export type TopBarLargeTitleAreaProps = React.ComponentProps<"div">;
 
 export function TopBarLargeTitleArea({
   className,
@@ -211,7 +211,7 @@ export function TopBarSection({
   );
 }
 
-export interface TopBarActionsProps extends React.ComponentProps<"div"> {}
+export type TopBarActionsProps = React.ComponentProps<"div">;
 
 export function TopBarActions({
   className,

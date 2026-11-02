@@ -12,3 +12,4 @@ export * from "./fab";
 export * from "./chip";
 export * from "./switch-row";
 export * from "./badge";
+export * from "./segmented-control";

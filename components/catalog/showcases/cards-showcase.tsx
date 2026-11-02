@@ -20,6 +20,8 @@ import {
   CardDescription,
   CardFooter,
   CardTitle,
+  SegmentedControl,
+  SegmentedControlItem,
 } from "@/components/ui";
 
 type CardVariant = "interactive" | "with-action" | "metric";
@@ -48,63 +50,47 @@ const VARIATIONS_INFO: Record<
   },
 };
 
-export const CARDS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: O card inteiro atua como botão/link tátil com 'active:scale-[0.98]' para feedback tátil instantâneo
-
+export const CARDS_CODE = `// Exemplo com Hapto Design System
 import { useState } from "react";
 import { ChevronRight, Bookmark, Sparkles } from "lucide-react";
+import { Card, CardTitle, CardDescription, CardAction, CardFooter, Badge } from "@/components/ui";
 
 export function CardInformativoErgonomico() {
   const [salvo, setSalvo] = useState(false);
 
   return (
-    <div className="w-full max-w-sm">
-      {/* 1. Card Inteiro como Alvo Tátil Generoso */}
-      <article
-        onClick={() => alert("Card principal acionado!")}
-        className="group relative cursor-pointer rounded-2xl border border-line bg-surface p-4 shadow-2xs transition-all duration-200 hover:border-primary/50 hover:shadow-md active:scale-[0.98]"
-      >
-        <div className="flex items-start justify-between gap-3">
-          {/* Ícone de Destaque */}
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-light text-primary">
-            <Sparkles className="size-5" />
-          </div>
+    <Card
+      as="article"
+      variant="interactive"
+      onClick={() => alert("Card acionado!")}
+      className="w-full max-w-sm"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <Badge variant="primary" shape="pill" icon={<Sparkles className="size-3" />}>
+          Destaque
+        </Badge>
 
-          {/* Ação Secundária com Hitbox Isolada (44x44dp) */}
-          <button
-            type="button"
-            aria-label="Salvar nos favoritos"
-            onClick={(e) => {
-              e.stopPropagation(); // Previne o clique indesejado no card
-              setSalvo(!salvo);
-            }}
-            className="flex size-11 shrink-0 items-center justify-center rounded-xl text-muted transition-colors hover:bg-surface-raised hover:text-primary active:scale-90"
-          >
-            <Bookmark
-              className={\`size-5 transition-transform \${
-                salvo ? "fill-primary text-primary scale-110" : ""
-              }\`}
-            />
-          </button>
-        </div>
+        {/* Ação secundária isolada (CardAction com stopPropagation automático) */}
+        <CardAction
+          aria-label="Salvar nos favoritos"
+          onClick={() => setSalvo(!salvo)}
+        >
+          <Bookmark className={\`size-5 \${salvo ? "fill-primary text-primary" : "text-muted"}\`} />
+        </CardAction>
+      </div>
 
-        {/* Conteúdo com Hierarquia Calibrada */}
-        <h3 className="mt-3 text-base font-bold text-ink transition-colors group-hover:text-primary">
-          Design System Háptico
-        </h3>
-        <p className="mt-1 text-xs leading-relaxed text-muted">
-          Padrões ergonômicos de toque e feedback tátil para aplicações mobile-first.
-        </p>
+      <CardTitle className="mt-3">Design System Háptico</CardTitle>
+      <CardDescription className="mt-1">
+        Padrões ergonômicos de toque e feedback tátil para aplicações mobile-first.
+      </CardDescription>
 
-        {/* Rodapé com Indicador de Navegação */}
-        <div className="mt-4 flex items-center justify-between border-t border-line/50 pt-2.5 text-xs font-semibold text-primary">
-          <span>Explorar módulo</span>
-          <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
-        </div>
-      </article>
-    </div>
+      <CardFooter className="mt-4">
+        <span>Explorar módulo</span>
+        <ChevronRight className="size-4" />
+      </CardFooter>
+    </Card>
   );
-}`;
+};`;
 
 export function CardsShowcase() {
   const [variant, setVariant] = useState<CardVariant>("interactive");
@@ -126,28 +112,16 @@ export function CardsShowcase() {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-      <div className="flex h-[46px] max-w-full shrink-0 items-center gap-1 rounded-xl border border-line bg-surface p-1 shadow-xs">
-        {(["interactive", "with-action", "metric"] as CardVariant[]).map((v) => {
-          const isSelected = variant === v;
-          const item = VARIATIONS_INFO[v];
-          return (
-            <button
-              key={v}
-              type="button"
-              onClick={() => setVariant(v)}
-              aria-pressed={isSelected}
-              className={cn(
-                "flex h-9 items-center whitespace-nowrap rounded-lg px-2.5 text-xs font-semibold transition-colors duration-200 active:scale-95 focus-visible:outline-2 focus-visible:outline-primary",
-                isSelected
-                  ? "bg-primary text-on-primary shadow-xs"
-                  : "text-muted hover:bg-surface-raised hover:text-ink"
-              )}
-            >
-              {item.label}
-            </button>
-          );
-        })}
-      </div>
+      <SegmentedControl
+        value={variant}
+        onValueChange={(val) => setVariant(val as CardVariant)}
+      >
+        {(["interactive", "with-action", "metric"] as CardVariant[]).map((v) => (
+          <SegmentedControlItem key={v} value={v}>
+            {VARIATIONS_INFO[v].label}
+          </SegmentedControlItem>
+        ))}
+      </SegmentedControl>
 
       <div className="h-[160px] w-full max-w-sm shrink-0">
         {variant === "interactive" && (

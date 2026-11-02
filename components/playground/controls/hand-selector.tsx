@@ -1,6 +1,10 @@
 import type { HandGrip } from "../types";
 import { Hand } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {
+  Badge,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 interface HandSelectorProps {
   value: HandGrip;
@@ -21,33 +25,30 @@ export function HandSelector({ value, onChange }: HandSelectorProps) {
           <Hand className="size-3.5 text-primary" />
           <span>Pegada da Mão</span>
         </label>
-        <span className="rounded-full bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary">
+        <Badge variant="primary" shape="pill" size="sm">
           {value === "right" ? "Destro" : value === "left" ? "Canhoto" : "2 Mãos"}
-        </span>
+        </Badge>
       </div>
 
-      <div className="grid grid-cols-3 gap-1.5 rounded-xl border border-line bg-surface-raised/60 p-1">
-        {options.map((option) => {
-          const isSelected = value === option.id;
-          return (
-            <button
-              key={option.id}
-              type="button"
-              aria-pressed={isSelected}
-              onClick={() => onChange(option.id)}
-              className={cn(
-                "flex flex-col items-center justify-center rounded-lg px-2.5 py-2 text-center transition-all cursor-pointer",
-                isSelected
-                  ? "bg-surface text-ink font-bold shadow-xs border border-line/80 ring-1 ring-primary/20"
-                  : "text-muted hover:text-ink hover:bg-surface/50 font-medium"
-              )}
-            >
-              <span className="text-xs">{option.label}</span>
-              <span className="text-[10px] text-muted/80">{option.sub}</span>
-            </button>
-          );
-        })}
-      </div>
+      <SegmentedControl
+        value={value}
+        onValueChange={(val) => onChange(val as HandGrip)}
+        variant="raised"
+        itemVariant="surface"
+        fullWidth
+        className="grid grid-cols-3"
+      >
+        {options.map((option) => (
+          <SegmentedControlItem
+            key={option.id}
+            value={option.id}
+            detail={option.sub}
+            className="flex-col py-2 min-h-12"
+          >
+            {option.label}
+          </SegmentedControlItem>
+        ))}
+      </SegmentedControl>
     </div>
   );
 }

@@ -17,7 +17,11 @@ import { TouchFeedback } from "./diagnostics/touch-feedback";
 import { Reveal } from "@/components/reveal";
 import Link from "next/link";
 import { ArrowLeft, Sliders, Smartphone } from "lucide-react";
-import { cn } from "@/lib/utils";
+import {
+  Badge,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@/components/ui";
 
 export function PlaygroundView() {
   const [settings, setSettings] = useState<SimulatorSettings>({
@@ -62,10 +66,16 @@ export function PlaygroundView() {
 
         <header className="mx-auto max-w-3xl text-center mb-10 lg:mb-14">
           <Reveal>
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-line/80 bg-surface/80 px-3.5 py-1 text-xs font-semibold text-muted shadow-2xs backdrop-blur-xs">
-              <span className="size-2 rounded-full bg-primary animate-pulse" />
-              <span>Módulo 03 • Laboratório Interativo</span>
-            </div>
+            <Badge
+              variant="outline"
+              shape="pill"
+              size="lg"
+              dot
+              pulse
+              className="mb-3 backdrop-blur-xs font-semibold text-muted"
+            >
+              Módulo 03 • Laboratório Interativo
+            </Badge>
             <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl lg:leading-[1.15]">
               Playground{" "}
               <span className="text-primary underline decoration-primary/30 underline-offset-8">
@@ -109,27 +119,30 @@ export function PlaygroundView() {
                       </label>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-1.5 rounded-xl border border-line bg-surface-raised/60 p-1">
-                      {scenarios.map((scen) => {
-                        const isSelected = settings.activeScreen === scen.id;
-                        return (
-                          <button
-                            key={scen.id}
-                            type="button"
-                            onClick={() => setSettings((s) => ({ ...s, activeScreen: scen.id }))}
-                            className={cn(
-                              "flex flex-col items-center justify-center rounded-lg px-2 py-2 text-center transition-all cursor-pointer border",
-                              isSelected
-                                ? "bg-surface text-ink font-bold shadow-xs border-line/80 ring-1 ring-primary/20"
-                                : "border-transparent text-muted hover:text-ink hover:bg-surface/50 font-medium"
-                            )}
-                          >
-                            <span className="text-xs">{scen.label}</span>
-                            <span className="text-[9px] text-muted/70">{scen.desc.split(" ")[0]}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
+                    <SegmentedControl
+                      value={settings.activeScreen}
+                      onValueChange={(val) =>
+                        setSettings((s) => ({
+                          ...s,
+                          activeScreen: val as ScreenScenario,
+                        }))
+                      }
+                      variant="raised"
+                      itemVariant="surface"
+                      fullWidth
+                      className="grid grid-cols-3"
+                    >
+                      {scenarios.map((scen) => (
+                        <SegmentedControlItem
+                          key={scen.id}
+                          value={scen.id}
+                          detail={scen.desc.split(" ")[0]}
+                          className="flex-col py-2"
+                        >
+                          {scen.label}
+                        </SegmentedControlItem>
+                      ))}
+                    </SegmentedControl>
                   </div>
                 </div>
 
