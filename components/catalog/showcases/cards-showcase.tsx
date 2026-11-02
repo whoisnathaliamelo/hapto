@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
+  Badge,
   Card,
   CardAction,
   CardDescription,
@@ -156,10 +157,13 @@ export function CardsShowcase() {
             className="flex h-full w-full flex-col justify-between"
           >
             <div className="flex items-center justify-between gap-2 whitespace-nowrap">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-line/60 bg-surface-raised px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted">
-                <Smartphone className="size-3 text-primary" />
-                <span>Mobile First</span>
-              </span>
+              <Badge
+                variant="neutral"
+                shape="pill"
+                icon={<Smartphone className="size-3 text-primary" />}
+              >
+                Mobile First
+              </Badge>
               <span className="flex items-center gap-1 text-[10px] text-muted">
                 <Clock className="size-3" />
                 <span>3 min de leitura</span>
@@ -267,14 +271,9 @@ export function CardsShowcase() {
             <Info className="size-3.5 shrink-0 text-primary" />
             <span className="truncate">Ergonomia ({currentInfo.label})</span>
           </span>
-          <span
-            className={cn(
-              "shrink-0 rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
-              currentInfo.badgeColor
-            )}
-          >
+          <Badge className={cn("shrink-0", currentInfo.badgeColor)}>
             {currentInfo.tag}
-          </span>
+          </Badge>
         </div>
         <p className="mt-1.5 line-clamp-2 text-[11px] leading-relaxed text-muted">
           {currentInfo.ergonomicNote}

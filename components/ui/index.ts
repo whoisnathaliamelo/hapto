@@ -11,3 +11,4 @@ export * from "./feedback";
 export * from "./fab";
 export * from "./chip";
 export * from "./switch-row";
+export * from "./badge";
