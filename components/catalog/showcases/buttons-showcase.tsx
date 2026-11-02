@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Sparkles, Check, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, FAB } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type ButtonSize = "sm" | "md" | "lg";
@@ -34,42 +34,33 @@ const SIZES_INFO: Record<
   },
 };
 
-export const BUTTONS_CODE = `// Exemplo com Tailwind CSS Puro (Zero Dependências)
-// Dica: Instale 'lucide-react' para os ícones ou use seus próprios SVGs
-
+export const BUTTONS_CODE = `// Exemplo com Hapto Design System
 import { Plus, Sparkles } from "lucide-react";
+import { Button, FAB } from "@/components/ui";
 
 export function BotoesErgonomicos() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       {/* 1. Botão Primário — 48px de altura (Regra dos 48dp para o polegar) */}
-      <button
-        type="button"
-        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-7 text-base font-semibold text-on-primary shadow-sm transition-all duration-200 hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
+      <Button variant="primary" size="lg">
         <Sparkles className="size-4" />
         <span>Principal</span>
-      </button>
+      </Button>
 
       {/* 2. Botão Secundário — 44px de altura (Padrão Apple HIG) */}
-      <button
-        type="button"
-        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-surface-raised px-5 text-sm font-medium text-ink transition-all duration-200 hover:border-primary/50 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
+      <Button variant="secondary" size="md">
         <span>Secundário</span>
-      </button>
+      </Button>
 
       {/* 3. FAB Flutuante — 56px de diâmetro (Alcance imediato do polegar) */}
-      <button
-        type="button"
-        aria-label="Ação rápida flutuante"
-        className="flex size-14 items-center justify-center rounded-full bg-primary text-on-primary shadow-md shadow-primary/25 transition-all duration-200 hover:scale-105 hover:bg-primary-hover active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-      >
-        <Plus className="size-6 stroke-[2.5]" />
-      </button>
+      <FAB
+        size="lg"
+        label="Adicionar"
+        icon={Plus}
+      />
     </div>
   );
-}`;
+};`;
 
 export function ButtonsShowcase() {
   const [size, setSize] = useState<ButtonSize>("lg");
@@ -133,15 +124,12 @@ export function ButtonsShowcase() {
           <span>Secundário</span>
         </Button>
 
-        <button
-          type="button"
+        <FAB
+          size="lg"
           onClick={() => handleClick("FAB Flutuante (56px)")}
-          aria-label="Ação rápida flutuante"
-          className="relative flex size-14 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary shadow-md shadow-primary/25 transition-all duration-200 hover:scale-105 hover:bg-primary-hover hover:shadow-lg active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        >
-          <Plus className="size-6 stroke-[2.5]" />
-          <span className="sr-only">Adicionar</span>
-        </button>
+          label="Adicionar"
+          icon={Plus}
+        />
       </div>
 
       <div className="w-full rounded-xl border border-line/60 bg-surface/70 p-3 text-xs">
