@@ -6,9 +6,25 @@ import "./globals.css";
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://hapto.vercel.app"),
   title: "Hapto — Design system com ergonomia mobile",
   description:
     "Um design system pensado para o toque. Explore componentes e entenda por que eles são do jeito que são.",
+  openGraph: {
+    title: "Hapto — Design system com ergonomia mobile",
+    description:
+      "Um design system pensado para o toque. Explore componentes e entenda por que eles são do jeito que são.",
+    url: "https://hapto.vercel.app",
+    siteName: "Hapto",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hapto — Design system com ergonomia mobile",
+    description:
+      "Um design system pensado para o toque. Explore componentes e entenda por que eles são do jeito que são.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
