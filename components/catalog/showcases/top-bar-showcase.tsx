@@ -29,24 +29,27 @@ import {
 
 const VARIATIONS_INFO: Record<
   TopBarVariant,
-  { label: string; tag: string; ergonomicNote: string; badgeColor: string }
+  { label: string; tabLabel: string; tag: string; ergonomicNote: string; badgeColor: string }
 > = {
   standard: {
     label: "Padrão (Voltar + Ações)",
+    tabLabel: "Padrão",
     tag: "Hitbox 48dp",
-    ergonomicNote: "Botão de voltar com área de toque mínima de 48dp na zona superior, com respiro de 12px entre ícones à direita para evitar toques simultâneos involuntários.",
+    ergonomicNote: "Botão voltar com área mínima de 48dp no topo e respiro de 12px entre ícones à direita para evitar toques acidentais.",
     badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/30",
   },
   "large-title": {
     label: "Título Expandido",
+    tabLabel: "Expandido",
     tag: "Escaneabilidade",
-    ergonomicNote: "Tipografia em destaque traz o ponto focal visual para mais perto do centro da tela, facilitando a leitura inicial sem esticar o polegar.",
+    ergonomicNote: "Tipografia em destaque traz o ponto focal para perto do centro da tela, facilitando a leitura imediata.",
     badgeColor: "bg-blue-500/10 text-blue-600 border-blue-500/30",
   },
   contextual: {
     label: "Barra Contextual",
+    tabLabel: "Contextual",
     tag: "Ações em Lote",
-    ergonomicNote: "Modo seleção rápida substitui a navegação com botão 'Cancelar' explícito e isola ações destrutivas na borda oposta com feedback imediato.",
+    ergonomicNote: "Modo seleção rápida substitui a navegação e isola ações destrutivas na borda oposta com feedback claro.",
     badgeColor: "bg-purple-500/10 text-purple-600 border-purple-500/30",
   },
 };
@@ -106,7 +109,7 @@ export function TopBarShowcase() {
         >
           {(["standard", "large-title", "contextual"] as TopBarVariant[]).map((v) => (
             <SegmentedControlItem key={v} value={v}>
-              {VARIATIONS_INFO[v].label}
+              {VARIATIONS_INFO[v].tabLabel}
             </SegmentedControlItem>
           ))}
         </SegmentedControl>
@@ -233,7 +236,7 @@ export function TopBarShowcase() {
 
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
-          Alvo: 44-48dp • Espaço entre Ações: 8dp
+          Alvo: 44-48dp • Espaçamento: 8dp
         </span>
         <span className="flex min-w-0 shrink-0 items-center gap-1 font-medium">
           {lastAction ? (
@@ -242,7 +245,7 @@ export function TopBarShowcase() {
               <span className="truncate font-semibold text-emerald-600">{lastAction}</span>
             </>
           ) : (
-            <span className="truncate text-muted">Toque em uma ação para testar</span>
+            <span className="truncate text-muted">Toque para testar</span>
           )}
         </span>
       </div>

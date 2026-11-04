@@ -23,24 +23,27 @@ import {
 
 const VARIATIONS_INFO: Record<
   BottomNavVariant,
-  { label: string; tag: string; ergonomicNote: string; badgeColor: string }
+  { label: string; tabLabel: string; tag: string; ergonomicNote: string; badgeColor: string }
 > = {
   standard: {
     label: "Padrão (4 Destinos)",
+    tabLabel: "Padrão",
     tag: "Zona do Polegar",
-    ergonomicNote: "Posicionada na 'Natural Thumb Zone' inferior. Distribui 4 alvos simétricos de 48dp de largura por 56dp de altura, evitando toques falsos.",
+    ergonomicNote: "Posicionada na Thumb Zone inferior com 4 alvos simétricos de 48dp, prevenindo toques falsos.",
     badgeColor: "bg-emerald-500/10 text-emerald-600 border-emerald-500/30",
   },
   "with-fab": {
     label: "Ação Central (FAB)",
-    tag: "Ação Primária Fácil",
-    ergonomicNote: "Gatilho central em relevo para a ação principal do app (ex: Criar/Novo), centralizado no arco de rotação confortável do polegar.",
+    tabLabel: "Com FAB",
+    tag: "Ação Primária",
+    ergonomicNote: "Gatilho central em relevo para a ação principal, no arco de rotação confortável do polegar.",
     badgeColor: "bg-blue-500/10 text-blue-600 border-blue-500/30",
   },
   floating: {
     label: "Barra Flutuante (Pill)",
+    tabLabel: "Flutuante",
     tag: "Respiro de Borda",
-    ergonomicNote: "Barra suspensa com cantos curvos e recuo das bordas físicas da tela, prevenindo acionamento acidental dos gestos de navegação do sistema operacional.",
+    ergonomicNote: "Barra suspensa com recuo das bordas da tela, prevenindo gestos acidentais do sistema operacional.",
     badgeColor: "bg-purple-500/10 text-purple-600 border-purple-500/30",
   },
 };
@@ -159,7 +162,7 @@ export function BottomNavShowcase() {
         >
           {(["standard", "with-fab", "floating"] as BottomNavVariant[]).map((v) => (
             <SegmentedControlItem key={v} value={v}>
-              {VARIATIONS_INFO[v].label}
+              {VARIATIONS_INFO[v].tabLabel}
             </SegmentedControlItem>
           ))}
         </SegmentedControl>
@@ -266,7 +269,7 @@ export function BottomNavShowcase() {
 
       <div className="flex h-[26px] w-full shrink-0 items-center justify-between gap-2 whitespace-nowrap border-t border-line/50 pt-2 text-[11px] text-muted">
         <span className="truncate font-mono text-[10px]">
-          Alvo: 48x48dp • Zona: Thumb Zone Inferior
+          Alvo: 48dp • Thumb Zone
         </span>
         <span className="flex min-w-0 shrink-0 items-center gap-1 font-medium">
           {lastAction ? (
@@ -275,7 +278,7 @@ export function BottomNavShowcase() {
               <span className="truncate font-semibold text-emerald-600">{lastAction}</span>
             </>
           ) : (
-            <span className="truncate text-muted">Toque em qualquer destino para testar</span>
+            <span className="truncate text-muted">Toque para testar</span>
           )}
         </span>
       </div>
