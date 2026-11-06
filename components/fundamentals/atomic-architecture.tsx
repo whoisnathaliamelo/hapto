@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Atom, Boxes, Component, Layout, Smartphone } from "lucide-react";
+import { Palette, Atom, Boxes, Component } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 export function AtomicArchitecture() {
@@ -11,71 +11,77 @@ export function AtomicArchitecture() {
     {
       step: 1,
       number: "01",
-      icon: Atom,
-      name: "Átomos",
-      tagline: "Unidades Fundamentais",
+      icon: Palette,
+      name: "Tokens",
+      tagline: "Decisões Sub-atômicas",
       description:
-        "As menores peças indivisíveis da interface. No mobile, incluem paleta de cores, tipografia calibrada, ícones e inputs em sua forma mais elementar.",
-      items: ["Design Tokens de Cor", "Font Scale (Outfit)", "Ícones Lucide", "Input Isolado"],
+        "A fundação matemática e visual do sistema. Variáveis agnósticas de plataforma que armazenam valores fundamentais de cor com contraste WCAG, escala tipográfica e malhas de espaçamento para toque.",
+      items: [
+        "Cores & Contraste WCAG (4.5:1+)",
+        "Tipografia & Escala (16px+ anti-zoom)",
+        "Espaçamentos & Targets (Grid 8dp)",
+        "Tokens Semânticos (Light/Dark)",
+      ],
       preview: {
-        title: "Tokens & Átomos",
+        title: "Tokens de Design",
         badge: "Fundação",
       },
     },
     {
       step: 2,
       number: "02",
-      icon: Boxes,
-      name: "Moléculas",
-      tagline: "Combinações Funcionais",
+      icon: Atom,
+      name: "Átomos",
+      tagline: "Componentes Unitários",
       description:
-        "Agrupamentos simples de átomos que passam a operar como uma unidade com propósito específico para o usuário.",
-      items: ["Label de Campo", "Input com Altura 48dp", "Botão de Limpeza com Ícone", "Helper Text"],
+        "Os menores blocos de interface interativa no DOM. Elementos funcionais puros estilizados pelos tokens, calibrados para assegurar alvos de toque generosos e estados táteis claros.",
+      items: [
+        "Botões (Normal, Secundário, FAB)",
+        "Inputs de Texto (Altura 48dp+)",
+        "Switches e Checkboxes",
+        "Ícones Ergonômicos com Padding",
+      ],
       preview: {
-        title: "Molécula de Formulário",
+        title: "Átomos Interativos",
         badge: "Unidade",
       },
     },
     {
       step: 3,
       number: "03",
-      icon: Component,
-      name: "Organismos",
-      tagline: "Seções Completas",
+      icon: Boxes,
+      name: "Moléculas",
+      tagline: "Combinações Funcionais",
       description:
-        "Componentes mais complexos que combinam moléculas e átomos para formar uma seção autônoma e reconhecível da interface.",
-      items: ["Bottom Navigation Bar", "Cabeçalho de Aplicação", "Card com Ações e Badges", "Barra de Busca"],
+        "Agrupamentos de átomos trabalhando em conjunto com um propósito funcional específico. Resolvem tarefas imediatas como busca, filtragem e entrada de dados sem sobrecarregar o usuário.",
+      items: [
+        "Barra de Busca com Botão Limpar",
+        "Cards Informativos Táteis",
+        "Campos com Label & Helper Text",
+        "Controles Segmentados & Chips",
+      ],
       preview: {
-        title: "Organismo de Navegação",
-        badge: "Seção",
+        title: "Moléculas Compostas",
+        badge: "Função",
       },
     },
     {
       step: 4,
       number: "04",
-      icon: Layout,
-      name: "Modelos",
-      tagline: "Esqueleto & Arquitetura",
+      icon: Component,
+      name: "Organismos",
+      tagline: "Seções & Navegação",
       description:
-        "A estrutura de layout em nível de wireframe. Define a distribuição espacial, o grid de 8dp e as zonas de alcance sem os dados definitivos.",
-      items: ["Grid Mobile de 8dp", "Zonas do Polegar Marcadas", "Esqueleto de Cards", "Hierarquia de Rolagem"],
+        "Estruturas completas e autônomas da interface formadas pela combinação de moléculas e átomos. Gerenciam os fluxos essenciais de navegação e feedback móvel na zona do polegar.",
+      items: [
+        "Bottom Navigation (Zona Natural)",
+        "Top App Bar com Ações",
+        "Alertas e Snackbars Táteis",
+        "Modais e Bottom Sheets",
+      ],
       preview: {
-        title: "Template Estrutural",
-        badge: "Layout",
-      },
-    },
-    {
-      step: 5,
-      number: "05",
-      icon: Smartphone,
-      name: "Páginas",
-      tagline: "Interface Concreta",
-      description:
-        "O produto final entregue ao usuário, com conteúdo dinâmico, estados de feedback tátil e interações reais prontas para produção.",
-      items: ["Dados Reais Preenchidos", "Micro-interações Ativas", "Acessibilidade Validada", "Feedback Háptico/Tátil"],
-      preview: {
-        title: "Tela em Produção",
-        badge: "Final",
+        title: "Organismo de Interface",
+        badge: "Seção",
       },
     },
   ];
@@ -95,13 +101,13 @@ export function AtomicArchitecture() {
               Arquitetura Modular (Atomic Design)
             </h2>
             <p className="mt-3 text-base text-muted">
-              Uma metodologia estruturada para decompor interfaces móveis em camadas progressivas, garantindo consistência do token até a tela final.
+              Uma metodologia estruturada para decompor interfaces móveis em 4 camadas progressivas, garantindo consistência total desde o token bruto até os organismos completos.
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={0.15} className="mt-10">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 items-stretch">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 items-stretch">
             {steps.map((item) => {
               const Icon = item.icon;
               const isActive = activeStep === item.step;
@@ -149,7 +155,7 @@ export function AtomicArchitecture() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs font-bold text-primary">
-                      Etapa {current.number} de 05
+                      Etapa {current.number} de 04
                     </span>
                     <span className="text-line">•</span>
                     <span className="text-xs font-semibold uppercase tracking-wider text-muted">
@@ -211,77 +217,87 @@ export function AtomicArchitecture() {
                         <div className="flex items-center justify-between rounded-xl border border-line bg-surface px-3.5 py-2.5 shadow-2xs">
                           <div className="flex items-center gap-2.5">
                             <span className="size-4 rounded-md bg-primary" />
-                            <span className="text-xs font-mono font-medium text-ink">primary</span>
+                            <span className="text-xs font-mono font-medium text-ink">--color-primary</span>
                           </div>
-                          <span className="font-mono text-[11px] text-muted">#176B5B</span>
+                          <span className="font-mono text-[11px] text-muted">#176B5B · 4.5:1 AA</span>
                         </div>
                         <div className="flex items-center justify-between rounded-xl border border-line bg-surface px-3.5 py-2.5 shadow-2xs">
                           <div className="flex items-center gap-2.5">
-                            <span className="size-4 rounded-md bg-accent" />
-                            <span className="text-xs font-mono font-medium text-ink">accent</span>
+                            <span className="size-4 rounded-md bg-surface-raised border border-line" />
+                            <span className="text-xs font-mono font-medium text-ink">--font-size-base</span>
                           </div>
-                          <span className="font-mono text-[11px] text-muted">#229981</span>
+                          <span className="font-mono text-[11px] text-muted">16px (Anti-zoom iOS)</span>
                         </div>
                         <div className="flex items-center justify-between rounded-xl border border-line bg-surface px-3.5 py-2.5 shadow-2xs">
-                          <span className="text-xs font-semibold text-ink">Touch Target Base</span>
+                          <span className="text-xs font-semibold text-ink">Touch Target Mínimo</span>
                           <span className="rounded-md bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary font-mono">48 × 48 dp</span>
                         </div>
                       </div>
                     )}
 
                     {current.step === 2 && (
-                      <div className="w-full space-y-2">
-                        <label className="text-xs font-semibold text-ink">E-mail Corporativo</label>
-                        <div className="flex h-12 items-center justify-between rounded-xl border border-line bg-surface px-3.5 shadow-2xs">
-                          <span className="text-xs text-ink font-medium">usuario@empresa.com</span>
-                          <span className="rounded-md bg-surface-raised px-2 py-1 text-[10px] font-mono text-muted">
-                            Clear
+                      <div className="w-full space-y-3">
+                        <div className="flex items-center justify-between rounded-xl border border-line bg-surface p-3 shadow-2xs">
+                          <div className="flex flex-col">
+                            <span className="text-xs font-bold text-ink">Botão Primário</span>
+                            <span className="text-[10px] text-muted">Touch target 48dp</span>
+                          </div>
+                          <span className="inline-flex h-10 items-center justify-center px-4 rounded-xl bg-primary text-xs font-bold text-on-primary shadow-xs">
+                            Ação
                           </span>
                         </div>
-                        <span className="text-[11px] text-muted block">Rótulo + Campo tátil (48dp) + Ação combinados</span>
+                        <div className="flex items-center justify-between rounded-xl border border-line bg-surface p-3 shadow-2xs">
+                          <div className="flex flex-col">
+                            <span className="text-xs font-bold text-ink">Switch Ergonômico</span>
+                            <span className="text-[10px] text-muted">Alternância tátil</span>
+                          </div>
+                          <div className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary p-0.5">
+                            <div className="size-5 rounded-full bg-surface shadow-xs translate-x-5 transition-transform" />
+                          </div>
+                        </div>
                       </div>
                     )}
 
                     {current.step === 3 && (
-                      <div className="w-full rounded-2xl border border-line bg-surface p-4 shadow-xs">
-                        <div className="flex items-center justify-between pb-3 border-b border-line/40">
-                          <span className="text-xs font-bold text-ink">Bottom Navigation</span>
-                          <span className="text-[10px] font-mono text-primary font-bold">h-16 (64dp)</span>
+                      <div className="w-full space-y-2.5">
+                        <div className="rounded-xl border border-line bg-surface p-3 shadow-2xs space-y-1.5">
+                          <div className="text-[11px] font-bold text-ink flex items-center justify-between">
+                            <span>Barra de Busca</span>
+                            <span className="text-[10px] font-mono text-primary font-semibold">Ícone + Input + Ação</span>
+                          </div>
+                          <div className="flex h-11 items-center justify-between rounded-lg border border-line bg-surface-raised px-3 text-xs">
+                            <span className="text-muted flex items-center gap-2">
+                              <span className="size-1.5 rounded-full bg-primary" />
+                              Pesquisar componente...
+                            </span>
+                            <span className="rounded bg-surface px-1.5 py-0.5 text-[10px] font-mono text-muted border border-line">
+                              Limpar
+                            </span>
+                          </div>
                         </div>
-                        <div className="mt-3 grid grid-cols-4 gap-1 text-center text-[11px] font-semibold text-muted">
-                          <span className="rounded-lg bg-primary-light py-2 text-primary font-bold">Início</span>
-                          <span className="py-2">Tokens</span>
-                          <span className="py-2">Testes</span>
-                          <span className="py-2">Docs</span>
+                        <div className="flex items-center justify-between rounded-xl border border-line bg-surface px-3 py-2 text-xs">
+                          <span className="font-medium text-ink">Card Informativo Tátil</span>
+                          <span className="text-[10px] text-primary font-bold">Feedback total</span>
                         </div>
                       </div>
                     )}
 
                     {current.step === 4 && (
-                      <div className="w-full space-y-2.5 rounded-2xl border border-dashed border-line bg-surface/50 p-4">
-                        <div className="h-4 w-1/3 rounded bg-line/60" />
-                        <div className="h-9 w-full rounded-xl bg-line/35" />
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="h-14 rounded-xl bg-line/25" />
-                          <div className="h-14 rounded-xl bg-line/25" />
+                      <div className="w-full rounded-2xl border border-line bg-surface p-4 shadow-xs space-y-3">
+                        <div className="flex items-center justify-between pb-2 border-b border-line/40">
+                          <span className="text-xs font-bold text-ink">Bottom Navigation</span>
+                          <span className="text-[10px] font-mono text-primary font-bold">Zona Natural · 64dp</span>
                         </div>
-                        <div className="h-10 w-full rounded-xl bg-line/30" />
-                      </div>
-                    )}
-
-                    {current.step === 5 && (
-                      <div className="w-full rounded-2xl border border-primary/30 bg-surface p-4 shadow-xs space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-ink">Painel de Métricas</span>
-                          <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <div className="grid grid-cols-4 gap-1 text-center text-[11px] font-semibold text-muted">
+                          <span className="rounded-lg bg-primary-light py-2 text-primary font-bold">Início</span>
+                          <span className="py-2">Tokens</span>
+                          <span className="py-2">Átomos</span>
+                          <span className="py-2">Mais</span>
                         </div>
-                        <div className="rounded-xl border border-line bg-surface-raised p-3">
-                          <span className="text-[11px] text-muted block">Status do Sistema</span>
-                          <strong className="text-xs font-bold text-ink">100% de conformidade tátil móvel</strong>
+                        <div className="flex items-center justify-between rounded-xl bg-surface-raised p-2 text-[11px]">
+                          <span className="text-muted">Top App Bar / Header</span>
+                          <span className="font-semibold text-ink">Ações de topo</span>
                         </div>
-                        <button type="button" className="w-full h-11 rounded-xl bg-primary text-xs font-bold text-on-primary shadow-xs">
-                          Acessar Componentes
-                        </button>
                       </div>
                     )}
                   </div>
@@ -289,11 +305,10 @@ export function AtomicArchitecture() {
                   <div className="border-t border-line/60 pt-3 flex items-center justify-between text-xs">
                     <span className="text-muted">Hierarquia modular:</span>
                     <span className="font-semibold text-primary">
-                      {current.step === 1 && "Átomos · Nível 1"}
-                      {current.step === 2 && "Moléculas · Nível 2"}
-                      {current.step === 3 && "Organismos · Nível 3"}
-                      {current.step === 4 && "Modelos · Nível 4"}
-                      {current.step === 5 && "Páginas · Nível 5"}
+                      {current.step === 1 && "Tokens · Nível 1"}
+                      {current.step === 2 && "Átomos · Nível 2"}
+                      {current.step === 3 && "Moléculas · Nível 3"}
+                      {current.step === 4 && "Organismos · Nível 4"}
                     </span>
                   </div>
                 </div>
