@@ -34,11 +34,11 @@ const modules = [
     title: "Playground",
     icon: Terminal,
     description:
-      "Ambiente interativo para testar estados dos componentes, ler a justificativa ergonômica de cada decisão e copiar o código pronto para produção.",
+      "Ambiente interativo para simular interações mobile, avaliar zonas de alcance do polegar e obter diagnósticos ergonômicos em tempo real.",
     features: [
       "Teste de componentes em tempo real",
-      "Explicativas anatômicas integradas",
-      "Snippet de código pronto (React, CVA & Tailwind)",
+      "Simulação de pegada e zonas de alcance",
+      "Diagnóstico de esforço e fadiga motora",
     ],
   },
 ];

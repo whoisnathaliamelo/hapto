@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
-import { Sliders, BookOpen, Code2, ArrowRight } from "lucide-react";
+import { Sliders, BookOpen, Activity, ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 
 const playgroundCards = [
@@ -19,11 +19,11 @@ const playgroundCards = [
       "Cada componente vem com a justificativa de ergonomia: alcance do polegar, prevenção de zoom e contraste.",
   },
   {
-    icon: Code2,
-    badge: "Exportação direta",
-    title: "Código Pronto para Copiar",
+    icon: Activity,
+    badge: "Diagnóstico ao vivo",
+    title: "Feedback Tátil em Tempo Real",
     description:
-      "Copie snippets limpos em React, Tailwind v4 e CVA, prontos para colar no seu projeto com um clique.",
+      "Receba avaliações instantâneas a cada toque: zona atingida (fácil, esticar ou difícil), esforço motor e conformidade.",
   },
 ];
 
@@ -41,7 +41,7 @@ export function PlaygroundPreview() {
                 Playground
               </h2>
               <p className="mt-3 text-base text-muted">
-                O laboratório prático: explore componentes, entenda a razão de cada detalhe e copie o código pronto para sua aplicação.
+                O laboratório prático: explore componentes, entenda a razão de cada detalhe e valide a ergonomia da sua interface em tempo real.
               </p>
             </div>
 
