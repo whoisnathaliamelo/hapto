@@ -74,7 +74,7 @@ export function PlaygroundView() {
               pulse
               className="mb-3 backdrop-blur-xs font-semibold text-muted"
             >
-              Módulo 03 • Laboratório Interativo
+              Laboratório Interativo
             </Badge>
             <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl lg:leading-[1.15]">
               Playground{" "}

@@ -37,10 +37,7 @@ export function PlaygroundPreview() {
         <Reveal>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-line/40 pb-8">
             <div className="max-w-2xl">
-              <span className="text-xs font-bold uppercase tracking-widest text-primary">
-                Módulo 03
-              </span>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+              <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
                 Playground
               </h2>
               <p className="mt-3 text-base text-muted">
